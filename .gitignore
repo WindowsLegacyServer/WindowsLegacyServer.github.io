@@ -1,16 +1,1 @@
-
-*.jpg
-*.mp4
-*.png
-*.svg
-*.gif
-*.jpg%3Alarge
-*.png%3Alarge
-*.exe
-*.woff2
-*.mp3
-*.js
-*.7z
-*.wma
-*.mid
 Assets/*
