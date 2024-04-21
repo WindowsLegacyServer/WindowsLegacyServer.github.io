@@ -1,0 +1,191 @@
+@-moz-document domain("www.google.com") {
+body {
+    background-image: url('https://cdn.discordapp.com/attachments/822234722536914984/827389750788882472/img13.jpg');
+    background-position: center center;
+}
+
+.gb_ob {
+    color: rgb(165,165,165) !important;
+}
+
+svg.gb_yb {
+    fill: white !important;
+}
+
+.gb_Rf.gb_Cb {
+    border-color: transparent;
+}
+
+.gb_Jb {
+    border-color: transparent;
+}
+
+.gb_Bb {
+    color: white;
+}
+
+.k1zIA {
+   background-image: url('https://media.discordapp.net/attachments/822234722536914984/827395218294833162/google_logo.png') !important;
+   background-position: center center !important;
+   background-repeat: no-repeat !important;
+   background-size: 280px 92px !important;
+   height: 333px;
+   width:280px;
+}
+
+.lnXdpd {
+    display: none;
+}
+
+.gb_9d a{
+    color: white;
+}
+
+svg.gb_Xe, .gb_D[aria-expanded="true"] .gb_Xe, .gb_D[aria-expanded="true"] .gb_Ze {
+    fill: white;
+}
+
+.c93Gbe {
+    background: rgba(0,0,0,0.25)
+}
+
+.FPdoLc > center:nth-child(1) > input,.gb_Db.gb_Db {
+    background-color: rgba(0,0,0,0.25);
+    color: white;
+    border-color: rgba(0,0,0,0)
+}
+
+.gb_ub.gb_ub, gb_Pa,a.pHiOh,.EzVRq {
+    color: rgb(165,165,165) !important;
+}
+
+.gb_ub.gb_ub:hover {
+    background-color: rgba(0,0,0,0.25) !important;
+}
+
+.FPdoLc center:nth-child(1) > input:hover,.gb_Db.gb_Db:hover {
+    background-color: rgba(128,128,128,0.25);
+    color: white;
+    border-color: rgba(0,0,0,0)
+}
+
+.RNNXgb, .RNNXgb:hover, .RNNXgb:focus {
+    background: rgba(0,0,0,0.25) !important;
+    border-color: rgba(0,0,0,0) !important;
+}
+
+.gb_F {
+    background-color: rgba(0,0,0,0.25);
+}
+
+.gb_sb {
+    background-color: rgba(0,0,0,0.25) !important;
+    color: white !important;
+    border-color: rgba(0,0,0,0) !important;
+}
+
+.gb_sb:hover {
+    background-color: rgba(128,128,128,0.25) !important;
+}
+
+.gLFyf {
+    color: white;
+}
+
+.aajZCb {
+    background-color: rgba(0,0,0,0.25)
+}
+
+li.sbhl {
+    background-color: rgba(128,128,128,0.25)
+}
+
+ul.erkvQe li div div span {
+    color: white !important;
+}
+
+div.tfB0Bf:nth-child(7) > center:nth-child(2) > input {
+    background-color: rgba(0,0,0,0.25);
+    color: white;
+    border-color: rgba(0,0,0,0)
+}
+
+div.tfB0Bf:nth-child(7) > center:nth-child(2) > input:hover {
+    background-color: rgba(128,128,128,0.25);
+    color: white;
+    border-color: rgba(0,0,0,0)
+}
+
+
+.gb_l .gb_mb {
+    color: white;
+}
+
+.gb_wb {
+    background-color: rgba(0,0,0,0) !important;
+}
+
+.gb_wb:hover {
+    background-color: rgba(128,128,128,0.25) !important;
+}
+}
+
+@-moz-document url-prefix("https://ogs.google.com/u/0/widget/app?bc=1&origin=https%3A%2F%2Fwww.google.com&cn=app&pid=1&spid=538&hl=en") {
+html > body > div > c-wiz > div > div > c-wiz > div > div {
+   background: #00000030 !important;
+   
+   /* border: 1px solid rgba(0,0,0,0.2); */
+   /* box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2); */
+   height: 900%;
+   overflow-x: hidden;
+   position: relative;
+   width: 100%;
+}
+
+
+
+ul {
+   
+   top: 0;
+}
+ul > li > a:hover{
+    background: #0000003d !important;
+}
+ul > li > a:hover span{
+background-color: #f6fafe00  !important;
+    text-decoration: none;
+    color: #fff;
+}
+
+ul > li > a > span{
+background-color: #f6fafe00;
+    text-decoration: none;
+    color: #f2f2f2  !important;
+}
+
+
+html > body > div > c-wiz > div > div > c-wiz > div > div > div > a{
+background-color: #f6fafe00 !important;;
+    border: 1px solid #dadce0;
+   color: #f2f2f2 !important;;
+}
+
+ html > body > div > c-wiz > div > div > c-wiz > div > div > span{
+           border-bottom: 1px solid #ffffff36 !important;
+          }
+
+
+::-webkit-scrollbar {
+   width: 12px !important;
+}  
+   
+::-webkit-scrollbar-thumb {
+    background: #00000000  !important;
+    background-clip: padding-box;
+    border: 1px solid #ffffff5c  !important;
+    border-radius: 8px;
+    box-shadow: none;
+    min-height: 35px;
+    width: 10px  !important; 
+}
+}

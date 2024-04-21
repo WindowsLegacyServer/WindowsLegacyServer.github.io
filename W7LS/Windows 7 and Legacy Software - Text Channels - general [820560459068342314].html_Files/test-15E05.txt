@@ -1,0 +1,26 @@
+push    ebp
+mov     ebp, esp
+push    edi
+push    esi
+push    ebx
+push    ecx
+sub     esp, 58h
+mov     eax, [ecx+8]
+mov     ebx, [ecx]
+mov     [ebp+hHash], 0
+mov     edi, [ecx+4]
+mov     esi, [ecx+18h]
+mov     [ebp+hAlgorithm], 0
+mov     [ebp+var_38], eax
+mov     eax, [ecx+0Ch]
+mov     [ebp+pbInput], eax
+mov     eax, [ecx+10h]
+mov     [ebp+cbInput], eax
+mov     eax, [ecx+14h]
+mov     [ebp+var_2C], eax
+lea     eax, [ebp+hAlgorithm]
+mov     [esp+68h+pszAlgId], ebx ; pszAlgId
+mov     [esp+68h+cbHashObject], 0 ; dwFlags
+mov     [esp+68h+pszImplementation], 0 ; pszImplementation
+mov     [esp+68h+phAlgorithm], eax ; phAlgorithm
+call    BCryptOpenAlgorithmProvider

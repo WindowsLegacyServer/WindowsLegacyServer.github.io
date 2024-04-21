@@ -1,0 +1,747 @@
+/**
+ * @name MSN Explorer 10 Discord Theme
+ * @author kamuisuki & Logan
+ * @version 0.3
+ * @description MSN EXPLORER 10 Theme
+*/
+
+.typeWindows-1za-n7 {
+    background: url(http://www.fa-series.com/wp-content/uploads/2020/11/topbarmsn9-1.png);
+background-size: cover;
+}
+.bg-h5JY_x {
+    background-color: transparent;
+
+}
+.wordmarkWindows-1v0lYD {
+    color: #2f445f00;
+}
+.winButtonClose-1HsbF- {
+    content: url(http://www.fa-series.com/wp-content/uploads/2020/11/close2.png);
+height:17px;
+width:17px;
+margin-top:5px;
+margin-right:5px;
+}
+.winButtonMinMax-PBQ2gm.winButton-iRh8-Z.flexCenter-3_1bcw.flex-1O1GKY.justifyCenter-3D2jYp.alignCenter-1dQNNs {
+height:17px;
+width:17px;
+margin-top:5px;
+margin-right:5px;
+}
+.withFrame-haYltI {
+height: 27px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.wrapper-1Rf91z {
+    width: 39px;
+    background-color: #63609b;
+}
+.tree-3tCaw8 {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    height: 100%;
+    width: 39px;
+}
+.scroller-2TZvBN {
+    background-color: #63609b;
+background: linear-gradient(to top, #5868a8, #5868a8, #5868a8, #5868a8, #ffffff);
+}
+/*Disable Weird Unrounding Thing
+foreignObject {
+    mask: none;
+    opacity: 1;
+}*/
+.wrapper-1BJsBx.selected-bZ3Lue .childWrapper-anI2G9, .wrapper-1BJsBx:hover .childWrapper-anI2G9 {
+    color: #fff;
+    background-color: #7289da00;
+}
+.childWrapper-anI2G9 {
+     background-color: #fff0;
+}
+.tutorialContainer-1v44GL {
+    position: relative;
+}
+
+.homeIcon-tEMBK1 {
+    display: block;
+    width: 0px;
+    height: 0px;
+}
+.tutorialContainer-1v44GL {
+    position: relative;
+    background: url(http://www.fa-series.com/wp-content/uploads/2020/11/contacttop.png);
+margin-top:8px;
+    margin-left:2px;
+    background-repeat:no-repeat;
+    margin-bottom:-8px;
+}
+
+.listItem-2P_4kh {
+    position: relative;
+    margin: 0px 0px 0px 0px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    width: 40px;
+    border: 0px solid #ababab;
+    border-top: 0px solid #a2a2a273;
+    border-left: solid 0px #cacaca;
+    box-shadow: 0px 0px 0Px #5d5d5d;
+    border-bottom: 0px solid #424242;
+    padding-left: 3Px;
+    margin-bottom: 0px;
+    opacity: 1;
+}
+.expandedFolderBackground-2sPsd-
+{
+	left: 4px;
+	width: 32px;
+	bottom: 6px;
+}
+.wrapper-21YSNc > ul
+{
+	display: inline !important;
+}
+.svg-1X37T1, .wrapper-25eVIn {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 39px;
+    height: 39px;
+    opacity: 1;
+    position: relative;
+    z-index: 0;
+    border-radius: 50%;
+    border: 3px solid #ffffff00;
+    left: -3px;
+    top: -3px;
+}
+.unreadMentionsIndicatorBottom-BXS58x, .unreadMentionsIndicatorTop-gA6RCh {
+    padding: 8px;
+    height: 36px;
+    width: 36px;
+}
+.wrapper-sa6paO {
+    width: 39px;
+    height: 39px;
+}
+.item-2hkk8m {
+    position: fixed;
+    display: block;
+    width: 5px;
+    border-radius: 0%;
+    margin-left: 0px;
+    background-color: #ff180000;
+    height: 6px !important;
+    border: 0px solid #780080;
+    background: linear-gradient(to bottom left,#259401, #1bff00);
+    margin: -17px 0px 1px 34px;
+    z-index: 2;
+}
+.numberBadge-2s8kKX.base-PmTxvP {
+    background: linear-gradient(45deg, #ff0202, #f3ec00fa);
+}
+/* nom serveur */
+.name-1jkAdW, .tierTooltipTitle-3AtaZT {
+    font-weight: 600;
+    color: black;
+    
+}
+.header-2V-4Sw {
+    box-shadow: var(--elevation-low);
+    background: url(http://www.fa-series.com/wp-content/uploads/2020/11/middlebar.png);
+background-repeat: repeat-x;
+ background-size:contain;  
+ height: 49px;
+ padding: 0 5px;
+}
+/* SERVER LIST*/
+.platform-win .sidebar-2K8pFh {
+    border-radius: 0px 0 0;
+}
+.container-3w7J-x  .content-3YMskv {
+    position: relative;
+    margin-top: 0px;
+}
+.sidebar-2K8pFh {
+    width: 170px;
+    
+}
+.scroller-1JbKMe { /*barre MP */
+    background-color: #63609b;
+}
+.privateChannels-1nO12o {
+    background-color: #63609b;
+}
+.content-1x5b-n {
+    height: 25px;
+    padding: 0px 4px;
+    margin-left: 0px;
+    border-radius: 6px;
+}
+.containerDefault--pIXnN, .containerDragAfter-3Fp7LC, .containerDragBefore-3iTCc7, .containerUserOver-2mv1jO {
+
+    background: radial-gradient(#fff, white);
+    box-shadow: inset 1Px 1px 2px grey;
+    margin:2px;
+    border-radius: 3px;
+    
+}
+.wrapper-PY0fhH {
+    color: white;
+}
+.wrapper-2jXpOf {
+    height: 26px;
+}
+.scroller-RmtA4e {
+    z-index: 1;
+    padding-right: 8px;
+    background: linear-gradient(to right,#5868a8, #6878b8, #6878b8, #667dbc, #859bdc, #8898d8);
+    border-right: 1px solid #80808073;
+    border-radius: 0px 0 0 0;
+}
+.container-2ax-kl { /* Categories */
+    text-transform: uppercase;
+    font-size: 14px;
+    color: #000000
+} /*category in server*/
+.containerDefault-3tr_sE, .containerDragAfter-Zk9oyx, .containerDragBefore-1YqewQ, .containerUserOver-98-yc7 {
+    position: relative;
+    padding-top: 3px;
+    background: linear-gradient(13deg, #ffffff30, #fbfbfbbf, #fbfbfb);
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 4px;
+    box-shadow: inset 1px 1px 1px #6d6d6d;
+    margin-left: 1px;
+    margin-right: 2px;
+
+}/*name in voicechanel */
+.icon-2IuuZd, .username-3KYl0N { 
+    color: black!important;
+}
+.name-23GUGE {
+    color: black;
+}
+.modeSelected-346R90 .name-23GUGE{
+        color: inherit;
+}
+.modeSelected-346R90 .content-1x5b-n, .modeSelected-346R90:hover .content-1x5b-n {
+    background: linear-gradient(to right,#b5b5b5, #ffffff00);
+    box-shadow: inset 1Px 1px 2px grey;
+    color: white;
+}
+.modeUnread-1qO3K1 .name-23GUGE{    
+    color: #020202;
+    background: url(http://www.fa-series.com/wp-content/uploads/2020/11/pin.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position-x: right;
+    font-weight: 600;
+}
+.unread-2lAfLh {
+    position: absolute;
+    height: 8px;
+    width: 8px;
+    border-radius: 15px;
+    top: 22%;
+    left: 5px;
+    margin-top: 0px;
+    display: none;
+}
+.icon-2IuuZd, .username-3KYl0N {
+    color: white;
+}
+.list-2luk8a
+{
+	padding-left: 0px;
+}
+/* MIDDLE */
+.base-3dtUhz {
+    left: 39px;
+}
+.colorDefault-22HBa0 {
+    background-color: #335abd;
+    color: #fff;
+}
+.notice-3bPHh- {
+    font-size: 14px;
+    line-height: 33px;
+    border-radius: 0px 0 0;
+}
+
+.container-1r6BKw.themed-ANHk51 {
+background: url(http://www.fa-series.com/wp-content/uploads/2020/11/middlebar.png);
+background-repeat: repeat-x;
+ background-size:contain;   
+}
+.newMessagesBar-265mhP {
+    border-radius: 0 0 0px 0px;
+    background-color: #ffffe1;
+}
+.barButtonBase-2uLO1z {
+    text-align: left;
+    background: none;
+    color: #000;
+    font-size: 12px;
+}
+.barBase-1c2Rfb {
+    left: 0px;
+    right: 0px;
+    opacity: .95;
+}
+.theme-light .children-19S4PO:after {
+    background: -webkit-gradient(linear,left top,right top,from(hsla(0,0%,100%,0)),to(var(--background-primary)));
+    background: linear-gradient(90deg,hsla(0,0%,100%,0) 0,var(--background-primary));
+display:none;
+    
+}
+.chatContent-a9vAAp {
+    border-top: 1px solid #8080807a;
+}
+.topic-TCb_qw {
+    color: #000;
+    font-style: italic;
+}
+.isUnread-3Ef-o9 {
+    border-color: #ffa500;
+}
+.unreadPill-2HyYtt {
+    color: #fff;
+    background-color: #ffa500;
+}
+.unreadPillCapStroke-7rkHbg {
+    color: #ffa500;
+    fill: #ffa500;
+}
+.compact-T3H92H .header-23xsNx {
+    display: block;
+}
+.messagesWrapper-1sRNjr, .scrollerContent-WzeG7R {
+    display: flex;
+    box-shadow: inset 0px 0px px black;
+    border-radius: 0px;
+background: white;
+}
+/*Big Orange Time Text
+.compact-T3H92H .timestamp-3ZCmNB, .cozy-3raOZG .timestamp-3ZCmNB.alt-1uNpEt {
+    text-align: right;
+    font-size: 0.95rem;
+    color: #ff8100;
+}*/
+.compact-T3H92H .timestamp-3ZCmNB, .cozy-3raOZG .timestamp-3ZCmNB.alt-1uNpEt {
+    color: #ff8100;
+}
+.username-1A8OIy {
+    font-size: 12px;
+    font-weight: 500!important;
+    line-height: 1.375rem;
+    color: #616161;
+    text-transform: uppercase;
+}
+.imageWrapper-2p5ogY {
+    border-radius: 2px;
+    border: solid 1px white;
+    border-bottom: 2px solid #fbfbfb;
+    border-top: 1px solid #d6d6d6;
+    border-left: 2px solid #e0e0e0;
+    box-shadow: 0px 0px 3px black;
+}
+.markup-2BOw-j {
+    color: #000;
+    font-weight: 400;
+    font-size: 14px;
+}
+/* Contacts*/
+.membersWrap-2h-GB4 {
+    min-width: 196px;
+    border-left: 1px solid #80808063;
+    border-right: 1px solid #80808063;
+}
+.members-1998pB {
+    width: 196px;
+}
+.members-1998pB .content-3YMskv {
+    width: 196px !important;
+    margin-top: 0px;
+}
+.members-1998pB, .members-1998pB>div {
+    
+    
+}
+.layout-2DM8Md {
+    border-radius: 4px;
+    height: 32px;
+    padding: 0 0px;
+}
+.container-2Pjhx- {
+    margin-right: 8px;
+    border-right: 1px solid #00000029;
+    background: url(http://www.fa-series.com/wp-content/uploads/2020/11/rightbar.png);
+    background-size: 196px;
+}
+.membersGroup-v9BXpm {
+    padding: 6px 7px 0px 6px;
+    height: 27px;
+    color: #0042a5;
+    text-shadow: 0px 0px 0px #00000080;
+    border-bottom: 1px solid #0000004a;
+    box-shadow: 0px 1px #ffffff7d;
+    background: linear-gradient(180deg, #cfdbeb, #fdfeff);
+    border-top: 1px solid #0000004a;
+    border-right: 1px solid #00000038;
+    margin-right: 8px;
+}
+.member-3-YXUe {
+    margin-left: 2px;
+}
+.name-uJV0GL {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 500;
+}
+.content-3QAtGj, .name-uJV0GL {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    color: black;
+
+}
+.activity-2Gy-9S {
+    font-size: 12px;
+    line-height: 16px;
+    color: #000;
+    font-weight: 500;
+    max-width: 140px;
+}
+.botTagRegular-2HEhHi {
+    background: #7289da00;
+    color: #020afd;
+}
+.px-10SIf7 .botText-1526X_ {
+    font-size: 10px;
+    line-height: 15px;
+    display:none;
+}
+.avatar-3uk_u9.da-avatar > div > svg { /*status*/
+    pointer-events: none;
+    position: relative;
+    display: block;
+    height: 32px;
+    width: 32px;
+    bottom:-2px;
+    right: -5px;
+    border-radius: 50%;
+}
+/* Lower Profile Menu */
+.panels-j1Uci_ {
+    background-color: #ebedef00;
+    background:linear-gradient(to right,#5868a8, #6878b8, #6878b8, #667dbc, #859bdc, #8898d8);
+}
+.panels-j1Uci_ .nameTag-3uD-yy.canCopy-2VBT7N {
+    display: none;
+}
+.panels-j1Uci_ .wrapper-3t9DeA .mask-1l8v16 {
+    pointer-events: none;
+    position: relative;
+    display: block;
+    height: 26px;
+    width: 32px;
+    bottom: 0px;
+    right: 0px;
+    border-radius: 4px;
+    border: 2px solid black;
+    background: linear-gradient(-45deg, #001933, #0063cc, #44a4ff);
+    box-shadow: 0px 1px 3px black;
+}
+.title-eS5yk3 {
+    color: #ffffff;
+    font-weight: 200;
+}
+.subtext-3CDbHg {
+    line-height: 13px;
+}
+.button-14-BFJ {
+
+    width: 26px;
+    height: 26px;
+    border-radius: 3px;
+    color: #fbfbfb;
+}
+
+/* BARRE HAUT ICON DROITE */
+.iconWrapper-2OrFZ1 {
+    margin: 0 0px;
+}
+.clickable-3rdHwn .icon-22AiRD {
+    color: #ffffff;
+}
+.icon-22AiRD {
+    width: 19px;
+    height: 19px;
+}
+.searchBar-3dMhjb {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    height: 23px;
+    width: 144px;
+    border-radius: 0px;
+    -webkit-box-shadow: none;
+    box-shadow: inset 1px 1Px 2px black;
+    cursor: text;
+    overflow: hidden;
+    padding: 0 2px;
+    color: #000000;
+    background-color: #eaeaea;
+}
+.base-1x0h_U {
+    font-weight: 600;
+}
+/*
+.size16-1P40sf {
+    font-size: 17px;
+    line-height: 22px;
+    text-shadow: 1px 1Px 1Px #202327;
+    color: #BBCDE5 !important;
+}
+*/
+/* chatbox */
+.form-2fGMdU {
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-top: -8px;
+}
+.channelTextArea-2VhZ6z {
+    border-radius: 0px;
+    border: 1px solid #80808073;
+}
+.scrollableContainer-2NUZem {
+    background-color: #71717140;
+    border-radius: 0px;
+}
+.button-3AYNKb {
+    color: #ffffff;
+}
+.attachButtonPlus-jWVFah {
+    fill: #fbfbfb;
+}
+.icon-3D60ES {
+    width: 24px;
+    height: 24px;
+
+}
+.typing-2GQL18 
+{
+    background-color: transparent;
+    color:white;
+    display: none;
+    }
+.form-2fGMdU {
+
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-top: -8px;
+    background:linear-gradient(0deg, #ffffff, #737373) ;
+}
+.fontSize12Padding-2x5wK2 { /*text chat */
+    padding-bottom: 4px;
+    padding-top: 6px;
+    box-shadow: inset 1Px 1px 3px #00000047;
+    border-radius: 4px;
+    margin-top: 8px;
+    background: white;
+}
+
+/*bouton bas avatar+son+mute */
+.container-3baos1 .flex-1xMQg5 button:first-child .contents-18-Yxp svg {
+    background:blue;
+    background-size:contain;
+    display:none;
+}
+.container-3baos1 .flex-1xMQg5 button:first-child  {
+    background:blue;
+    background:url(http://www.fa-series.com/wp-content/uploads/2020/11/micromsn2.png);
+    background-size:contain;
+    height:19px;
+   width:19px;
+   margin-right:8px}
+.container-3baos1 .flex-1xMQg5 button:nth-child(2) .contents-18-Yxp svg {
+    background:red;
+    display:none;
+}
+.container-3baos1 .flex-1xMQg5 button:nth-child(2)  {
+    background:red;
+    background:url(http://www.fa-series.com/wp-content/uploads/2020/11/muteall0.png);
+    background-size:contain;
+      height:19px;
+      width:19px;
+      margin-right:8px;
+}
+.container-3baos1 .flex-1xMQg5 button:nth-child(3) .contents-18-Yxp svg {
+    background:green;
+   display:none;
+}
+.container-3baos1 .flex-1xMQg5 button:nth-child(3) {
+    background:red;
+    background:url(http://www.fa-series.com/wp-content/uploads/2020/11/setting.png);
+    background-size:contain;
+    height:19px;
+    width:19px;
+ /* icons top bar right */ 
+}
+.toolbar-1t6TWx .iconWrapper-2OrFZ1:first-child .iconWrapper-2OrFZ1 svg{
+    background:orange;
+}
+.toolbar-1t6TWx .iconWrapper-2OrFZ1:first-child {
+    content:url(http://www.fa-series.com/wp-content/uploads/2020/11/bell.png);
+    background-size:contain;
+    height:24px;
+    width:24px;
+    margin-right:5px;
+}
+.toolbar-1t6TWx .iconWrapper-2OrFZ1:nth-child(2) .iconWrapper-2OrFZ1 svg{
+    background:red;
+}
+.toolbar-1t6TWx .iconWrapper-2OrFZ1:nth-child(2){
+    content:url(http://www.fa-series.com/wp-content/uploads/2020/11/pin.png);
+     background-size:contain;
+      height:32px;
+      width:32px;
+      margin-right:5px;
+}
+.toolbar-1t6TWx .iconWrapper-2OrFZ1:nth-child(3) .iconWrapper-2OrFZ1 svg{ 
+    background:blue;
+}
+.toolbar-1t6TWx .iconWrapper-2OrFZ1:nth-child(3) {
+    content:url('http://www.fa-series.com/wp-content/uploads/2020/11/contactstopbar.png)');
+        background-size:contain;
+      height:24px;
+      width:24px;
+      margin-right:5px;
+}
+.toolbar-1t6TWx .iconWrapper-2OrFZ1:nth-child(5) .iconWrapper-2OrFZ1 svg{
+    background:grey;
+}
+.toolbar-1t6TWx .iconWrapper-2OrFZ1:nth-child(5) {
+    content:url(http://www.fa-series.com/wp-content/uploads/2020/11/download.png);
+        background-size:contain;
+      height:24px;
+      width:24px;
+      margin-right:8px;
+}
+.toolbar-1t6TWx .iconWrapper-2OrFZ1:nth-child(6) .iconWrapper-2OrFZ1 svg{
+    background:green;
+}
+.toolbar-1t6TWx .iconWrapper-2OrFZ1:nth-child(6) {
+    content:url(http://www.fa-series.com/wp-content/uploads/2020/11/mailbox2top.png);
+        background-size:contain;
+      height:24px;
+      width:24px;
+      margin-right:8px;
+}
+.toolbar-1t6TWx .iconWrapper-2OrFZ1:last-child .iconWrapper-2OrFZ1 svg{
+    background:violet;
+}
+.toolbar-1t6TWx .iconWrapper-2OrFZ1:last-child {
+    content:url(http://www.fa-series.com/wp-content/uploads/2020/11/help.png);
+    background-size:contain;
+      height:24px;
+      width:24px;
+}
+
+/* button right message bar*/
+.buttons-3JBrkn :nth-child(2) svg{
+background:blue;
+visibility:hidden;
+display:none;
+}
+.buttons-3JBrkn :nth-child(1) svg{
+background:blue;
+background:url(http://www.fa-series.com/wp-content/uploads/2020/11/pin.png);
+background-size:cover;
+display:none;
+}
+.sprite-2iCowe  {
+background:green;
+visibility:hidden;
+}
+.emojiButton-3uL3Aw {
+background:red;
+background:url(http://www.fa-series.com/wp-content/uploads/2020/11/emote.png);
+background-size:24px 24px;
+background-position:fixed;
+background-repeat:no-repeat;
+margin-top:8px;
+}
+
+
+/*BetterDiscord 3.0 Fixes*/
+
+/*Edit & Delete Buttton Patch*/
+#bd-settingspane-container > div > div > div.contentColumn-2hrIYH.contentColumnDefault-1VQkGM.content-column.default > div.bda-slist.bd-addon-list > div > div.bd-addon-header.bda-header > div.bd-addon-controls.bda-controls > div > svg
+{
+	fill: #4f545c;
+}
+
+/*Search Bar Patches*/
+.bd-search-wrapper
+{
+	background-color: #e3e5e8;
+}
+#bd-settingspane-container > div > div > div.contentColumn-2hrIYH.contentColumnDefault-1VQkGM.content-column.default > div.bd-controls.bd-addon-controls > div.bd-search-wrapper > svg
+{
+	fill: #4f545c;
+}
+.bd-search
+{
+	color: #4f545c;
+}
+
+/*Sorting Controls Patches*/
+#bd-settingspane-container > div > div > div.contentColumn-2hrIYH.contentColumnDefault-1VQkGM.content-column.default > div.bd-controls.bd-addon-controls > div.bd-addon-dropdowns > div > div
+{
+	color: #000000;
+}
+.bd-select-wrapper label
+{
+	color: #000000;
+	opacity: 1;
+}
+#bd-settingspane-container > div > div > div.contentColumn-2hrIYH.contentColumnDefault-1VQkGM.content-column.default > div.bd-controls.bd-addon-controls > div.bd-addon-dropdowns > div > div > svg
+{
+	fill: #000000;
+}
+
+/*Sorting Pop-up Menu Patch*/
+.bd-select-option
+{
+	background: #ffffff;
+}
+.bd-select .bd-select-option:hover, .bd-select .bd-select-option.selected
+{
+	background: #f6f6f7;
+}
+.bd-select .bd-select-options
+{
+	background: #ffffff;
+}
+
+/*BD Section Logo Color Patch*/
+.theme-light #bd-settings-sidebar .ui-tab-bar-header
+{
+	color: #8e9297;
+}
+
