@@ -1,0 +1,1761 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Windows 7 and Legacy Software - windows-store</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <style>
+        /* General */
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-300.woff);
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-400.woff);
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-500.woff);
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-600.woff);
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-700.woff);
+    font-weight: 700;
+}
+
+body {
+    font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 17px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    object-fit: contain;
+}
+
+.markdown {
+    max-width: 100%;
+    line-height: 1.3;
+    overflow-wrap: break-word;
+}
+
+.preserve-whitespace {
+    white-space: pre-wrap;
+}
+
+.spoiler {
+    /* width: fit-content; */
+    display: inline-block;
+    /* This is more consistent across browsers, the old attribute worked well under Chrome but not FireFox. */
+}
+
+.spoiler--hidden {
+    cursor: pointer;
+}
+
+.spoiler-text {
+    border-radius: 3px;
+}
+
+.spoiler--hidden .spoiler-text {
+    color: rgba(0, 0, 0, 0);
+}
+
+.spoiler--hidden .spoiler-text::selection {
+    color: rgba(0, 0, 0, 0);
+}
+
+.spoiler-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px;
+}
+
+.spoiler--hidden .spoiler-image {
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.spoiler--hidden .spoiler-image * {
+    filter: blur(44px);
+}
+
+.spoiler--hidden .spoiler-image:after {
+    content: "SPOILER";
+    color: #dcddde;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 600;
+    padding: 100%;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+    font-size: 0.9em;
+}
+
+.spoiler--hidden:hover .spoiler-image:after {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.quote {
+    margin: 0.1em 0;
+    padding-left: 0.6em;
+    border-left: 4px solid;
+    border-radius: 3px;
+}
+
+.pre {
+    font-family: "Consolas", "Courier New", Courier, monospace;
+}
+
+.pre--multiline {
+    margin-top: 0.25em;
+    padding: 0.5em;
+    border: 2px solid;
+    border-radius: 5px;
+}
+
+.pre--inline {
+    padding: 2px;
+    border-radius: 3px;
+    font-size: 0.85em;
+}
+
+.mention {
+    border-radius: 3px;
+    padding: 0 2px;
+    color: #7289da;
+    background: rgba(114, 137, 218, .1);
+    font-weight: 500;
+}
+
+.emoji {
+    width: 1.25em;
+    height: 1.25em;
+    margin: 0 0.06em;
+    vertical-align: -0.4em;
+}
+
+.emoji--small {
+    width: 1em;
+    height: 1em;
+}
+
+.emoji--large {
+    width: 2.8em;
+    height: 2.8em;
+}
+
+/* Preamble */
+
+.preamble {
+    display: grid;
+    margin: 0 0.3em 0.6em 0.3em;
+    max-width: 100%;
+    grid-template-columns: auto 1fr;
+}
+
+.preamble__guild-icon-container {
+    grid-column: 1;
+}
+
+.preamble__guild-icon {
+    max-width: 88px;
+    max-height: 88px;
+}
+
+.preamble__entries-container {
+    grid-column: 2;
+    margin-left: 0.6em;
+}
+
+.preamble__entry {
+    font-size: 1.4em;
+}
+
+.preamble__entry--small {
+    font-size: 1em;
+}
+
+/* Chatlog */
+
+.chatlog {
+    max-width: 100%;
+}
+
+.chatlog__message-group {
+    display: grid;
+    margin: 0 0.6em;
+    padding: 0.9em 0;
+    border-top: 1px solid;
+    grid-template-columns: auto 1fr;
+}
+
+.chatlog__reference-symbol {
+    grid-column: 1;
+    border-style: solid;
+    border-width: 2px 0 0 2px;
+    border-radius: 8px 0 0 0;
+    margin-left: 16px;
+    margin-top: 8px;
+}
+
+.chatlog__reference {
+    display: flex;
+    grid-column: 2;
+    margin-left: 1.2em;
+    margin-bottom: 0.25em;
+    font-size: 0.875em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    align-items: center;
+}
+
+.chatlog__reference-avatar {
+    border-radius: 50%;
+    height: 16px;
+    width: 16px;
+    margin-right: 0.25em;
+}
+
+.chatlog__reference-name {
+    margin-right: 0.25em;
+    font-weight: 600;
+}
+
+.chatlog__reference-link {
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.chatlog__reference-link:hover {
+    text-decoration: none;
+}
+
+.chatlog__reference-content > * {
+    display: inline;
+}
+
+.chatlog__reference-edited-timestamp {
+    margin-left: 0.25em;
+    font-size: 0.8em;
+}
+
+.chatlog__author-avatar-container {
+    grid-column: 1;
+    width: 40px;
+    height: 40px;
+}
+
+.chatlog__author-avatar {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+}
+
+.chatlog__messages {
+    grid-column: 2;
+    margin-left: 1.2em;
+    min-width: 50%;
+}
+
+.chatlog__author-name {
+    font-weight: 500;
+}
+
+.chatlog__timestamp {
+    margin-left: 0.3em;
+    font-size: 0.75em;
+}
+
+.chatlog__message {
+    padding: 0.1em 0.3em;
+    margin: 0 -0.3em;
+    background-color: transparent;
+    transition: background-color 1s ease;
+}
+
+.chatlog__content {
+    font-size: 0.95em;
+    word-wrap: break-word;
+}
+
+.chatlog__edited-timestamp {
+    margin-left: 0.15em;
+    font-size: 0.8em;
+}
+
+.chatlog__attachment {
+    margin-top: 0.3em;
+}
+
+.chatlog__attachment-thumbnail {
+    vertical-align: top;
+    max-width: 45vw;
+    max-height: 500px;
+    border-radius: 3px;
+}
+
+.chatlog__attachment-container {
+    height: 40px;
+    width: 100%;
+    max-width: 520px;
+    padding: 10px;
+    border: 1px solid;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.chatlog__attachment-icon {
+    float: left;
+    height: 100%;
+    margin-right: 10px;
+}
+
+.chatlog__attachment-icon > .a {
+    fill: #f4f5fb;
+    d: path("M50,935a25,25,0,0,1-25-25V50A25,25,0,0,1,50,25H519.6L695,201.32V910a25,25,0,0,1-25,25Z");
+}
+
+.chatlog__attachment-icon > .b {
+    fill: #7789c4;
+    d: path("M509.21,50,670,211.63V910H50V50H509.21M530,0H50A50,50,0,0,0,0,50V910a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50h0V191Z");
+}
+
+.chatlog__attachment-icon > .c {
+    fill: #f4f5fb;
+    d: path("M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z");
+}
+
+.chatlog__attachment-icon > .d {
+    fill: #7789c4;
+    d: path("M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z");
+}
+
+.chatlog__attachment-filesize {
+    color: #72767d;
+    font-size: 12px;
+}
+
+.chatlog__attachment-filename {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.chatlog__embed {
+    display: flex;
+    margin-top: 0.3em;
+    max-width: 520px;
+}
+
+.chatlog__embed-color-pill {
+    flex-shrink: 0;
+    width: 0.25em;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.chatlog__embed-content-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em 0.6em;
+    border: 1px solid;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.chatlog__embed-content {
+    display: flex;
+    width: 100%;
+}
+
+.chatlog__embed-text {
+    flex: 1;
+}
+
+.chatlog__embed-author {
+    display: flex;
+    margin-bottom: 0.3em;
+    align-items: center;
+}
+
+.chatlog__embed-author-icon {
+    margin-right: 0.5em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.chatlog__embed-author-name {
+    font-size: 0.875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-title {
+    margin-bottom: 0.2em;
+    font-size: 0.875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-description {
+    font-weight: 500;
+    font-size: 0.85em;
+}
+
+.chatlog__embed-fields {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.chatlog__embed-field {
+    flex: 0;
+    min-width: 100%;
+    max-width: 506px;
+    padding-top: 0.6em;
+    font-size: 0.875em;
+}
+
+.chatlog__embed-field--inline {
+    flex: 1;
+    flex-basis: auto;
+    min-width: 150px;
+}
+
+.chatlog__embed-field-name {
+    margin-bottom: 0.2em;
+    font-weight: 600;
+}
+
+.chatlog__embed-field-value {
+    font-weight: 500;
+}
+
+.chatlog__embed-thumbnail {
+    flex: 0;
+    margin-left: 1.2em;
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-image-container {
+    margin-top: 0.6em;
+}
+
+.chatlog__embed-image {
+    max-width: 500px;
+    max-height: 400px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-footer {
+    margin-top: 0.6em;
+}
+
+.chatlog__embed-footer-icon {
+    margin-right: 0.2em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.chatlog__embed-footer-text {
+    font-size: 0.75em;
+    font-weight: 500;
+}
+
+.chatlog__reactions {
+    display: flex;
+}
+
+.chatlog__reaction {
+    display: flex;
+    align-items: center;
+    margin: 0.35em 0.1em 0.1em 0.1em;
+    padding: 0.2em 0.35em;
+    border-radius: 3px;
+}
+
+.chatlog__reaction-count {
+    min-width: 9px;
+    margin-left: 0.35em;
+    font-size: 0.875em;
+}
+
+.chatlog__bot-tag {
+    position: relative;
+    top: -.2em;
+    margin-left: 0.3em;
+    padding: 0.05em 0.3em;
+    border-radius: 3px;
+    vertical-align: middle;
+    line-height: 1.3;
+    background: #7289da;
+    color: #ffffff;
+    font-size: 0.625em;
+    font-weight: 500;
+}
+
+/* Postamble */
+
+.postamble {
+    margin: 1.4em 0.3em 0.6em 0.3em;
+    padding: 1em;
+    border-top: 1px solid;
+}
+    </style>
+    <style>
+        /* General */
+
+body {
+    background-color: #36393e;
+    color: #dcddde;
+}
+
+a {
+    color: #0096cf;
+}
+
+.spoiler-text {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.spoiler--hidden .spoiler-text {
+    background-color: #202225;
+}
+
+.spoiler--hidden:hover .spoiler-text {
+    background-color: rgba(32, 34, 37, 0.8);
+}
+
+.quote {
+    border-color: #4f545c;
+}
+
+.pre {
+    background-color: #2f3136 !important;
+}
+
+.pre--multiline {
+    border-color: #282b30 !important;
+    color: #b9bbbe !important;
+}
+
+/* === Preamble === */
+
+.preamble__entry {
+    color: #ffffff;
+}
+
+/* Chatlog */
+
+.chatlog__message-group {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.chatlog__reference-symbol {
+    border-color: #4f545c;
+}
+
+.chatlog__reference {
+    color: #b5b6b8;
+}
+
+.chatlog__reference-link {
+    color: #b5b6b8;
+}
+
+.chatlog__reference-link:hover {
+    color: #ffffff;
+}
+
+.chatlog__reference-edited-timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__author-name {
+    color: #ffffff;
+}
+
+.chatlog__timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__message--highlighted {
+    background-color: rgba(114, 137, 218, 0.2) !important;
+}
+
+.chatlog__message--pinned {
+    background-color: rgba(249, 168, 37, 0.05);
+}
+
+.chatlog__attachment-container {
+    background-color: #2f3136;
+    border-color: #292b2f;
+}
+
+.chatlog__edited-timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__embed-color-pill--default {
+    background-color: rgba(79, 84, 92, 1);
+}
+
+.chatlog__embed-content-container {
+    background-color: rgba(46, 48, 54, 0.3);
+    border-color: rgba(46, 48, 54, 0.6);
+}
+
+.chatlog__embed-author-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-author-name-link {
+    color: #ffffff;
+}
+
+.chatlog__embed-title {
+    color: #ffffff;
+}
+
+.chatlog__embed-description {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-field-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-field-value {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-footer {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__reaction {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.chatlog__reaction-count {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* Postamble */
+
+.postamble {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.postamble__entry {
+    color: #ffffff;
+}
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.pre--multiline').forEach(block => hljs.highlightBlock(block));
+        });
+    </script>
+
+    <script>
+        function scrollToMessage(event, id) {
+            var element = document.getElementById('message-' + id);
+
+            if (element) {
+                event.preventDefault();
+
+                element.classList.add('chatlog__message--highlighted');
+
+                window.scrollTo({
+                    top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
+                    behavior: 'smooth'
+                });
+
+                window.setTimeout(function() {
+                    element.classList.remove('chatlog__message--highlighted');
+                }, 2000);
+            }
+        }
+
+        function showSpoiler(event, element) {
+            if (element && element.classList.contains('spoiler--hidden')) {
+                event.preventDefault();
+                element.classList.remove('spoiler--hidden');
+            }
+        }
+    </script>
+</head>
+<body>
+
+<div class="preamble">
+    <div class="preamble__guild-icon-container">
+        <img class="preamble__guild-icon" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/dc536ce53c6925864bef1064f357e510-C5C2D.png" alt="Guild icon">
+    </div>
+    <div class="preamble__entries-container">
+        <div class="preamble__entry">Windows 7 and Legacy Software</div>
+        <div class="preamble__entry">410 gone / windows-store</div>
+
+
+    </div>
+</div>
+
+<div class="chatlog">
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/c428bb71e26ad27f6888e8c95c84110a-B5280.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="ImSwordKing#8312" data-user-id="262543082271145984" style="color: rgb(32,102,148)">ImSwordKing</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 05:51 AM</span>
+
+            <div class="chatlog__message " data-message-id="820610203892056084" id="message-820610203892056084">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">dead like the real store <img class="emoji " alt="😦" title="😦" src="https://twemoji.maxcdn.com/2/72x72/1f626.png"></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/5c704ee0474da04776a841a71fb7dd20-0CB43.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Shroomer98#4146" data-user-id="347134668417531914" style="color: rgb(149,165,166)">Shroomer98 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 06:05 AM</span>
+
+            <div class="chatlog__message " data-message-id="820613632982646824" id="message-820613632982646824">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I wonder if the windows store has improved since 2016</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+        <div class="chatlog__reference-symbol">
+        </div>
+        <div class="chatlog__reference">
+                <img class="chatlog__reference-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/c428bb71e26ad27f6888e8c95c84110a-B5280.png" alt="Avatar">
+                <span class="chatlog__reference-name" title="ImSwordKing#8312" style="color: rgb(32,102,148)">ImSwordKing</span>
+                <a class="chatlog__reference-link" href="#" onclick="scrollToMessage(event, &#39;820610203892056084&#39;)">
+                    <span class="chatlog__reference-content">
+dead like the real store <img class="emoji " alt="😦" title="😦" src="https://twemoji.maxcdn.com/2/72x72/1f626.png">                    </span>
+
+                </a>
+        </div>
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/2f6ed3cd7ff5e57001e331d6e21567a1-C3A51.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="mintel#9690" data-user-id="217674581136113664" style="color: rgb(149,165,166)">Mintel (Haha Starter go brrr)</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 06:57 AM</span>
+
+            <div class="chatlog__message " data-message-id="820626677956476980" id="message-820626677956476980">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">on 8.0 that is</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="820626789600591903" id="message-820626789600591903">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">8.1&#39;s store still works despite the connection issues</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/21180337ff74db5f57aeed1a7ac9ca5f-FF199.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="freedom#7341" data-user-id="190196212165509121" style="">freedom</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 02:13 PM</span>
+
+            <div class="chatlog__message " data-message-id="820736315611938846" id="message-820736315611938846">
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/unknown-C00E6.png">
+                                        <img class="chatlog__attachment-thumbnail" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/unknown-C00E6.png" alt="Image attachment" title="Image: unknown.png (47.03 KB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="820736317268820009" id="message-820736317268820009">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">F</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/c428bb71e26ad27f6888e8c95c84110a-B5280.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="ImSwordKing#8312" data-user-id="262543082271145984" style="color: rgb(32,102,148)">ImSwordKing</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 03:25 PM</span>
+
+            <div class="chatlog__message " data-message-id="820754637430587442" id="message-820754637430587442">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">it still works</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/21180337ff74db5f57aeed1a7ac9ca5f-FF199.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="freedom#7341" data-user-id="190196212165509121" style="">freedom</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 03:27 PM</span>
+
+            <div class="chatlog__message " data-message-id="820754951734296647" id="message-820754951734296647">
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/unknown-E4A81.png">
+                                        <img class="chatlog__attachment-thumbnail" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/unknown-E4A81.png" alt="Image attachment" title="Image: unknown.png (813.5 KB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/31a48b435811b1cb77ac09a8b8d1bc83-4AC9D.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Daniel7689#8482" data-user-id="486532062426300444" style="color: rgb(149,165,166)">Rosen but better (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 07:40 PM</span>
+
+            <div class="chatlog__message " data-message-id="820818603401674763" id="message-820818603401674763">
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/unknown-98AFC.png">
+                                        <img class="chatlog__attachment-thumbnail" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/unknown-98AFC.png" alt="Image attachment" title="Image: unknown.png (1.01 MB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/21180337ff74db5f57aeed1a7ac9ca5f-FF199.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="freedom#7341" data-user-id="190196212165509121" style="">freedom</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 07:57 PM</span>
+
+            <div class="chatlog__message " data-message-id="820822899937116170" id="message-820822899937116170">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">it works for you too</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="820822903062528032" id="message-820822903062528032">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">finally</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/df42723fea69ea9e06c47b52ec4ae459-A581E.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ximonite#2784" data-user-id="563854547479560193" style="color: rgb(32,102,148)">Ximonite (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 08:58 PM</span>
+
+            <div class="chatlog__message " data-message-id="820838454777872466" id="message-820838454777872466">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><img class="emoji emoji--large" alt="PekoPog" title="PekoPog" src="https://cdn.discordapp.com/emojis/751747967731630090.png"></span>
+
+                        </div>
+                    </div>
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/3xFgSmGjTG-FB40D.png">
+                                        <img class="chatlog__attachment-thumbnail" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/3xFgSmGjTG-FB40D.png" alt="Image attachment" title="Image: 3xFgSmGjTG.png (808.07 KB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/21180337ff74db5f57aeed1a7ac9ca5f-FF199.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="freedom#7341" data-user-id="190196212165509121" style="">freedom</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 09:01 PM</span>
+
+            <div class="chatlog__message " data-message-id="820838999203381308" id="message-820838999203381308">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">the virgin 16:9 vs the chad 16:10</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 09:05 PM</span>
+
+            <div class="chatlog__message " data-message-id="820840125155639327" id="message-820840125155639327">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">the virgin ntsc vs the chad pal</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 09:38 PM</span>
+
+            <div class="chatlog__message " data-message-id="820848287505973299" id="message-820848287505973299">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">good</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/41657403d00925ca72e869fb47f70ac7-409CB.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Vruh 2#0961" data-user-id="146956554371989504" style="color: rgb(52,152,219)">Vruh 2 (cry about it)</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 09:57 PM</span>
+
+            <div class="chatlog__message " data-message-id="820853184699432970" id="message-820853184699432970">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">16:10 1920x1200 is just</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="820853202676744205" id="message-820853202676744205">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">fucking amazing</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="820853215544344616" id="message-820853215544344616">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">too bad i don&#39;t have it</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/21180337ff74db5f57aeed1a7ac9ca5f-FF199.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="freedom#7341" data-user-id="190196212165509121" style="">freedom</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 10:06 PM</span>
+
+            <div class="chatlog__message " data-message-id="820855429974327317" id="message-820855429974327317">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">wish i had 1920x1200</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/21180337ff74db5f57aeed1a7ac9ca5f-FF199.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="freedom#7341" data-user-id="190196212165509121" style="">freedom</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 10:13 PM</span>
+
+            <div class="chatlog__message " data-message-id="820857249558954055" id="message-820857249558954055">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">yeah that&#39;s my laptop res</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/41657403d00925ca72e869fb47f70ac7-409CB.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Vruh 2#0961" data-user-id="146956554371989504" style="color: rgb(52,152,219)">Vruh 2 (cry about it)</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 10:40 PM</span>
+
+            <div class="chatlog__message " data-message-id="820863962706346024" id="message-820863962706346024">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">i have 1920x1080</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="820863999578996768" id="message-820863999578996768">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">i don&#39;t look back to 1366x768 nor 1280x800</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/232755f4cde29cc8b2e54bd50da14e43-3A9B1.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="PerkCheddy#0001" data-user-id="636607762385731598" style="">PerkCheddy</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 10:41 PM</span>
+
+            <div class="chatlog__message " data-message-id="820864139889999882" id="message-820864139889999882">
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/unknown-04552.png">
+                                        <img class="chatlog__attachment-thumbnail" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/unknown-04552.png" alt="Image attachment" title="Image: unknown.png (702.11 KB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/41657403d00925ca72e869fb47f70ac7-409CB.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Vruh 2#0961" data-user-id="146956554371989504" style="color: rgb(52,152,219)">Vruh 2 (cry about it)</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 10:41 PM</span>
+
+            <div class="chatlog__message " data-message-id="820864321298628649" id="message-820864321298628649">
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/unknown-E8573.png">
+                                        <img class="chatlog__attachment-thumbnail" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/unknown-E8573.png" alt="Image attachment" title="Image: unknown.png (2.85 MB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="820864431042592840" id="message-820864431042592840">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">not entirely sure why do i have touch keyboard</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="820864508355411988" id="message-820864508355411988">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">it doesn&#39;t open a start menu</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="820864523753750548" id="message-820864523753750548">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">i don&#39;t need a start button</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="820864591801483318" id="message-820864591801483318">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">a start screen</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="820864609157120020" id="message-820864609157120020">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">it&#39;s just pointless</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="820864702358749244" id="message-820864702358749244">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">if i had a menu that&#39;s not a start screen</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="820864721279385601" id="message-820864721279385601">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">i&#39;d have a button</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="820864725918547969" id="message-820864725918547969">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">but i don&#39;t</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/232755f4cde29cc8b2e54bd50da14e43-3A9B1.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="PerkCheddy#0001" data-user-id="636607762385731598" style="">PerkCheddy</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 10:44 PM</span>
+
+            <div class="chatlog__message " data-message-id="820865008971939890" id="message-820865008971939890">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">start button asthetics tho!!</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/41657403d00925ca72e869fb47f70ac7-409CB.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Vruh 2#0961" data-user-id="146956554371989504" style="color: rgb(52,152,219)">Vruh 2 (cry about it)</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 10:46 PM</span>
+
+            <div class="chatlog__message " data-message-id="820865570484125706" id="message-820865570484125706">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">too bad</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/21180337ff74db5f57aeed1a7ac9ca5f-FF199.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="freedom#7341" data-user-id="190196212165509121" style="">freedom</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 10:57 PM</span>
+
+            <div class="chatlog__message " data-message-id="820868194947825664" id="message-820868194947825664">
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/image-297F3.png">
+                                        <img class="chatlog__attachment-thumbnail" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/image-297F3.png" alt="Image attachment" title="Image: image.png (4.65 KB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+        <div class="chatlog__reference-symbol">
+        </div>
+        <div class="chatlog__reference">
+                <span class="chatlog__reference-unknown">
+                    Original message was deleted.
+                </span>
+        </div>
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 11:39 PM</span>
+
+            <div class="chatlog__message " data-message-id="820878742884712518" id="message-820878742884712518">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">We got RGB SCART and more love for the Master System <img class="emoji " alt="🙂" title="🙂" src="https://twemoji.maxcdn.com/2/72x72/1f642.png"></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="820878944936919050" id="message-820878944936919050">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">OG PCMR started in Europe too</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="820878989027573790" id="message-820878989027573790">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Glad it did because demoscene is cool</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/21180337ff74db5f57aeed1a7ac9ca5f-FF199.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="freedom#7341" data-user-id="190196212165509121" style="">freedom</span>
+
+
+        <span class="chatlog__timestamp">24-Mar-21 12:17 AM</span>
+
+            <div class="chatlog__message " data-message-id="824149879823663104" id="message-824149879823663104">
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/unknown-83A9A.png">
+                                        <img class="chatlog__attachment-thumbnail" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/unknown-83A9A.png" alt="Image attachment" title="Image: unknown.png (47.22 KB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="824149914380140545" id="message-824149914380140545">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">stuck there</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="824149916146073601" id="message-824149916146073601">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">F</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/cbad1418a0cd40ea749636cb35b86295-20CB0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Audi81#5335" data-user-id="410109122839838721" style="color: rgb(149,165,166)">Audi666 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">24-Mar-21 12:28 AM</span>
+
+            <div class="chatlog__message " data-message-id="824152599878959165" id="message-824152599878959165">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Opened for me</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="824152623472574494" id="message-824152623472574494">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Wait what</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="824152679223394334" id="message-824152679223394334">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Ah yes my metro apps are broken</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/21180337ff74db5f57aeed1a7ac9ca5f-FF199.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="freedom#7341" data-user-id="190196212165509121" style="">freedom</span>
+
+
+        <span class="chatlog__timestamp">24-Mar-21 02:00 PM</span>
+
+            <div class="chatlog__message " data-message-id="824356916519239721" id="message-824356916519239721">
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/unknown-48497.png">
+                                        <img class="chatlog__attachment-thumbnail" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/unknown-48497.png" alt="Image attachment" title="Image: unknown.png (47.22 KB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="824356926589763704" id="message-824356926589763704">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">rip 8.1 store</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+        <div class="chatlog__reference-symbol">
+        </div>
+        <div class="chatlog__reference">
+                <img class="chatlog__reference-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/21180337ff74db5f57aeed1a7ac9ca5f-FF199.png" alt="Avatar">
+                <span class="chatlog__reference-name" title="freedom#7341" style="">freedom</span>
+                <a class="chatlog__reference-link" href="#" onclick="scrollToMessage(event, &#39;824356926589763704&#39;)">
+                    <span class="chatlog__reference-content">
+rip 8.1 store                    </span>
+
+                </a>
+        </div>
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/31a48b435811b1cb77ac09a8b8d1bc83-4AC9D.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Daniel7689#8482" data-user-id="486532062426300444" style="color: rgb(149,165,166)">Rosen but better (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">24-Mar-21 05:37 PM</span>
+
+            <div class="chatlog__message " data-message-id="824411699289260045" id="message-824411699289260045">
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/unknown-157F9.png">
+                                        <img class="chatlog__attachment-thumbnail" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/unknown-157F9.png" alt="Image attachment" title="Image: unknown.png (878.11 KB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/21180337ff74db5f57aeed1a7ac9ca5f-FF199.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="freedom#7341" data-user-id="190196212165509121" style="">freedom</span>
+
+
+        <span class="chatlog__timestamp">24-Mar-21 05:38 PM</span>
+
+            <div class="chatlog__message " data-message-id="824411791236268092" id="message-824411791236268092">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">it just gets stuck at the loading screen for me</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="824411793253859398" id="message-824411793253859398">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">rip</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/31a48b435811b1cb77ac09a8b8d1bc83-4AC9D.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Daniel7689#8482" data-user-id="486532062426300444" style="color: rgb(149,165,166)">Rosen but better (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">24-Mar-21 05:41 PM</span>
+
+            <div class="chatlog__message " data-message-id="824412624317972490" id="message-824412624317972490">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">probably regional issue</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#129315;" title="&#129315;" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20windows-store%20%5B820565761507721216%5D.html_Files/1f923-C1147.png">
+                                <span class="chatlog__reaction-count">3</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+</div>
+
+<div class="postamble">
+    <div class="postamble__entry">Exported 50 message(s)</div>
+</div>
+
+</body>
+
+</html>

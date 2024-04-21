@@ -1,0 +1,4380 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Windows 7 and Legacy Software - welcome</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <style>
+        /* General */
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-300.woff);
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-400.woff);
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-500.woff);
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-600.woff);
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-700.woff);
+    font-weight: 700;
+}
+
+body {
+    font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 17px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    object-fit: contain;
+}
+
+.markdown {
+    max-width: 100%;
+    line-height: 1.3;
+    overflow-wrap: break-word;
+}
+
+.preserve-whitespace {
+    white-space: pre-wrap;
+}
+
+.spoiler {
+    /* width: fit-content; */
+    display: inline-block;
+    /* This is more consistent across browsers, the old attribute worked well under Chrome but not FireFox. */
+}
+
+.spoiler--hidden {
+    cursor: pointer;
+}
+
+.spoiler-text {
+    border-radius: 3px;
+}
+
+.spoiler--hidden .spoiler-text {
+    color: rgba(0, 0, 0, 0);
+}
+
+.spoiler--hidden .spoiler-text::selection {
+    color: rgba(0, 0, 0, 0);
+}
+
+.spoiler-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px;
+}
+
+.spoiler--hidden .spoiler-image {
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.spoiler--hidden .spoiler-image * {
+    filter: blur(44px);
+}
+
+.spoiler--hidden .spoiler-image:after {
+    content: "SPOILER";
+    color: #dcddde;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 600;
+    padding: 100%;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+    font-size: 0.9em;
+}
+
+.spoiler--hidden:hover .spoiler-image:after {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.quote {
+    margin: 0.1em 0;
+    padding-left: 0.6em;
+    border-left: 4px solid;
+    border-radius: 3px;
+}
+
+.pre {
+    font-family: "Consolas", "Courier New", Courier, monospace;
+}
+
+.pre--multiline {
+    margin-top: 0.25em;
+    padding: 0.5em;
+    border: 2px solid;
+    border-radius: 5px;
+}
+
+.pre--inline {
+    padding: 2px;
+    border-radius: 3px;
+    font-size: 0.85em;
+}
+
+.mention {
+    border-radius: 3px;
+    padding: 0 2px;
+    color: #7289da;
+    background: rgba(114, 137, 218, .1);
+    font-weight: 500;
+}
+
+.emoji {
+    width: 1.25em;
+    height: 1.25em;
+    margin: 0 0.06em;
+    vertical-align: -0.4em;
+}
+
+.emoji--small {
+    width: 1em;
+    height: 1em;
+}
+
+.emoji--large {
+    width: 2.8em;
+    height: 2.8em;
+}
+
+/* Preamble */
+
+.preamble {
+    display: grid;
+    margin: 0 0.3em 0.6em 0.3em;
+    max-width: 100%;
+    grid-template-columns: auto 1fr;
+}
+
+.preamble__guild-icon-container {
+    grid-column: 1;
+}
+
+.preamble__guild-icon {
+    max-width: 88px;
+    max-height: 88px;
+}
+
+.preamble__entries-container {
+    grid-column: 2;
+    margin-left: 0.6em;
+}
+
+.preamble__entry {
+    font-size: 1.4em;
+}
+
+.preamble__entry--small {
+    font-size: 1em;
+}
+
+/* Chatlog */
+
+.chatlog {
+    max-width: 100%;
+}
+
+.chatlog__message-group {
+    display: grid;
+    margin: 0 0.6em;
+    padding: 0.9em 0;
+    border-top: 1px solid;
+    grid-template-columns: auto 1fr;
+}
+
+.chatlog__reference-symbol {
+    grid-column: 1;
+    border-style: solid;
+    border-width: 2px 0 0 2px;
+    border-radius: 8px 0 0 0;
+    margin-left: 16px;
+    margin-top: 8px;
+}
+
+.chatlog__reference {
+    display: flex;
+    grid-column: 2;
+    margin-left: 1.2em;
+    margin-bottom: 0.25em;
+    font-size: 0.875em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    align-items: center;
+}
+
+.chatlog__reference-avatar {
+    border-radius: 50%;
+    height: 16px;
+    width: 16px;
+    margin-right: 0.25em;
+}
+
+.chatlog__reference-name {
+    margin-right: 0.25em;
+    font-weight: 600;
+}
+
+.chatlog__reference-link {
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.chatlog__reference-link:hover {
+    text-decoration: none;
+}
+
+.chatlog__reference-content > * {
+    display: inline;
+}
+
+.chatlog__reference-edited-timestamp {
+    margin-left: 0.25em;
+    font-size: 0.8em;
+}
+
+.chatlog__author-avatar-container {
+    grid-column: 1;
+    width: 40px;
+    height: 40px;
+}
+
+.chatlog__author-avatar {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+}
+
+.chatlog__messages {
+    grid-column: 2;
+    margin-left: 1.2em;
+    min-width: 50%;
+}
+
+.chatlog__author-name {
+    font-weight: 500;
+}
+
+.chatlog__timestamp {
+    margin-left: 0.3em;
+    font-size: 0.75em;
+}
+
+.chatlog__message {
+    padding: 0.1em 0.3em;
+    margin: 0 -0.3em;
+    background-color: transparent;
+    transition: background-color 1s ease;
+}
+
+.chatlog__content {
+    font-size: 0.95em;
+    word-wrap: break-word;
+}
+
+.chatlog__edited-timestamp {
+    margin-left: 0.15em;
+    font-size: 0.8em;
+}
+
+.chatlog__attachment {
+    margin-top: 0.3em;
+}
+
+.chatlog__attachment-thumbnail {
+    vertical-align: top;
+    max-width: 45vw;
+    max-height: 500px;
+    border-radius: 3px;
+}
+
+.chatlog__attachment-container {
+    height: 40px;
+    width: 100%;
+    max-width: 520px;
+    padding: 10px;
+    border: 1px solid;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.chatlog__attachment-icon {
+    float: left;
+    height: 100%;
+    margin-right: 10px;
+}
+
+.chatlog__attachment-icon > .a {
+    fill: #f4f5fb;
+    d: path("M50,935a25,25,0,0,1-25-25V50A25,25,0,0,1,50,25H519.6L695,201.32V910a25,25,0,0,1-25,25Z");
+}
+
+.chatlog__attachment-icon > .b {
+    fill: #7789c4;
+    d: path("M509.21,50,670,211.63V910H50V50H509.21M530,0H50A50,50,0,0,0,0,50V910a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50h0V191Z");
+}
+
+.chatlog__attachment-icon > .c {
+    fill: #f4f5fb;
+    d: path("M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z");
+}
+
+.chatlog__attachment-icon > .d {
+    fill: #7789c4;
+    d: path("M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z");
+}
+
+.chatlog__attachment-filesize {
+    color: #72767d;
+    font-size: 12px;
+}
+
+.chatlog__attachment-filename {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.chatlog__embed {
+    display: flex;
+    margin-top: 0.3em;
+    max-width: 520px;
+}
+
+.chatlog__embed-color-pill {
+    flex-shrink: 0;
+    width: 0.25em;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.chatlog__embed-content-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em 0.6em;
+    border: 1px solid;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.chatlog__embed-content {
+    display: flex;
+    width: 100%;
+}
+
+.chatlog__embed-text {
+    flex: 1;
+}
+
+.chatlog__embed-author {
+    display: flex;
+    margin-bottom: 0.3em;
+    align-items: center;
+}
+
+.chatlog__embed-author-icon {
+    margin-right: 0.5em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.chatlog__embed-author-name {
+    font-size: 0.875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-title {
+    margin-bottom: 0.2em;
+    font-size: 0.875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-description {
+    font-weight: 500;
+    font-size: 0.85em;
+}
+
+.chatlog__embed-fields {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.chatlog__embed-field {
+    flex: 0;
+    min-width: 100%;
+    max-width: 506px;
+    padding-top: 0.6em;
+    font-size: 0.875em;
+}
+
+.chatlog__embed-field--inline {
+    flex: 1;
+    flex-basis: auto;
+    min-width: 150px;
+}
+
+.chatlog__embed-field-name {
+    margin-bottom: 0.2em;
+    font-weight: 600;
+}
+
+.chatlog__embed-field-value {
+    font-weight: 500;
+}
+
+.chatlog__embed-thumbnail {
+    flex: 0;
+    margin-left: 1.2em;
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-image-container {
+    margin-top: 0.6em;
+}
+
+.chatlog__embed-image {
+    max-width: 500px;
+    max-height: 400px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-footer {
+    margin-top: 0.6em;
+}
+
+.chatlog__embed-footer-icon {
+    margin-right: 0.2em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.chatlog__embed-footer-text {
+    font-size: 0.75em;
+    font-weight: 500;
+}
+
+.chatlog__reactions {
+    display: flex;
+}
+
+.chatlog__reaction {
+    display: flex;
+    align-items: center;
+    margin: 0.35em 0.1em 0.1em 0.1em;
+    padding: 0.2em 0.35em;
+    border-radius: 3px;
+}
+
+.chatlog__reaction-count {
+    min-width: 9px;
+    margin-left: 0.35em;
+    font-size: 0.875em;
+}
+
+.chatlog__bot-tag {
+    position: relative;
+    top: -.2em;
+    margin-left: 0.3em;
+    padding: 0.05em 0.3em;
+    border-radius: 3px;
+    vertical-align: middle;
+    line-height: 1.3;
+    background: #7289da;
+    color: #ffffff;
+    font-size: 0.625em;
+    font-weight: 500;
+}
+
+/* Postamble */
+
+.postamble {
+    margin: 1.4em 0.3em 0.6em 0.3em;
+    padding: 1em;
+    border-top: 1px solid;
+}
+    </style>
+    <style>
+        /* General */
+
+body {
+    background-color: #36393e;
+    color: #dcddde;
+}
+
+a {
+    color: #0096cf;
+}
+
+.spoiler-text {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.spoiler--hidden .spoiler-text {
+    background-color: #202225;
+}
+
+.spoiler--hidden:hover .spoiler-text {
+    background-color: rgba(32, 34, 37, 0.8);
+}
+
+.quote {
+    border-color: #4f545c;
+}
+
+.pre {
+    background-color: #2f3136 !important;
+}
+
+.pre--multiline {
+    border-color: #282b30 !important;
+    color: #b9bbbe !important;
+}
+
+/* === Preamble === */
+
+.preamble__entry {
+    color: #ffffff;
+}
+
+/* Chatlog */
+
+.chatlog__message-group {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.chatlog__reference-symbol {
+    border-color: #4f545c;
+}
+
+.chatlog__reference {
+    color: #b5b6b8;
+}
+
+.chatlog__reference-link {
+    color: #b5b6b8;
+}
+
+.chatlog__reference-link:hover {
+    color: #ffffff;
+}
+
+.chatlog__reference-edited-timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__author-name {
+    color: #ffffff;
+}
+
+.chatlog__timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__message--highlighted {
+    background-color: rgba(114, 137, 218, 0.2) !important;
+}
+
+.chatlog__message--pinned {
+    background-color: rgba(249, 168, 37, 0.05);
+}
+
+.chatlog__attachment-container {
+    background-color: #2f3136;
+    border-color: #292b2f;
+}
+
+.chatlog__edited-timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__embed-color-pill--default {
+    background-color: rgba(79, 84, 92, 1);
+}
+
+.chatlog__embed-content-container {
+    background-color: rgba(46, 48, 54, 0.3);
+    border-color: rgba(46, 48, 54, 0.6);
+}
+
+.chatlog__embed-author-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-author-name-link {
+    color: #ffffff;
+}
+
+.chatlog__embed-title {
+    color: #ffffff;
+}
+
+.chatlog__embed-description {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-field-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-field-value {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-footer {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__reaction {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.chatlog__reaction-count {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* Postamble */
+
+.postamble {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.postamble__entry {
+    color: #ffffff;
+}
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.pre--multiline').forEach(block => hljs.highlightBlock(block));
+        });
+    </script>
+
+    <script>
+        function scrollToMessage(event, id) {
+            var element = document.getElementById('message-' + id);
+
+            if (element) {
+                event.preventDefault();
+
+                element.classList.add('chatlog__message--highlighted');
+
+                window.scrollTo({
+                    top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
+                    behavior: 'smooth'
+                });
+
+                window.setTimeout(function() {
+                    element.classList.remove('chatlog__message--highlighted');
+                }, 2000);
+            }
+        }
+
+        function showSpoiler(event, element) {
+            if (element && element.classList.contains('spoiler--hidden')) {
+                event.preventDefault();
+                element.classList.remove('spoiler--hidden');
+            }
+        }
+    </script>
+</head>
+<body>
+
+<div class="preamble">
+    <div class="preamble__guild-icon-container">
+        <img class="preamble__guild-icon" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/dc536ce53c6925864bef1064f357e510-C5C2D.png" alt="Guild icon">
+    </div>
+    <div class="preamble__entries-container">
+        <div class="preamble__entry">Windows 7 and Legacy Software</div>
+        <div class="preamble__entry">Important / welcome</div>
+
+
+    </div>
+</div>
+
+<div class="chatlog">
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/e4de0121e08e9e5e1c626c2c2c5ab298-8BC71.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Tux.#3021" data-user-id="189384773486116865" style="color: rgb(153,45,34)">Tux. (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 07:03 AM</span>
+
+            <div class="chatlog__message " data-message-id="820628143881715732" id="message-820628143881715732">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/406a288bb0c301920f1a6857b6b6dda2-B82A0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="tyl#5381" data-user-id="711271606835740791" style="color: rgb(149,165,166)">tyl</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 07:03 AM</span>
+
+            <div class="chatlog__message " data-message-id="820628148349042720" id="message-820628148349042720">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/ea0eab6251e41e50ecb57247dc3fb064-740B4.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="ur mother#0462" data-user-id="747194824372781207" style="">ur mother</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 07:03 AM</span>
+
+            <div class="chatlog__message " data-message-id="820628208138846248" id="message-820628208138846248">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/46c8edbf094f683787a14382764cddb6-4C13B.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="door257#7919" data-user-id="544915314299895838" style="color: rgb(153,45,34)">door257</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 07:42 AM</span>
+
+            <div class="chatlog__message " data-message-id="820638085737742366" id="message-820638085737742366">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/d3b2cff3e98a5568ec82b3beedc1b77a-4D60D.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MadEvening#3923" data-user-id="732394165911945236" style="color: rgb(52,152,219)">MadEvening</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 07:44 AM</span>
+
+            <div class="chatlog__message " data-message-id="820638497198964766" id="message-820638497198964766">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/3d5d5fa8dfd0760eab3bc219323f3760-EB589.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="mjdxp#3230" data-user-id="272855379715686400" style="color: rgb(149,165,166)">mjdxp (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 07:46 AM</span>
+
+            <div class="chatlog__message " data-message-id="820638919250411540" id="message-820638919250411540">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/2ef379f771163e9a1cd7273b38bf4bd9-89862.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="blackwingcat#0501" data-user-id="406818588478144512" style="color: rgb(41,89,194)">w2k god (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 07:49 AM</span>
+
+            <div class="chatlog__message " data-message-id="820639754667294780" id="message-820639754667294780">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/2615e7bba5bafc8a266dd8422fc8db9b-E597E.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win32#7457" data-user-id="767234278630228019" style="color: rgb(26,188,156)">win32</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 08:29 AM</span>
+
+            <div class="chatlog__message " data-message-id="820649726961385502" id="message-820649726961385502">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/46c8edbf094f683787a14382764cddb6-4C13B.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="door257#7919" data-user-id="544915314299895838" style="color: rgb(153,45,34)">door257</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 08:33 AM</span>
+
+            <div class="chatlog__message " data-message-id="820650740837384232" id="message-820650740837384232">
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="820650807778607124" id="message-820650807778607124">
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/1a9ccf5359090fbf0ece63f8be2354ab-99331.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Harry#8671" data-user-id="301502541915619328" style="color: rgb(149,165,166)">Harry (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 08:49 AM</span>
+
+            <div class="chatlog__message " data-message-id="820654812760244244" id="message-820654812760244244">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/b2b484c060f572c18ad63f7f1c4b3caa-0C58E.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="docR#2335" data-user-id="376619418643333120" style="color: rgb(32,102,148)">docR (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 08:52 AM</span>
+
+            <div class="chatlog__message " data-message-id="820655559531298826" id="message-820655559531298826">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/ec5624411aafab1b959ece2a0ff5401f-E6A19.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="GMM#7750" data-user-id="376759194600210433" style="color: rgb(153,45,34)">GMM</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 08:52 AM</span>
+
+            <div class="chatlog__message " data-message-id="820655703471292496" id="message-820655703471292496">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/f8adf0c371897afa7501de7934042057-45254.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="SGWaS#8599" data-user-id="344354626403041281" style="color: rgb(149,165,166)">SGWaS</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 09:01 AM</span>
+
+            <div class="chatlog__message " data-message-id="820657956516266014" id="message-820657956516266014">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/29dd49b8638517a5a1a4046eb8c9aa3b-E89DD.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Fluent#0798" data-user-id="565538294289661963" style="color: rgb(149,165,166)">Fluent (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 09:02 AM</span>
+
+            <div class="chatlog__message " data-message-id="820658226495356928" id="message-820658226495356928">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/a_7052b5b68e4395f3a06cee9e17786bc6-93FA2.gif" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Forbidden George Lopez#0001" data-user-id="493909376109903873" style="color: rgb(231,76,60)">Forbidden George Lopez</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 09:14 AM</span>
+
+            <div class="chatlog__message " data-message-id="820661154195177482" id="message-820661154195177482">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/2-ADBB4.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="AbaddoN#8967" data-user-id="499044703958990849" style="color: rgb(52,152,219)">AbaddoN</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 09:28 AM</span>
+
+            <div class="chatlog__message " data-message-id="820664648494743553" id="message-820664648494743553">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/2-ADBB4.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Gekarupu#9647" data-user-id="413399700515848212" style="color: rgb(149,165,166)">Gekarupu</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 09:34 AM</span>
+
+            <div class="chatlog__message " data-message-id="820666170448674837" id="message-820666170448674837">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/9d4dbd6dfff606e4b7932be2cba6c6d2-B9567.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="_xXeleKtricKilzXx_#0803" data-user-id="137032690284232704" style="color: rgb(149,165,166)">_xXeleKtricKilzXx_</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 09:41 AM</span>
+
+            <div class="chatlog__message " data-message-id="820667845842042900" id="message-820667845842042900">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/4d42d8b2e57c4310ab421eb4e52f3938-CC5EA.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="TheRealZago#8820" data-user-id="526138306488959048" style="color: rgb(149,165,166)">TheRealZago</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 09:55 AM</span>
+
+            <div class="chatlog__message " data-message-id="820671596855296000" id="message-820671596855296000">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/be43ebd673bd810352c65327de9299ba-FC400.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win7#2305" data-user-id="744462879499091969" style="color: rgb(52,152,219)">win7</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 10:26 AM</span>
+
+            <div class="chatlog__message " data-message-id="820679169276248145" id="message-820679169276248145">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/a_4e50a7485801135df77ec540d32c5221-36F49.gif" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="TheQuantumMadness#0007" data-user-id="197453553751687168" style="">TheQuantumMadness</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 11:01 AM</span>
+
+            <div class="chatlog__message " data-message-id="820687977084354640" id="message-820687977084354640">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/423c7536719cbb7b1904c25c07fe7c5a-F2E4F.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="blueviper10#3793" data-user-id="792629882907394063" style="color: rgb(149,165,166)">blueviper10</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 11:19 AM</span>
+
+            <div class="chatlog__message " data-message-id="820692631742971944" id="message-820692631742971944">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/cbfef398fc99135738641948db12998a-C52A6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="K4sum1#7987" data-user-id="549009613710819331" style="color: rgb(149,165,166)">K4sumi (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 12:06 PM</span>
+
+            <div class="chatlog__message " data-message-id="820704360950005790" id="message-820704360950005790">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/2c8e4ab1f29e5f5bd18036b40ab08c6f-8C240.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="B1-BattleDroid#4927" data-user-id="326025160157167616" style="color: rgb(149,165,166)">B1-BattleDroid</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 12:08 PM</span>
+
+            <div class="chatlog__message " data-message-id="820704854812655636" id="message-820704854812655636">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/b5527e1bb2eeef2d7d02da7598d27112-126B9.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MichaelMaymays#3957" data-user-id="811069132879167509" style="color: rgb(231,76,60)">MichaelMaymays</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 12:11 PM</span>
+
+            <div class="chatlog__message " data-message-id="820705802167517214" id="message-820705802167517214">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/a_17f9e5625baa2e550cd4319eefb05395-FA473.gif" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Mr. Spicy Forth#5224" data-user-id="187673891018244096" style="color: rgb(149,165,166)">Mr. Spicy Forth (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 12:14 PM</span>
+
+            <div class="chatlog__message " data-message-id="820706515417169920" id="message-820706515417169920">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/782cd7029729aefa8ea651bf84fd7829-6758C.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Thespikedballofdoom#7161" data-user-id="526823815297237003" style="">Thespikedballofdoom</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 12:27 PM</span>
+
+            <div class="chatlog__message " data-message-id="820709745022468146" id="message-820709745022468146">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/0cfec781df368dbce990d440d075a2d7-B24BC.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="AmariBot#5150" data-user-id="339254240012664832" style="color: rgb(233,30,99)">AmariBot</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Mar-21 12:30 PM</span>
+
+            <div class="chatlog__message " data-message-id="820710477533413417" id="message-820710477533413417">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/80b059fb529fc45ec25d21bcc8bca5d5-1BEC2.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="UB3R-B0T#3802" data-user-id="85614143951892480" style="color: rgb(233,30,99)">UB3R-B0T</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Mar-21 12:31 PM</span>
+
+            <div class="chatlog__message " data-message-id="820710792999469136" id="message-820710792999469136">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/bc76ac2eb2a23a7c055316b7cd6ff3b6-90529.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Uzume#0851" data-user-id="168497908314800129" style="color: rgb(233,30,99)">Uzume</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Mar-21 12:32 PM</span>
+
+            <div class="chatlog__message " data-message-id="820710984016592937" id="message-820710984016592937">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/ad4594c81ec29ef11f23c3b76a96a678-28EEB.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="NotSoBot#9555" data-user-id="439205512425504771" style="color: rgb(233,30,99)">NotSoBot</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Mar-21 12:34 PM</span>
+
+            <div class="chatlog__message " data-message-id="820711488867532820" id="message-820711488867532820">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/50a12a857cbdbdb85c8bc3dc7ba8f1f0-52A01.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ayana#8911" data-user-id="185476724627210241" style="color: rgb(233,30,99)">Ayana</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Mar-21 12:35 PM</span>
+
+            <div class="chatlog__message " data-message-id="820711681444282378" id="message-820711681444282378">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/a_09e9876cf1a7844b53d9b21af3c6a7c0-8CCA8.gif" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="dro3m#0420" data-user-id="594926940905930772" style="">dro3m</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 01:06 PM</span>
+
+            <div class="chatlog__message " data-message-id="820719549040558100" id="message-820719549040558100">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/e660e81851e1c9a170e67f684765c20c-A3F75.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Plece#1516" data-user-id="486062951292338176" style="color: rgb(149,165,166)">Plece</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 01:18 PM</span>
+
+            <div class="chatlog__message " data-message-id="820722607954985050" id="message-820722607954985050">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/ab152b72ccafc50f73c298ee461b7fbe-FA069.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dean&#39;s Tech Corner#1062" data-user-id="672537216064552982" style="color: rgb(149,165,166)">Dean&#39;s Tech Corner</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 01:52 PM</span>
+
+            <div class="chatlog__message " data-message-id="820731030281256970" id="message-820731030281256970">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/f953ff9a75e1634451c80d0874f5df3b-02EF2.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Alt+F4#2274" data-user-id="545061370132168704" style="color: rgb(149,165,166)">Alt+F4</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 03:03 PM</span>
+
+            <div class="chatlog__message " data-message-id="820749033517482024" id="message-820749033517482024">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/41657403d00925ca72e869fb47f70ac7-409CB.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Vruh 2#0961" data-user-id="146956554371989504" style="color: rgb(52,152,219)">Vruh 2 (cry about it)</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 03:59 PM</span>
+
+            <div class="chatlog__message " data-message-id="820763090349326346" id="message-820763090349326346">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/db1869231b2d1fd7a00d96d3379d7d05-EC4E5.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="ChansLeChan#0772" data-user-id="404390671064104970" style="color: rgb(149,165,166)">ChansLeChan (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 04:12 PM</span>
+
+            <div class="chatlog__message " data-message-id="820766295996891146" id="message-820766295996891146">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/ec740026f53f1b970d7431377f3fefb1-6CAB5.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="retroreviewyt#8176" data-user-id="469343369479454733" style="color: rgb(149,165,166)">retroreviewyt (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 06:22 PM</span>
+
+            <div class="chatlog__message " data-message-id="820798974511808573" id="message-820798974511808573">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/7a6ceee6812344ccc1ff373fc0315036-AD11F.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="ran#8981" data-user-id="367966164829339649" style="color: rgb(46,204,113)">R4n (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 06:22 PM</span>
+
+            <div class="chatlog__message " data-message-id="820799177800941589" id="message-820799177800941589">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/28a75d2648315a60f26ec6795922ce12-891B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MaxleAisy#1393" data-user-id="690897750547759134" style="color: rgb(149,165,166)">MaxleAisy</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 08:55 PM</span>
+
+            <div class="chatlog__message " data-message-id="820837503233163284" id="message-820837503233163284">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/9b604bf736e462fa0f7c88ce48d7adb9-93050.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="TuxPuf#6243" data-user-id="551803495057981465" style="">TuxPuf</span>
+
+
+        <span class="chatlog__timestamp">15-Mar-21 01:30 AM</span>
+
+            <div class="chatlog__message " data-message-id="820906802740461598" id="message-820906802740461598">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/be50c61205d5cc0ee73315173d16d882-76DF1.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Mr. Difficult#4011" data-user-id="435541604283973634" style="color: rgb(149,165,166)">Mr. Difficult</span>
+
+
+        <span class="chatlog__timestamp">15-Mar-21 07:31 AM</span>
+
+            <div class="chatlog__message " data-message-id="820997573468880896" id="message-820997573468880896">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/506d6a6b824af2952bbef32d08239fd2-8E3A7.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Avon#8665" data-user-id="410131301509627905" style="">Avon</span>
+
+
+        <span class="chatlog__timestamp">15-Mar-21 07:55 AM</span>
+
+            <div class="chatlog__message " data-message-id="821003775337955348" id="message-821003775337955348">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/be793d794983b0fabedbf06bf7fe4043-59777.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="LonelyFox#0785" data-user-id="527973487432957993" style="color: rgb(149,165,166)">LonelyFox (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">15-Mar-21 11:17 AM</span>
+
+            <div class="chatlog__message " data-message-id="821054402986639400" id="message-821054402986639400">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/0f3042b93896ee212f40dba379a794a8-AAA35.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Servixe Pack 3#6921" data-user-id="821085820051128331" style="">Servixe Pack 3</span>
+
+
+        <span class="chatlog__timestamp">15-Mar-21 01:24 PM</span>
+
+            <div class="chatlog__message " data-message-id="821086581656911893" id="message-821086581656911893">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/4-4551A.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="xpuser2020#1209" data-user-id="785949161479864420" style="color: rgb(149,165,166)">xpuser2020</span>
+
+
+        <span class="chatlog__timestamp">15-Mar-21 03:34 PM</span>
+
+            <div class="chatlog__message " data-message-id="821119221164539964" id="message-821119221164539964">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/1f5ac926d1728c5e14bc61c068540b1f-7E929.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="DragonMen154#1031" data-user-id="447765420137644063" style="color: rgb(149,165,166)">DragonMen154 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">15-Mar-21 10:00 PM</span>
+
+            <div class="chatlog__message " data-message-id="821216233617489960" id="message-821216233617489960">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/841fa7b99e48b5ab587ca0ce3dcd6c9d-CF1BF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win#0235" data-user-id="149047896468226048" style="color: rgb(149,165,166)">win</span>
+
+
+        <span class="chatlog__timestamp">15-Mar-21 10:16 PM</span>
+
+            <div class="chatlog__message " data-message-id="821220465694736434" id="message-821220465694736434">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/9a3fb01257afcca1f90210428fed4e48-9EADB.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Sputnik1973#6566" data-user-id="442738536551153685" style="color: rgb(149,165,166)">Splutnik4006 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">16-Mar-21 02:33 AM</span>
+
+            <div class="chatlog__message " data-message-id="821285119687393300" id="message-821285119687393300">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/deb0328fc998f58749786289ec5b8b9d-14677.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="someonehere#5335" data-user-id="444204635117584405" style="color: rgb(149,165,166)">someonehere (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">16-Mar-21 03:13 AM</span>
+
+            <div class="chatlog__message " data-message-id="821295039195643905" id="message-821295039195643905">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/7df5e17e5b53de67c65970bbe9808c25-FCBDC.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="&#39;90&#39;s Fan#5583" data-user-id="467054904372887563" style="">&#39;90&#39;s Fan</span>
+
+
+        <span class="chatlog__timestamp">16-Mar-21 05:25 AM</span>
+
+            <div class="chatlog__message " data-message-id="821328305978081300" id="message-821328305978081300">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/abd9d252b787c18a4329e8dca5072eb3-C8169.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Calm360#4469" data-user-id="621411433825042447" style="color: rgb(52,152,219)">Calm360</span>
+
+
+        <span class="chatlog__timestamp">16-Mar-21 01:31 PM</span>
+
+            <div class="chatlog__message " data-message-id="821450635790516264" id="message-821450635790516264">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/a_3758e38004feb860b39b6097897b7795-66A2B.gif" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="linux boi#1100" data-user-id="435376858754973697" style="">linux boi</span>
+
+
+        <span class="chatlog__timestamp">16-Mar-21 01:33 PM</span>
+
+            <div class="chatlog__message " data-message-id="821451100090663012" id="message-821451100090663012">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/55f745443f6a114cf6548c5ed64adb43-B9C25.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="❣sweon❣#4490" data-user-id="663080575959171142" style="color: rgb(149,165,166)">❣sweon❣</span>
+
+
+        <span class="chatlog__timestamp">16-Mar-21 06:14 PM</span>
+
+            <div class="chatlog__message " data-message-id="821521758028693515" id="message-821521758028693515">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/ed7b5d1616dd177b457bc8221733f1d9-DB19C.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="realismbro285#4207" data-user-id="735998422653599785" style="color: rgb(149,165,166)">realismbro4006 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">17-Mar-21 02:06 AM</span>
+
+            <div class="chatlog__message " data-message-id="821640629879701504" id="message-821640629879701504">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/a3e63ef1cb4fe11c6decc4d032f46eab-CB4C7.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Sempronium 2450++#0931" data-user-id="660586165006762041" style="color: rgb(149,165,166)">Sempronium 2450++</span>
+
+
+        <span class="chatlog__timestamp">17-Mar-21 03:25 AM</span>
+
+            <div class="chatlog__message " data-message-id="821660427992956958" id="message-821660427992956958">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/ab152b72ccafc50f73c298ee461b7fbe-FA069.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dean&#39;s Tech Corner#1062" data-user-id="672537216064552982" style="color: rgb(149,165,166)">Dean&#39;s Tech Corner</span>
+
+
+        <span class="chatlog__timestamp">17-Mar-21 07:50 AM</span>
+
+            <div class="chatlog__message " data-message-id="821727158232940544" id="message-821727158232940544">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/37c8d28313864ba8b03055071cb72c0c-1DAD3.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Cy&#39;s Junk#2447" data-user-id="607374465793392651" style="color: rgb(149,165,166)">Cy&#39;s Junk</span>
+
+
+        <span class="chatlog__timestamp">17-Mar-21 12:15 PM</span>
+
+            <div class="chatlog__message " data-message-id="821793957474336848" id="message-821793957474336848">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">17-Mar-21 07:20 PM</span>
+
+            <div class="chatlog__message " data-message-id="821900833834401792" id="message-821900833834401792">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/c30dfc0ee1efe0b42109fb2a2105a244-006A6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="ᚸᚶᛙᚪᛊᛚ#7248" data-user-id="176549102773862400" style="color: rgb(149,165,166)">ᚸᚶᛙᚪᛊᛚ</span>
+
+
+        <span class="chatlog__timestamp">18-Mar-21 10:26 AM</span>
+
+            <div class="chatlog__message " data-message-id="822128874245980170" id="message-822128874245980170">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/5b4f53b521e43ae9e1e74c95144c665a-35B0F.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="vinaypundith#0455" data-user-id="721427247650701383" style="color: rgb(32,102,148)">vinaypundith</span>
+
+
+        <span class="chatlog__timestamp">18-Mar-21 08:10 PM</span>
+
+            <div class="chatlog__message " data-message-id="822275850526654464" id="message-822275850526654464">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/c9ef80382cf254f4bf2c7c263cfd2588-A18DB.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rosen#9349" data-user-id="600719571821002782" style="color: rgb(149,165,166)">Rosen is better</span>
+
+
+        <span class="chatlog__timestamp">19-Mar-21 01:28 AM</span>
+
+            <div class="chatlog__message " data-message-id="822355739241873418" id="message-822355739241873418">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/3-FB033.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="ATB57791#2783" data-user-id="423107495435698176" style="color: rgb(149,165,166)">ATB57791</span>
+
+
+        <span class="chatlog__timestamp">19-Mar-21 07:42 AM</span>
+
+            <div class="chatlog__message " data-message-id="822449889400062004" id="message-822449889400062004">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/bfcbb9f3d398a3485415b47eeb29072b-FEC50.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Cookies#2119" data-user-id="339159179262427137" style="color: rgb(149,165,166)">Cookies</span>
+
+
+        <span class="chatlog__timestamp">19-Mar-21 09:29 AM</span>
+
+            <div class="chatlog__message " data-message-id="822476820393754635" id="message-822476820393754635">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/d64a45022c2b890d5b7815fa81f27572-0F76D.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="pokeguy#6991" data-user-id="503292558898757634" style="color: rgb(52,152,219)">pokeguy</span>
+
+
+        <span class="chatlog__timestamp">19-Mar-21 07:40 PM</span>
+
+            <div class="chatlog__message " data-message-id="822630626251243570" id="message-822630626251243570">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/49f28d4567ec774812f9b0d467183494-66AB8.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Fuck#3802" data-user-id="247089539330473984" style="color: rgb(149,165,166)">Fuck (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">19-Mar-21 10:10 PM</span>
+
+            <div class="chatlog__message " data-message-id="822668343575314552" id="message-822668343575314552">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/ebfb351692e1e4061d7fdce00ab9bc88-D5744.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="DeadUser#8915" data-user-id="247495900463759360" style="color: rgb(149,165,166)">oldie Scarlet (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">20-Mar-21 06:13 AM</span>
+
+            <div class="chatlog__message " data-message-id="822790001792253952" id="message-822790001792253952">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/a23d14bf5b77fe6a8e8131dce4c918b5-EA3C0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Komfudo#8193" data-user-id="706195845019598930" style="color: rgb(149,165,166)">Komfudo (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">20-Mar-21 08:21 AM</span>
+
+            <div class="chatlog__message " data-message-id="822822219889639435" id="message-822822219889639435">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/a37214572db04c8d64a192b1a9c1aefe-FE436.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Boris Network#2193" data-user-id="435952239127822336" style="">Boris Network</span>
+
+
+        <span class="chatlog__timestamp">20-Mar-21 10:42 AM</span>
+
+            <div class="chatlog__message " data-message-id="822857558074589204" id="message-822857558074589204">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/5516c244395d137ff71dc217a85c4c4c-82AE6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="KevinHassani#2656" data-user-id="798927052510068767" style="">KevinHassani</span>
+
+
+        <span class="chatlog__timestamp">20-Mar-21 07:12 PM</span>
+
+            <div class="chatlog__message " data-message-id="822985889248575548" id="message-822985889248575548">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/a3481c0d4458191555b51bcd95bb38d4-19B11.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nate#4754" data-user-id="196817730257551360" style="color: rgb(149,165,166)">Nate (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">20-Mar-21 08:04 PM</span>
+
+            <div class="chatlog__message " data-message-id="822999049472704532" id="message-822999049472704532">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/7471a943334f70581e5259243c8c5b9f-EC758.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nanandmic567#0356" data-user-id="245706287743107073" style="color: rgb(149,165,166)">Nanandmic567 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">21-Mar-21 06:38 PM</span>
+
+            <div class="chatlog__message " data-message-id="823339806465196072" id="message-823339806465196072">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/c7a35e0677f225098b7a5fc88920aef9-BBB65.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="RLD Ludlulu#2007" data-user-id="519986698084548619" style="">RLD Ludlulu</span>
+
+
+        <span class="chatlog__timestamp">21-Mar-21 10:32 PM</span>
+
+            <div class="chatlog__message " data-message-id="823398830467710986" id="message-823398830467710986">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/3577e994f033dcc32ab56c8f398b391d-273E3.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="~Seraphina~#2009" data-user-id="426538636213878785" style="color: rgb(149,165,166)">~Seraphina~</span>
+
+
+        <span class="chatlog__timestamp">23-Mar-21 02:31 PM</span>
+
+            <div class="chatlog__message " data-message-id="824002387684360202" id="message-824002387684360202">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="vaaa#5670" data-user-id="824408813468778527" style="">vaaa (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">24-Mar-21 05:48 PM</span>
+
+            <div class="chatlog__message " data-message-id="824414325892579338" id="message-824414325892579338">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/2-ADBB4.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="rrr#5342" data-user-id="824418424025120779" style="">rrr (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">24-Mar-21 07:04 PM</span>
+
+            <div class="chatlog__message " data-message-id="824433589869084682" id="message-824433589869084682">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/4d87d2548cd941008ccab0e9a6f5ebeb-C3392.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="crashssdweed#1315" data-user-id="756629774176223383" style="color: rgb(149,165,166)">ragecleanpro (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">24-Mar-21 07:56 PM</span>
+
+            <div class="chatlog__message " data-message-id="824446694073696316" id="message-824446694073696316">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/d7b8d910316a8fcfb7f2e562c39ee43f-8544F.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Endless Nameless#3388" data-user-id="287375241766764545" style="color: rgb(149,165,166)">Endless Nameless (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">25-Mar-21 03:30 PM</span>
+
+            <div class="chatlog__message " data-message-id="824742013231562752" id="message-824742013231562752">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/98b8a9715fbc22c002382d71250c1d9b-C3D1B.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="diyamund#2745" data-user-id="797689107664601088" style="">diyamund</span>
+
+
+        <span class="chatlog__timestamp">28-Mar-21 01:09 PM</span>
+
+            <div class="chatlog__message " data-message-id="825793718891315250" id="message-825793718891315250">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/1-B2132.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Sirovina#9086" data-user-id="707171091214499912" style="">Sirovina</span>
+
+
+        <span class="chatlog__timestamp">31-Mar-21 03:25 PM</span>
+
+            <div class="chatlog__message " data-message-id="826915135175262208" id="message-826915135175262208">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/76af4a6ca21220bfb87d290aa05e8a57-765D6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Emperor_TRXT74#0362" data-user-id="787162381419020331" style="color: rgb(149,165,166)">Emperor_4006 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">31-Mar-21 10:18 PM</span>
+
+            <div class="chatlog__message " data-message-id="827018970300547082" id="message-827018970300547082">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/3-FB033.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="the barcode#7538" data-user-id="827314231144874064" style="">the barcode (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">01-Apr-21 05:51 PM</span>
+
+            <div class="chatlog__message " data-message-id="827314282249191424" id="message-827314282249191424">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/933456cc8cec68eabdeb71700396cf02-5FD2E.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Madhattan#0573" data-user-id="746498097911169025" style="color: rgb(231,76,60)">Madhattan</span>
+
+
+        <span class="chatlog__timestamp">02-Apr-21 05:13 AM</span>
+
+            <div class="chatlog__message " data-message-id="827485800047968276" id="message-827485800047968276">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/3aaa923b80aa2c126558e3bc7f9ea68f-B2984.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="TTR#8363" data-user-id="195615268460953602" style="color: rgb(149,165,166)">TTR (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">03-Apr-21 02:12 PM</span>
+
+            <div class="chatlog__message " data-message-id="827983975880196178" id="message-827983975880196178">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/abcc945f9fb6cb88dbe0c472bae52e4a-F557F.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="daylin#2409" data-user-id="282581828852776960" style="color: rgb(149,165,166)">daylin</span>
+
+
+        <span class="chatlog__timestamp">03-Apr-21 03:12 PM</span>
+
+            <div class="chatlog__message " data-message-id="827998936513118270" id="message-827998936513118270">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/0631b5bff53c434717a0fe4da14dfc48-72229.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="csanchez#5443" data-user-id="367086828626378762" style="color: rgb(149,165,166)">csanchez (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">04-Apr-21 12:46 PM</span>
+
+            <div class="chatlog__message " data-message-id="828324652014501958" id="message-828324652014501958">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/4db6fa35686cd374e659bed370ed3885-757DD.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Shaman Fu™#1776" data-user-id="112383252911665152" style="color: rgb(149,165,166)">Shaman Flu  (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">04-Apr-21 12:47 PM</span>
+
+            <div class="chatlog__message " data-message-id="828324814204043264" id="message-828324814204043264">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/55904cc7432b93e24da00c411557a012-FC615.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Psychotic Giraffe#3511" data-user-id="317486329984450561" style="color: rgb(149,165,166)">PsychoticGiraffe (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">04-Apr-21 01:08 PM</span>
+
+            <div class="chatlog__message " data-message-id="828330299019493406" id="message-828330299019493406">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/c7e8a56c6522b4f8a16bf16b3ddd093f-9643B.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Avi#0659" data-user-id="333069057345716224" style="color: rgb(52,152,219)">Avi</span>
+
+
+        <span class="chatlog__timestamp">04-Apr-21 03:38 PM</span>
+
+            <div class="chatlog__message " data-message-id="828368010879303710" id="message-828368010879303710">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/ebe29aa9d8fa33a2030b178f4783b4be-F4608.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="businessmansgt#7406" data-user-id="547749922469052427" style="color: rgb(149,165,166)">businessmansgt (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">04-Apr-21 08:18 PM</span>
+
+            <div class="chatlog__message " data-message-id="828438453795553330" id="message-828438453795553330">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/7030e62c0b029e10c40df68237990c7a-4DD9D.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="quoth09#2720" data-user-id="299107519245189120" style="color: rgb(149,165,166)">quoth4006 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">05-Apr-21 01:39 AM</span>
+
+            <div class="chatlog__message " data-message-id="828519168608436244" id="message-828519168608436244">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/8b490e7f9b8bf61fe9dca01f5a47ded9-76B24.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dibya#5937" data-user-id="579946163730645003" style="color: rgb(46,204,113)">Dibya</span>
+
+
+        <span class="chatlog__timestamp">05-Apr-21 04:01 AM</span>
+
+            <div class="chatlog__message " data-message-id="828554840664834048" id="message-828554840664834048">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/712b2de619d47a9d0a30a1d36a237f39-A2DBA.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="yuxtel#6106" data-user-id="675515601149624360" style="color: rgb(149,165,166)">yuxtel</span>
+
+
+        <span class="chatlog__timestamp">05-Apr-21 05:38 AM</span>
+
+            <div class="chatlog__message " data-message-id="828579239565590580" id="message-828579239565590580">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/0b1e900db9721b9e169e701b48f41cc3-00088.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="keyboardthebest#7664" data-user-id="813752496610738216" style="color: rgb(149,165,166)">keyboard (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">05-Apr-21 07:33 AM</span>
+
+            <div class="chatlog__message " data-message-id="828608387931176980" id="message-828608387931176980">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/2-ADBB4.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="asdf2345#7872" data-user-id="443178594932490260" style="color: rgb(149,165,166)">R3n alt (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">05-Apr-21 11:44 AM</span>
+
+            <div class="chatlog__message " data-message-id="828671565092225104" id="message-828671565092225104">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/f5837cd4cbb34097e4ef6281133be723-C7039.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Bryn The furry lucario (alt)#0186" data-user-id="793043269671845888" style="color: rgb(31,139,76)">Bryn The furry (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">06-Apr-21 04:49 AM</span>
+
+            <div class="chatlog__message " data-message-id="828929474145681428" id="message-828929474145681428">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/015517b10b915997ba8c09a7b3062e4a-9FBCE.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Bunny Megs#0403" data-user-id="217458988843925505" style="">Bunny Megs</span>
+
+
+        <span class="chatlog__timestamp">07-Apr-21 08:47 PM</span>
+
+            <div class="chatlog__message " data-message-id="829532980174651422" id="message-829532980174651422">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/d4918cddd2475822478a0aa290a5b44c-742B3.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="bokeeXD#9210" data-user-id="804697194825121842" style="color: rgb(46,204,113)">BokeeXD</span>
+
+
+        <span class="chatlog__timestamp">08-Apr-21 04:03 PM</span>
+
+            <div class="chatlog__message " data-message-id="829823872714539069" id="message-829823872714539069">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/ad4a1004dd164d6103f831908c301dbb-25F4A.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="USS Essex#4890" data-user-id="539223548246360064" style="">USS Essex</span>
+
+
+        <span class="chatlog__timestamp">08-Apr-21 05:23 PM</span>
+
+            <div class="chatlog__message " data-message-id="829843801468174366" id="message-829843801468174366">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/a996c987d595a7048f7a32b140908cce-945C2.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Lloyd#1573" data-user-id="614732158938120193" style="">Lloyd</span>
+
+
+        <span class="chatlog__timestamp">08-Apr-21 05:44 PM</span>
+
+            <div class="chatlog__message " data-message-id="829849191122599986" id="message-829849191122599986">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/ad4a1004dd164d6103f831908c301dbb-25F4A.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="USS Essex#4890" data-user-id="539223548246360064" style="">USS Essex</span>
+
+
+        <span class="chatlog__timestamp">08-Apr-21 05:45 PM</span>
+
+            <div class="chatlog__message " data-message-id="829849562398064669" id="message-829849562398064669">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/21180337ff74db5f57aeed1a7ac9ca5f-FF199.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="freedom#7341" data-user-id="190196212165509121" style="">freedom</span>
+
+
+        <span class="chatlog__timestamp">08-Apr-21 05:47 PM</span>
+
+            <div class="chatlog__message " data-message-id="829850044450078741" id="message-829850044450078741">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/ae554f7420ef9fd6fd16f282ba366235-183D4.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="freedom#6124" data-user-id="758870833590173698" style="">freedom</span>
+
+
+        <span class="chatlog__timestamp">08-Apr-21 05:50 PM</span>
+
+            <div class="chatlog__message " data-message-id="829850674333483028" id="message-829850674333483028">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/47a290789ba2f50a107dc5d53cb6d1fb-09B7F.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="freedom#3636" data-user-id="681329936963076152" style="">freedom</span>
+
+
+        <span class="chatlog__timestamp">08-Apr-21 05:53 PM</span>
+
+            <div class="chatlog__message " data-message-id="829851376389324840" id="message-829851376389324840">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/a973f40afd376a9de0943e89c587483a-FB67B.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="freedom#2108" data-user-id="580551845965987840" style="">freedom</span>
+
+
+        <span class="chatlog__timestamp">08-Apr-21 05:57 PM</span>
+
+            <div class="chatlog__message " data-message-id="829852477922344970" id="message-829852477922344970">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/0a779cd0127cd5909eec30e2525012b8-BD6E3.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="CRMX#0666" data-user-id="647890761848848433" style="color: rgb(149,165,166)">CRMX</span>
+
+
+        <span class="chatlog__timestamp">08-Apr-21 06:06 PM</span>
+
+            <div class="chatlog__message " data-message-id="829854712232673310" id="message-829854712232673310">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/bced4205a335334ca131eb14e0d1510d-8A3EE.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="freedom#8364" data-user-id="815477371993718815" style="">freedom</span>
+
+
+        <span class="chatlog__timestamp">08-Apr-21 06:10 PM</span>
+
+            <div class="chatlog__message " data-message-id="829855811801972737" id="message-829855811801972737">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/ae554f7420ef9fd6fd16f282ba366235-183D4.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="freedom#6124" data-user-id="758870833590173698" style="">freedom</span>
+
+
+        <span class="chatlog__timestamp">08-Apr-21 06:10 PM</span>
+
+            <div class="chatlog__message " data-message-id="829855825383653387" id="message-829855825383653387">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/47a290789ba2f50a107dc5d53cb6d1fb-09B7F.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="freedom#3636" data-user-id="681329936963076152" style="">freedom</span>
+
+
+        <span class="chatlog__timestamp">08-Apr-21 06:10 PM</span>
+
+            <div class="chatlog__message " data-message-id="829855841423196160" id="message-829855841423196160">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/ab751d5cbee9abde3428d051b9945202-DBE38.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="freedom#3509" data-user-id="560621040154181634" style="">freedom</span>
+
+
+        <span class="chatlog__timestamp">08-Apr-21 06:10 PM</span>
+
+            <div class="chatlog__message " data-message-id="829855857097179136" id="message-829855857097179136">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/a973f40afd376a9de0943e89c587483a-FB67B.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="freedom#2108" data-user-id="580551845965987840" style="">freedom</span>
+
+
+        <span class="chatlog__timestamp">08-Apr-21 06:10 PM</span>
+
+            <div class="chatlog__message " data-message-id="829855871647219722" id="message-829855871647219722">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/21180337ff74db5f57aeed1a7ac9ca5f-FF199.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="freedom#7341" data-user-id="190196212165509121" style="">freedom</span>
+
+
+        <span class="chatlog__timestamp">08-Apr-21 06:11 PM</span>
+
+            <div class="chatlog__message " data-message-id="829855884238651442" id="message-829855884238651442">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/232755f4cde29cc8b2e54bd50da14e43-3A9B1.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="PerkCheddy#0001" data-user-id="636607762385731598" style="">PerkCheddy</span>
+
+
+        <span class="chatlog__timestamp">08-Apr-21 06:15 PM</span>
+
+            <div class="chatlog__message " data-message-id="829857124220928010" id="message-829857124220928010">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/535528e0e05ef4a5ea2cd4d8bb30b2c8-BCC87.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="liberty#0732" data-user-id="518872125394649099" style="color: rgb(149,165,166)">liberty_4006 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">08-Apr-21 10:54 PM</span>
+
+            <div class="chatlog__message " data-message-id="829927156594245682" id="message-829927156594245682">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/21180337ff74db5f57aeed1a7ac9ca5f-FF199.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="freedom#7341" data-user-id="190196212165509121" style="">freedom</span>
+
+
+        <span class="chatlog__timestamp">08-Apr-21 11:14 PM</span>
+
+            <div class="chatlog__message " data-message-id="829932181635465216" id="message-829932181635465216">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/e8d3af31afd66942a449b1cba1e3462e-F4027.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="dārk-swē&#248;&#241;#2050" data-user-id="829706218187522138" style="color: rgb(149,165,166)">dārk-swē&#248;&#241;</span>
+
+
+        <span class="chatlog__timestamp">09-Apr-21 01:40 PM</span>
+
+            <div class="chatlog__message " data-message-id="830150293136211988" id="message-830150293136211988">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/1b6ef1383b39509ea359d7623914567f-BCA1C.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="R3n#5950" data-user-id="159828005781241868" style="color: rgb(155,89,182)">R3n&#39;s ghost (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">09-Apr-21 01:42 PM</span>
+
+            <div class="chatlog__message " data-message-id="830150819536961537" id="message-830150819536961537">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><img class="emoji emoji--large" alt="incel" title="incel" src="https://cdn.discordapp.com/emojis/829351889404690492.png"></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/967f09d7d3e4a5e404f2d7e572cd7450-3175A.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="George W. Bush#9684" data-user-id="810371783135723550" style="color: rgb(149,165,166)">President (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">09-Apr-21 04:46 PM</span>
+
+            <div class="chatlog__message " data-message-id="830196890519601172" id="message-830196890519601172">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/ad5e2530c055526c124d54ef8422d8f2-17009.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="drno0#0926" data-user-id="306455084131287042" style="color: rgb(149,165,166)">drno0 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">10-Apr-21 11:59 AM</span>
+
+            <div class="chatlog__message " data-message-id="830487218539069491" id="message-830487218539069491">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/1-B2132.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="TiagoB#1731" data-user-id="500470792979480577" style="color: rgb(149,165,166)">TiagoB (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">11-Apr-21 10:59 AM</span>
+
+            <div class="chatlog__message " data-message-id="830834483002343454" id="message-830834483002343454">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/967f09d7d3e4a5e404f2d7e572cd7450-3175A.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="George W. Bush#9684" data-user-id="810371783135723550" style="color: rgb(149,165,166)">President (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">12-Apr-21 06:39 PM</span>
+
+            <div class="chatlog__message " data-message-id="831312676377329664" id="message-831312676377329664">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/cbad1418a0cd40ea749636cb35b86295-20CB0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Audi81#5335" data-user-id="410109122839838721" style="color: rgb(149,165,166)">Audi666 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">13-Apr-21 08:05 AM</span>
+
+            <div class="chatlog__message " data-message-id="831515405213630494" id="message-831515405213630494">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/cbad1418a0cd40ea749636cb35b86295-20CB0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Audi81#5335" data-user-id="410109122839838721" style="color: rgb(149,165,166)">Audi666 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">13-Apr-21 08:13 AM</span>
+
+            <div class="chatlog__message " data-message-id="831517335776657428" id="message-831517335776657428">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/1e45c2b9445dfc481cbe506bbf4aec58-4872F.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="RakanX#2390" data-user-id="388025543502856192" style="color: rgb(149,165,166)">Rakan4006 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">13-Apr-21 11:43 AM</span>
+
+            <div class="chatlog__message " data-message-id="831570215937769502" id="message-831570215937769502">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/933456cc8cec68eabdeb71700396cf02-5FD2E.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Madhattan#0573" data-user-id="746498097911169025" style="color: rgb(231,76,60)">Madhattan</span>
+
+
+        <span class="chatlog__timestamp">13-Apr-21 07:58 PM</span>
+
+            <div class="chatlog__message " data-message-id="831694950780502046" id="message-831694950780502046">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/30047494172ab9740dfbf7209f500236-1A90C.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Claptrap#0353" data-user-id="461553560354553858" style="">Claptrap</span>
+
+
+        <span class="chatlog__timestamp">13-Apr-21 09:22 PM</span>
+
+            <div class="chatlog__message " data-message-id="831716074726096906" id="message-831716074726096906">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/60b07df04e6134df30147c6f37905fd8-59B34.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Dizzy#4744" data-user-id="234139652574019584" style="color: rgb(149,165,166)">Dizzy (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">14-Apr-21 03:34 PM</span>
+
+            <div class="chatlog__message " data-message-id="831990912761856010" id="message-831990912761856010">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/a_5f6d0ce99ad254e1d6ea83b732fc320d-A2667.gif" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="lollol#0069" data-user-id="524170065302781953" style="color: rgb(149,165,166)">lollol</span>
+
+
+        <span class="chatlog__timestamp">14-Apr-21 04:18 PM</span>
+
+            <div class="chatlog__message " data-message-id="832001914635419678" id="message-832001914635419678">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/1de1986b16057c600a91c8d248e43515-75D1F.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="invisible#0754" data-user-id="800672336528932904" style="">invisible</span>
+
+
+        <span class="chatlog__timestamp">15-Apr-21 10:51 AM</span>
+
+            <div class="chatlog__message " data-message-id="832281954782019604" id="message-832281954782019604">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/5f6feeecfaf0c1cb7b5617de8ea495f7-455DA.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Alba#2699" data-user-id="820004755362676736" style="color: rgb(149,165,166)">Alba</span>
+
+
+        <span class="chatlog__timestamp">17-Apr-21 04:09 AM</span>
+
+            <div class="chatlog__message " data-message-id="832905554099306506" id="message-832905554099306506">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/981b070e08ea276fb29207e03929ca7c-71FFB.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Kotokonpa#6743" data-user-id="824248557309001749" style="">Kotokonpa</span>
+
+
+        <span class="chatlog__timestamp">17-Apr-21 05:12 AM</span>
+
+            <div class="chatlog__message " data-message-id="832921376196788224" id="message-832921376196788224">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/965997f497171cb53a245ada4f775ead-3230D.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Chester#0483" data-user-id="820831474604310548" style="">Chester</span>
+
+
+        <span class="chatlog__timestamp">17-Apr-21 10:46 AM</span>
+
+            <div class="chatlog__message " data-message-id="833005464240390174" id="message-833005464240390174">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/ec6648095d8192e7d7a74891ee0fbc47-DE889.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Huge Alligator#6530" data-user-id="821117142819799080" style="">Huge Alligator</span>
+
+
+        <span class="chatlog__timestamp">17-Apr-21 10:52 AM</span>
+
+            <div class="chatlog__message " data-message-id="833007085826211941" id="message-833007085826211941">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/1e5eecbde949a238b61c61b4252da660-01A5E.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="DistinctiveFurry | BLM | ACAB#5448" data-user-id="402935614896603158" style="">DistinctiveFurry | BLM | ACAB</span>
+
+
+        <span class="chatlog__timestamp">17-Apr-21 11:07 AM</span>
+
+            <div class="chatlog__message " data-message-id="833010707909967882" id="message-833010707909967882">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/c9ef80382cf254f4bf2c7c263cfd2588-A18DB.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Rosen#9349" data-user-id="600719571821002782" style="color: rgb(149,165,166)">Rosen is better</span>
+
+
+        <span class="chatlog__timestamp">18-Apr-21 02:11 AM</span>
+
+            <div class="chatlog__message " data-message-id="833238300047179796" id="message-833238300047179796">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/e54c8d4ab7545ed4606e030710330c07-7525F.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Tuscan37#2137" data-user-id="353945889414316033" style="color: rgb(149,165,166)">Tuscan37</span>
+
+
+        <span class="chatlog__timestamp">18-Apr-21 03:37 AM</span>
+
+            <div class="chatlog__message " data-message-id="833259907515547658" id="message-833259907515547658">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/4aa536cbfd146c69cf8dd885a14dbfba-5D699.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="1999poopcivic#8073" data-user-id="432454088324546561" style="">1999poopcivic</span>
+
+
+        <span class="chatlog__timestamp">18-Apr-21 06:42 AM</span>
+
+            <div class="chatlog__message " data-message-id="833306596942675989" id="message-833306596942675989">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/ce6b5136f0ccf8bf4409d389c82f5fd3-29C61.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="k24a1#0180" data-user-id="719658405911855174" style="">k24a1</span>
+
+
+        <span class="chatlog__timestamp">19-Apr-21 04:48 AM</span>
+
+            <div class="chatlog__message " data-message-id="833640068358864986" id="message-833640068358864986">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/1d8dfb7b49785939acac37b965c75f1f-C8422.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="JustScarlight#8464" data-user-id="832457622371172372" style="color: rgb(149,165,166)">Scarlet (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">19-Apr-21 10:35 AM</span>
+
+            <div class="chatlog__message " data-message-id="833727414504259584" id="message-833727414504259584">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/2615e7bba5bafc8a266dd8422fc8db9b-E597E.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win32#7457" data-user-id="767234278630228019" style="color: rgb(26,188,156)">win32</span>
+
+
+        <span class="chatlog__timestamp">19-Apr-21 05:40 PM</span>
+
+            <div class="chatlog__message " data-message-id="833834537561489428" id="message-833834537561489428">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/8143c0d6ff3dc092218a00ba77daee1e-BCB8B.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Yuki#0545" data-user-id="489219428358160385" style="color: rgb(233,30,99)">Yuki</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">20-Apr-21 01:36 PM</span>
+
+            <div class="chatlog__message " data-message-id="834135569570463804" id="message-834135569570463804">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/0ef6ba92625f4ea2d4d15a908ac8b837-14119.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="H3xaB0t v0.3#5903" data-user-id="834137847308746762" style="color: rgb(233,30,99)">H3xaB0t v0.3</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">20-Apr-21 01:56 PM</span>
+
+            <div class="chatlog__message " data-message-id="834140520061468692" id="message-834140520061468692">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/ad4594c81ec29ef11f23c3b76a96a678-28EEB.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="NotSoBot#9555" data-user-id="439205512425504771" style="color: rgb(233,30,99)">NotSoBot</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">20-Apr-21 02:21 PM</span>
+
+            <div class="chatlog__message " data-message-id="834146671398617128" id="message-834146671398617128">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Important%20-%20welcome%20%5B820595388313632790%5D.html_Files/0a779cd0127cd5909eec30e2525012b8-BD6E3.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="CRMX#0666" data-user-id="647890761848848433" style="color: rgb(149,165,166)">CRMX</span>
+
+
+        <span class="chatlog__timestamp">20-Apr-21 02:48 PM</span>
+
+            <div class="chatlog__message " data-message-id="834153674557227058" id="message-834153674557227058">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined the server.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+</div>
+
+<div class="postamble">
+    <div class="postamble__entry">Exported 146 message(s)</div>
+</div>
+
+</body>
+
+</html>

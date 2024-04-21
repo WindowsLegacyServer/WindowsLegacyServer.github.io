@@ -1,0 +1,2128 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Windows 7 and Legacy Software - general-pe-modding-stuff</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <style>
+        /* General */
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-300.woff);
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-400.woff);
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-500.woff);
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-600.woff);
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-700.woff);
+    font-weight: 700;
+}
+
+body {
+    font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 17px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    object-fit: contain;
+}
+
+.markdown {
+    max-width: 100%;
+    line-height: 1.3;
+    overflow-wrap: break-word;
+}
+
+.preserve-whitespace {
+    white-space: pre-wrap;
+}
+
+.spoiler {
+    /* width: fit-content; */
+    display: inline-block;
+    /* This is more consistent across browsers, the old attribute worked well under Chrome but not FireFox. */
+}
+
+.spoiler--hidden {
+    cursor: pointer;
+}
+
+.spoiler-text {
+    border-radius: 3px;
+}
+
+.spoiler--hidden .spoiler-text {
+    color: rgba(0, 0, 0, 0);
+}
+
+.spoiler--hidden .spoiler-text::selection {
+    color: rgba(0, 0, 0, 0);
+}
+
+.spoiler-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px;
+}
+
+.spoiler--hidden .spoiler-image {
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.spoiler--hidden .spoiler-image * {
+    filter: blur(44px);
+}
+
+.spoiler--hidden .spoiler-image:after {
+    content: "SPOILER";
+    color: #dcddde;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 600;
+    padding: 100%;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+    font-size: 0.9em;
+}
+
+.spoiler--hidden:hover .spoiler-image:after {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.quote {
+    margin: 0.1em 0;
+    padding-left: 0.6em;
+    border-left: 4px solid;
+    border-radius: 3px;
+}
+
+.pre {
+    font-family: "Consolas", "Courier New", Courier, monospace;
+}
+
+.pre--multiline {
+    margin-top: 0.25em;
+    padding: 0.5em;
+    border: 2px solid;
+    border-radius: 5px;
+}
+
+.pre--inline {
+    padding: 2px;
+    border-radius: 3px;
+    font-size: 0.85em;
+}
+
+.mention {
+    border-radius: 3px;
+    padding: 0 2px;
+    color: #7289da;
+    background: rgba(114, 137, 218, .1);
+    font-weight: 500;
+}
+
+.emoji {
+    width: 1.25em;
+    height: 1.25em;
+    margin: 0 0.06em;
+    vertical-align: -0.4em;
+}
+
+.emoji--small {
+    width: 1em;
+    height: 1em;
+}
+
+.emoji--large {
+    width: 2.8em;
+    height: 2.8em;
+}
+
+/* Preamble */
+
+.preamble {
+    display: grid;
+    margin: 0 0.3em 0.6em 0.3em;
+    max-width: 100%;
+    grid-template-columns: auto 1fr;
+}
+
+.preamble__guild-icon-container {
+    grid-column: 1;
+}
+
+.preamble__guild-icon {
+    max-width: 88px;
+    max-height: 88px;
+}
+
+.preamble__entries-container {
+    grid-column: 2;
+    margin-left: 0.6em;
+}
+
+.preamble__entry {
+    font-size: 1.4em;
+}
+
+.preamble__entry--small {
+    font-size: 1em;
+}
+
+/* Chatlog */
+
+.chatlog {
+    max-width: 100%;
+}
+
+.chatlog__message-group {
+    display: grid;
+    margin: 0 0.6em;
+    padding: 0.9em 0;
+    border-top: 1px solid;
+    grid-template-columns: auto 1fr;
+}
+
+.chatlog__reference-symbol {
+    grid-column: 1;
+    border-style: solid;
+    border-width: 2px 0 0 2px;
+    border-radius: 8px 0 0 0;
+    margin-left: 16px;
+    margin-top: 8px;
+}
+
+.chatlog__reference {
+    display: flex;
+    grid-column: 2;
+    margin-left: 1.2em;
+    margin-bottom: 0.25em;
+    font-size: 0.875em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    align-items: center;
+}
+
+.chatlog__reference-avatar {
+    border-radius: 50%;
+    height: 16px;
+    width: 16px;
+    margin-right: 0.25em;
+}
+
+.chatlog__reference-name {
+    margin-right: 0.25em;
+    font-weight: 600;
+}
+
+.chatlog__reference-link {
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.chatlog__reference-link:hover {
+    text-decoration: none;
+}
+
+.chatlog__reference-content > * {
+    display: inline;
+}
+
+.chatlog__reference-edited-timestamp {
+    margin-left: 0.25em;
+    font-size: 0.8em;
+}
+
+.chatlog__author-avatar-container {
+    grid-column: 1;
+    width: 40px;
+    height: 40px;
+}
+
+.chatlog__author-avatar {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+}
+
+.chatlog__messages {
+    grid-column: 2;
+    margin-left: 1.2em;
+    min-width: 50%;
+}
+
+.chatlog__author-name {
+    font-weight: 500;
+}
+
+.chatlog__timestamp {
+    margin-left: 0.3em;
+    font-size: 0.75em;
+}
+
+.chatlog__message {
+    padding: 0.1em 0.3em;
+    margin: 0 -0.3em;
+    background-color: transparent;
+    transition: background-color 1s ease;
+}
+
+.chatlog__content {
+    font-size: 0.95em;
+    word-wrap: break-word;
+}
+
+.chatlog__edited-timestamp {
+    margin-left: 0.15em;
+    font-size: 0.8em;
+}
+
+.chatlog__attachment {
+    margin-top: 0.3em;
+}
+
+.chatlog__attachment-thumbnail {
+    vertical-align: top;
+    max-width: 45vw;
+    max-height: 500px;
+    border-radius: 3px;
+}
+
+.chatlog__attachment-container {
+    height: 40px;
+    width: 100%;
+    max-width: 520px;
+    padding: 10px;
+    border: 1px solid;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.chatlog__attachment-icon {
+    float: left;
+    height: 100%;
+    margin-right: 10px;
+}
+
+.chatlog__attachment-icon > .a {
+    fill: #f4f5fb;
+    d: path("M50,935a25,25,0,0,1-25-25V50A25,25,0,0,1,50,25H519.6L695,201.32V910a25,25,0,0,1-25,25Z");
+}
+
+.chatlog__attachment-icon > .b {
+    fill: #7789c4;
+    d: path("M509.21,50,670,211.63V910H50V50H509.21M530,0H50A50,50,0,0,0,0,50V910a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50h0V191Z");
+}
+
+.chatlog__attachment-icon > .c {
+    fill: #f4f5fb;
+    d: path("M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z");
+}
+
+.chatlog__attachment-icon > .d {
+    fill: #7789c4;
+    d: path("M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z");
+}
+
+.chatlog__attachment-filesize {
+    color: #72767d;
+    font-size: 12px;
+}
+
+.chatlog__attachment-filename {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.chatlog__embed {
+    display: flex;
+    margin-top: 0.3em;
+    max-width: 520px;
+}
+
+.chatlog__embed-color-pill {
+    flex-shrink: 0;
+    width: 0.25em;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.chatlog__embed-content-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em 0.6em;
+    border: 1px solid;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.chatlog__embed-content {
+    display: flex;
+    width: 100%;
+}
+
+.chatlog__embed-text {
+    flex: 1;
+}
+
+.chatlog__embed-author {
+    display: flex;
+    margin-bottom: 0.3em;
+    align-items: center;
+}
+
+.chatlog__embed-author-icon {
+    margin-right: 0.5em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.chatlog__embed-author-name {
+    font-size: 0.875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-title {
+    margin-bottom: 0.2em;
+    font-size: 0.875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-description {
+    font-weight: 500;
+    font-size: 0.85em;
+}
+
+.chatlog__embed-fields {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.chatlog__embed-field {
+    flex: 0;
+    min-width: 100%;
+    max-width: 506px;
+    padding-top: 0.6em;
+    font-size: 0.875em;
+}
+
+.chatlog__embed-field--inline {
+    flex: 1;
+    flex-basis: auto;
+    min-width: 150px;
+}
+
+.chatlog__embed-field-name {
+    margin-bottom: 0.2em;
+    font-weight: 600;
+}
+
+.chatlog__embed-field-value {
+    font-weight: 500;
+}
+
+.chatlog__embed-thumbnail {
+    flex: 0;
+    margin-left: 1.2em;
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-image-container {
+    margin-top: 0.6em;
+}
+
+.chatlog__embed-image {
+    max-width: 500px;
+    max-height: 400px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-footer {
+    margin-top: 0.6em;
+}
+
+.chatlog__embed-footer-icon {
+    margin-right: 0.2em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.chatlog__embed-footer-text {
+    font-size: 0.75em;
+    font-weight: 500;
+}
+
+.chatlog__reactions {
+    display: flex;
+}
+
+.chatlog__reaction {
+    display: flex;
+    align-items: center;
+    margin: 0.35em 0.1em 0.1em 0.1em;
+    padding: 0.2em 0.35em;
+    border-radius: 3px;
+}
+
+.chatlog__reaction-count {
+    min-width: 9px;
+    margin-left: 0.35em;
+    font-size: 0.875em;
+}
+
+.chatlog__bot-tag {
+    position: relative;
+    top: -.2em;
+    margin-left: 0.3em;
+    padding: 0.05em 0.3em;
+    border-radius: 3px;
+    vertical-align: middle;
+    line-height: 1.3;
+    background: #7289da;
+    color: #ffffff;
+    font-size: 0.625em;
+    font-weight: 500;
+}
+
+/* Postamble */
+
+.postamble {
+    margin: 1.4em 0.3em 0.6em 0.3em;
+    padding: 1em;
+    border-top: 1px solid;
+}
+    </style>
+    <style>
+        /* General */
+
+body {
+    background-color: #36393e;
+    color: #dcddde;
+}
+
+a {
+    color: #0096cf;
+}
+
+.spoiler-text {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.spoiler--hidden .spoiler-text {
+    background-color: #202225;
+}
+
+.spoiler--hidden:hover .spoiler-text {
+    background-color: rgba(32, 34, 37, 0.8);
+}
+
+.quote {
+    border-color: #4f545c;
+}
+
+.pre {
+    background-color: #2f3136 !important;
+}
+
+.pre--multiline {
+    border-color: #282b30 !important;
+    color: #b9bbbe !important;
+}
+
+/* === Preamble === */
+
+.preamble__entry {
+    color: #ffffff;
+}
+
+/* Chatlog */
+
+.chatlog__message-group {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.chatlog__reference-symbol {
+    border-color: #4f545c;
+}
+
+.chatlog__reference {
+    color: #b5b6b8;
+}
+
+.chatlog__reference-link {
+    color: #b5b6b8;
+}
+
+.chatlog__reference-link:hover {
+    color: #ffffff;
+}
+
+.chatlog__reference-edited-timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__author-name {
+    color: #ffffff;
+}
+
+.chatlog__timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__message--highlighted {
+    background-color: rgba(114, 137, 218, 0.2) !important;
+}
+
+.chatlog__message--pinned {
+    background-color: rgba(249, 168, 37, 0.05);
+}
+
+.chatlog__attachment-container {
+    background-color: #2f3136;
+    border-color: #292b2f;
+}
+
+.chatlog__edited-timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__embed-color-pill--default {
+    background-color: rgba(79, 84, 92, 1);
+}
+
+.chatlog__embed-content-container {
+    background-color: rgba(46, 48, 54, 0.3);
+    border-color: rgba(46, 48, 54, 0.6);
+}
+
+.chatlog__embed-author-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-author-name-link {
+    color: #ffffff;
+}
+
+.chatlog__embed-title {
+    color: #ffffff;
+}
+
+.chatlog__embed-description {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-field-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-field-value {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-footer {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__reaction {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.chatlog__reaction-count {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* Postamble */
+
+.postamble {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.postamble__entry {
+    color: #ffffff;
+}
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.pre--multiline').forEach(block => hljs.highlightBlock(block));
+        });
+    </script>
+
+    <script>
+        function scrollToMessage(event, id) {
+            var element = document.getElementById('message-' + id);
+
+            if (element) {
+                event.preventDefault();
+
+                element.classList.add('chatlog__message--highlighted');
+
+                window.scrollTo({
+                    top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
+                    behavior: 'smooth'
+                });
+
+                window.setTimeout(function() {
+                    element.classList.remove('chatlog__message--highlighted');
+                }, 2000);
+            }
+        }
+
+        function showSpoiler(event, element) {
+            if (element && element.classList.contains('spoiler--hidden')) {
+                event.preventDefault();
+                element.classList.remove('spoiler--hidden');
+            }
+        }
+    </script>
+</head>
+<body>
+
+<div class="preamble">
+    <div class="preamble__guild-icon-container">
+        <img class="preamble__guild-icon" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/dc536ce53c6925864bef1064f357e510-C5C2D.png" alt="Guild icon">
+    </div>
+    <div class="preamble__entries-container">
+        <div class="preamble__entry">Windows 7 and Legacy Software</div>
+        <div class="preamble__entry">Software / general-pe-modding-stuff</div>
+
+            <div class="preamble__entry preamble__entry--small">only win32, ximonite and blackwingcat will understand anything in this channel</div>
+
+    </div>
+</div>
+
+<div class="chatlog">
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/c428bb71e26ad27f6888e8c95c84110a-B5280.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="ImSwordKing#8312" data-user-id="262543082271145984" style="color: rgb(32,102,148)">ImSwordKing</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 05:52 AM</span>
+
+            <div class="chatlog__message " data-message-id="820610314394796042" id="message-820610314394796042">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">i&#39;m modding windows pe</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/2615e7bba5bafc8a266dd8422fc8db9b-E597E.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win32#7457" data-user-id="767234278630228019" style="color: rgb(26,188,156)">win32</span>
+
+
+        <span class="chatlog__timestamp">17-Mar-21 05:55 PM</span>
+
+            <div class="chatlog__message " data-message-id="821879414337568809" id="message-821879414337568809">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Another PE32/PE32+ tool: <a href="https://www.softpedia.com/get/Programming/Debuggers-Decompilers-Dissasemblers/PE-Internals.shtml">https://www.softpedia.com/get/Programming/Debuggers-Decompilers-Dissasemblers/PE-Internals.shtml</a></span>
+
+                        </div>
+                    </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+
+                                        <div class="chatlog__embed-title">
+                                                <a class="chatlog__embed-title-link" href="https://www.softpedia.com/get/Programming/Debuggers-Decompilers-Dissasemblers/PE-Internals.shtml">
+                                                    <div class="markdown preserve-whitespace">Download PE Internals 4.0.15222.1</div>
+                                                </a>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown preserve-whitespace">Download PE Internals - A useful and easy-to-use processor utility that enables you to decompile executables (PE32 and PE32+) and search for HEX and ANSI strings</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/PE-Internals_1-20291.png">
+                                            <img class="chatlog__embed-thumbnail" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/PE-Internals_1-20291.png" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+            </div>
+            <div class="chatlog__message " data-message-id="821880746775150654" id="message-821880746775150654">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">It is actually capable of adding new sections. Just change the number of sections and reload the file. But I can&#39;t confirm if this turns out crap yet.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="821881384095318046" id="message-821881384095318046">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">But there are some flaws: if you save as a new file, it only seems to save the changed parts, like the section that is modified. If no parts are changed, then the save is complete.</span>
+
+                                <span class="chatlog__edited-timestamp" title="17-Mar-21 06:04 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/2615e7bba5bafc8a266dd8422fc8db9b-E597E.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win32#7457" data-user-id="767234278630228019" style="color: rgb(26,188,156)">win32</span>
+
+
+        <span class="chatlog__timestamp">17-Mar-21 06:42 PM</span>
+
+            <div class="chatlog__message " data-message-id="821891268232609802" id="message-821891268232609802">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">you can even mod pe32+ reloc tables</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/2615e7bba5bafc8a266dd8422fc8db9b-E597E.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win32#7457" data-user-id="767234278630228019" style="color: rgb(26,188,156)">win32</span>
+
+
+        <span class="chatlog__timestamp">17-Mar-21 10:05 PM</span>
+
+            <div class="chatlog__message " data-message-id="821942347561697331" id="message-821942347561697331">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">and this is a foss pe viewer: <a href="https://github.com/YajS/NikPEViewer">https://github.com/YajS/NikPEViewer</a></span>
+
+                        </div>
+                    </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(30,35,39,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+
+                                        <div class="chatlog__embed-title">
+                                                <a class="chatlog__embed-title-link" href="https://github.com/YajS/NikPEViewer">
+                                                    <div class="markdown preserve-whitespace">YajS/NikPEViewer</div>
+                                                </a>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown preserve-whitespace">NikPEViewer a PE viewer source code. Contribute to YajS/NikPEViewer development by creating an account on GitHub.</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/21968899-EA1D8">
+                                            <img class="chatlog__embed-thumbnail" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/21968899-EA1D8" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/f953ff9a75e1634451c80d0874f5df3b-02EF2.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Alt+F4#2274" data-user-id="545061370132168704" style="color: rgb(149,165,166)">Alt+F4</span>
+
+
+        <span class="chatlog__timestamp">19-Mar-21 11:32 PM</span>
+
+            <div class="chatlog__message " data-message-id="822689019115733024" id="message-822689019115733024">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Ima sound dumb</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="822689040696475658" id="message-822689040696475658">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">is this about windows pe?</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="822689123202367508" id="message-822689123202367508">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">or does pe stand for somthing that has nothing to do with windows pe</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/2615e7bba5bafc8a266dd8422fc8db9b-E597E.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win32#7457" data-user-id="767234278630228019" style="color: rgb(26,188,156)">win32</span>
+
+
+        <span class="chatlog__timestamp">19-Mar-21 11:33 PM</span>
+
+            <div class="chatlog__message " data-message-id="822689195033493504" id="message-822689195033493504">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">It has everything to do with Windows, but is something different.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/f953ff9a75e1634451c80d0874f5df3b-02EF2.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Alt+F4#2274" data-user-id="545061370132168704" style="color: rgb(149,165,166)">Alt+F4</span>
+
+
+        <span class="chatlog__timestamp">19-Mar-21 11:33 PM</span>
+
+            <div class="chatlog__message " data-message-id="822689227137482792" id="message-822689227137482792">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Ok gotcha lmao</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/2615e7bba5bafc8a266dd8422fc8db9b-E597E.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win32#7457" data-user-id="767234278630228019" style="color: rgb(26,188,156)">win32</span>
+
+
+        <span class="chatlog__timestamp">19-Mar-21 11:33 PM</span>
+
+            <div class="chatlog__message " data-message-id="822689228717948978" id="message-822689228717948978">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">PE = Portable Executable in this case</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/f953ff9a75e1634451c80d0874f5df3b-02EF2.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Alt+F4#2274" data-user-id="545061370132168704" style="color: rgb(149,165,166)">Alt+F4</span>
+
+
+        <span class="chatlog__timestamp">19-Mar-21 11:33 PM</span>
+
+            <div class="chatlog__message " data-message-id="822689253195907122" id="message-822689253195907122">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">ah ok</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="822689305788416060" id="message-822689305788416060">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">was a bit confused wondering what mods people could be doing to windows pe lmao</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="822689328177872926" id="message-822689328177872926">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">thanks for the clarification</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/2615e7bba5bafc8a266dd8422fc8db9b-E597E.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win32#7457" data-user-id="767234278630228019" style="color: rgb(26,188,156)">win32</span>
+
+
+        <span class="chatlog__timestamp">22-Mar-21 12:26 AM</span>
+
+            <div class="chatlog__message " data-message-id="823427457071710208" id="message-823427457071710208">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">soon: can the sections in a portable executable (32+) be out of order?</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="823428603483783178" id="message-823428603483783178">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">well, that seems to confuse cff explorer into thinking that the new section is an extension of the previous one, and also refuses to admit that .reloc exists (that is when changing data directory locations)</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">22-Mar-21 12:39 AM</span>
+
+            <div class="chatlog__message " data-message-id="823430609619124265" id="message-823430609619124265">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Speaking of which, finally found this again* so might as well post it again: <a href="https://github.com/ClownQq/YDArk">https://github.com/ClownQq/YDArk</a> (originally posted by win32), and it&#39;s cousin (Not sure if this has been posted before but might as well try to refresh someone&#39;s memory about it): <a href="https://github.com/AxtMueller/Windows-Kernel-Explorer">https://github.com/AxtMueller/Windows-Kernel-Explorer</a></span>
+
+                                <span class="chatlog__edited-timestamp" title="22-Mar-21 12:59 AM">(edited)</span>
+                        </div>
+                    </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(30,35,39,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+
+                                        <div class="chatlog__embed-title">
+                                                <a class="chatlog__embed-title-link" href="https://github.com/ClownQq/YDArk">
+                                                    <div class="markdown preserve-whitespace">ClownQq/YDArk</div>
+                                                </a>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown preserve-whitespace">X64内核小工具. Contribute to ClownQq/YDArk development by creating an account on GitHub.</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/43288713-1D1E3">
+                                            <img class="chatlog__embed-thumbnail" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/43288713-1D1E3" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(30,35,39,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+
+                                        <div class="chatlog__embed-title">
+                                                <a class="chatlog__embed-title-link" href="https://github.com/AxtMueller/Windows-Kernel-Explorer">
+                                                    <div class="markdown preserve-whitespace">AxtMueller/Windows-Kernel-Explorer</div>
+                                                </a>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown preserve-whitespace">A free but powerful Windows kernel research tool. Contribute to AxtMueller/Windows-Kernel-Explorer development by creating an account on GitHub.</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/43190072-EF293">
+                                            <img class="chatlog__embed-thumbnail" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/43190072-EF293" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/2615e7bba5bafc8a266dd8422fc8db9b-E597E.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win32#7457" data-user-id="767234278630228019" style="color: rgb(26,188,156)">win32</span>
+
+
+        <span class="chatlog__timestamp">24-Mar-21 12:39 PM</span>
+
+            <div class="chatlog__message " data-message-id="824336654461960263" id="message-824336654461960263">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">So I pre-made my new (100 000h byte) section in CFF Explorer, then changed the attributes in PE Internals so the new section started where .rsrc did before, then moved rsrc/reloc down by 100 000h.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="824338346632413264" id="message-824338346632413264">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Thus, all sections had their attributes finalized, so all I had to do was swap the new section around with the existing ones (in a hex editor, it will be everything from &quot;.xxxx&quot; to the last byte before the next &quot;.xxxx&quot; or a set of nops).</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="824338931066994739" id="message-824338931066994739">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Then changed the address of the resource and relocation directories to the new .rsrc/.reloc locations.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="824338944396623954" id="message-824338944396623954">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Then I used PE Internals to copy the hex contents of rsrc and reloc from a copy of the original file to plaintext files. Then opened the new version of the file and copied those to the sections in their new locations.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="824339278308966421" id="message-824339278308966421">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Then use CFF Explorer, select all of the new section, and fill it with zeros, to remove any traces of the old sections. Note: PE Internals and CFF will look for resources anywhere in a file, so the file looks less broken in those applications than it does in Resource Hacker or to Windows itself.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="824339375906619456" id="message-824339375906619456">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Then use Resource Hacker to mass-import and overwrite resources from an original copy of the file.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="824339428712382536" id="message-824339428712382536">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Then you&#39;re done and you have a fully functional, clean, expanded x64 ntoskrnl.</span>
+
+                                <span class="chatlog__edited-timestamp" title="24-Mar-21 12:50 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/1b6ef1383b39509ea359d7623914567f-BCA1C.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="R3n#5950" data-user-id="159828005781241868" style="color: rgb(155,89,182)">R3n&#39;s ghost (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">24-Mar-21 01:05 PM</span>
+
+            <div class="chatlog__message " data-message-id="824343276680904714" id="message-824343276680904714">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Cool, now give 6801 hal</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/cbad1418a0cd40ea749636cb35b86295-20CB0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Audi81#5335" data-user-id="410109122839838721" style="color: rgb(149,165,166)">Audi666 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">24-Mar-21 01:15 PM</span>
+
+            <div class="chatlog__message " data-message-id="824345788485206056" id="message-824345788485206056">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Is that the guide to porting 6568 explorer to vista?</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="824345833679749131" id="message-824345833679749131">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Jokes aside, holy shit man</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/df42723fea69ea9e06c47b52ec4ae459-A581E.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ximonite#2784" data-user-id="563854547479560193" style="color: rgb(32,102,148)">Ximonite (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">24-Mar-21 04:38 PM</span>
+
+            <div class="chatlog__message " data-message-id="824396893689610240" id="message-824396893689610240">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">idk where to ask this so I will here. anyone know if the code in the first pic has any reason to be used instead of the code in the second pic?</span>
+
+                        </div>
+                    </div>
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/ida_vYJNqYCbre-A7C78.png">
+                                        <img class="chatlog__attachment-thumbnail" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/ida_vYJNqYCbre-A7C78.png" alt="Image attachment" title="Image: ida_vYJNqYCbre.png (1.07 KB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="824396903092322344" id="message-824396903092322344">
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/ida_Y9eQ9OoBmT-3AACE.png">
+                                        <img class="chatlog__attachment-thumbnail" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/ida_Y9eQ9OoBmT-3AACE.png" alt="Image attachment" title="Image: ida_Y9eQ9OoBmT.png (841 bytes)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="824397382707576852" id="message-824397382707576852">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">afaik the code in second pic seems better in every way to me, but idk maybe I&#39;m missing some detail that one of you knows</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/2615e7bba5bafc8a266dd8422fc8db9b-E597E.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win32#7457" data-user-id="767234278630228019" style="color: rgb(26,188,156)">win32</span>
+
+
+        <span class="chatlog__timestamp">24-Mar-21 04:48 PM</span>
+
+            <div class="chatlog__message " data-message-id="824399181522927616" id="message-824399181522927616">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">seems good. nothing i see says you can&#39;t push memory references, though i don&#39;t think i&#39;ve ever seen that in practice</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="824399816929837088" id="message-824399816929837088">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">i wonder if mips/risc-v instructions are more efficient than x86 instructions? you can do an entire arithmetic operation and send the result to a register in one instruction with the former architectures.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/2615e7bba5bafc8a266dd8422fc8db9b-E597E.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win32#7457" data-user-id="767234278630228019" style="color: rgb(26,188,156)">win32</span>
+
+
+        <span class="chatlog__timestamp">24-Mar-21 05:04 PM</span>
+
+            <div class="chatlog__message " data-message-id="824403424514801735" id="message-824403424514801735">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">And also, I think we should build some basic app that compares the speed of my &quot;bloated&quot; functions to your slim functions. I got the idea from here: &quot;To test the new Win32 subsystem architecture, I wrote the SETCURS program (see Figure A). SETCURS calls the SetCursor function 5000 times in a loop and uses the QueryPerformanceCounter to time it. I selected SetCursor because under Windows NT 4.0 the function almost immediately invokes an INT 2Eh. Under Windows NT 3.51, SetCursor takes a much longer code path involving thread switching to the Win32 subsystem. In an informal test, I found that Windows NT 4.0 beta 1 was about three times as fast as Windows NT 3.51. It&#39;s unlikely that the internals of the SetCursor function changed much between 3.51 and 4.0, so the speed-up is almost certainly due to implementing SetCursor in kernel mode, thereby avoiding thread switches.&quot;</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="824403456176685066" id="message-824403456176685066">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://web.archive.org/web/20030809030108/http://www.microsoft.com/msj/archive/S413.aspx">https://web.archive.org/web/20030809030108/http://www.microsoft.com/msj/archive/S413.aspx</a></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="824403645323542558" id="message-824403645323542558">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Unfortunately they didn&#39;t keep the source code for it, like they did with the other applications mentioned in that edition of MSJ.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/df42723fea69ea9e06c47b52ec4ae459-A581E.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ximonite#2784" data-user-id="563854547479560193" style="color: rgb(32,102,148)">Ximonite (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">24-Mar-21 06:48 PM</span>
+
+            <div class="chatlog__message " data-message-id="824429427529875497" id="message-824429427529875497">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I think a whole toolkit for single function testing would be a really cool thing to have because something that I think would be really useful is a tool where I can just set input values, run a function, and see the output. That kind of thing could easily be combined with your idea.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/981b070e08ea276fb29207e03929ca7c-71FFB.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Kotokonpa#6743" data-user-id="824248557309001749" style="color: rgb(149,165,166)">Compa (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">19-Apr-21 08:16 AM</span>
+
+            <div class="chatlog__message " data-message-id="833692558471200818" id="message-833692558471200818">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention" title="CRMX#0666">@CRMX</span> how was dancing lol</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="833692608831553567" id="message-833692608831553567">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">was it to pal music</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/0a779cd0127cd5909eec30e2525012b8-BD6E3.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="CRMX#0666" data-user-id="647890761848848433" style="color: rgb(149,165,166)">CRMX</span>
+
+
+        <span class="chatlog__timestamp">19-Apr-21 08:17 AM</span>
+
+            <div class="chatlog__message " data-message-id="833692665920094218" id="message-833692665920094218">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">ofc not</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="833692698024083507" id="message-833692698024083507">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">ridiculously boring</span>
+
+                                <span class="chatlog__edited-timestamp" title="19-Apr-21 08:17 AM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/d4918cddd2475822478a0aa290a5b44c-742B3.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="bokeeXD#9210" data-user-id="804697194825121842" style="color: rgb(46,204,113)">BokeeXD</span>
+
+
+        <span class="chatlog__timestamp">19-Apr-21 10:21 AM</span>
+
+            <div class="chatlog__message " data-message-id="833724044813402212" id="message-833724044813402212">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">does anyone else uses windows 7 50mb?</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="833724089762840596" id="message-833724089762840596">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">i use it and it works well</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">19-Apr-21 10:24 AM</span>
+
+            <div class="chatlog__message " data-message-id="833724829533208576" id="message-833724829533208576">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">50 mb? Tiny7? because it&#39;s way more than that.</span>
+
+                                <span class="chatlog__edited-timestamp" title="19-Apr-21 10:25 AM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/d4918cddd2475822478a0aa290a5b44c-742B3.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="bokeeXD#9210" data-user-id="804697194825121842" style="color: rgb(46,204,113)">BokeeXD</span>
+
+
+        <span class="chatlog__timestamp">19-Apr-21 10:28 AM</span>
+
+            <div class="chatlog__message " data-message-id="833725710412808192" id="message-833725710412808192">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">yes</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="833725731074342912" id="message-833725731074342912">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">50mb</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="833725846308782161" id="message-833725846308782161">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://youtu.be/rNkU_CVdhwU">https://youtu.be/rNkU_CVdhwU</a></span>
+
+                        </div>
+                    </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(255,0,0,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://www.youtube.com/channel/UCS-WzPVpAAli-1IfEG2lN8A">Michael MJD</a>
+                                                </span>
+                                        </div>
+
+                                        <div class="chatlog__embed-title">
+                                                <a class="chatlog__embed-title-link" href="https://www.youtube.com/watch?v=rNkU_CVdhwU">
+                                                    <div class="markdown preserve-whitespace">The 50MB Windows 7 CD - Overview &amp; Demo</div>
+                                                </a>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown preserve-whitespace">● Liked this video? Subscribe for more: <a href="http://mjd.yt/subscribe">http://mjd.yt/subscribe</a>
+
+Welcome back to another Unofficial Windows video! Today we&#39;re taking a look at a version of Windows 7 that only takes up 50MB on a CD!
+
+The Windows 3.1 Floppy: <a href="https://www.youtube.com/watch?v=wbZ5Q0GsdV4">https://www.youtube.com/watch?v=wbZ5Q0GsdV4</a>
+
+● Join our forum community: <a href="https://osforums.net">https://osforums.net</a>
+
+● Gear I use to make these ...</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/maxresdefault-94819.jpg">
+                                            <img class="chatlog__embed-thumbnail" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/maxresdefault-94819.jpg" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+            </div>
+            <div class="chatlog__message " data-message-id="833725895344390235" id="message-833725895344390235">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">thank you Michael</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">19-Apr-21 10:29 AM</span>
+
+            <div class="chatlog__message " data-message-id="833725918005952552" id="message-833725918005952552">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Oh it&#39;s PE.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/d4918cddd2475822478a0aa290a5b44c-742B3.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="bokeeXD#9210" data-user-id="804697194825121842" style="color: rgb(46,204,113)">BokeeXD</span>
+
+
+        <span class="chatlog__timestamp">19-Apr-21 10:29 AM</span>
+
+            <div class="chatlog__message " data-message-id="833725998867808277" id="message-833725998867808277">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">what do u think why i put it in this topic</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/ae49a4f17998a6c977abd666795c8119-D10DE.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="RostiTheGamer#5002" data-user-id="657246335006933043" style="color: rgb(31,139,76)">RostiTheGamer (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">19-Apr-21 10:29 AM</span>
+
+            <div class="chatlog__message " data-message-id="833726056853667872" id="message-833726056853667872">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Windows 7 PE</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/d4918cddd2475822478a0aa290a5b44c-742B3.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="bokeeXD#9210" data-user-id="804697194825121842" style="color: rgb(46,204,113)">BokeeXD</span>
+
+
+        <span class="chatlog__timestamp">19-Apr-21 10:29 AM</span>
+
+            <div class="chatlog__message " data-message-id="833726089330294834" id="message-833726089330294834">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">yeah</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="833726146255781909" id="message-833726146255781909">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">it works good enough for my needs</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">19-Apr-21 10:30 AM</span>
+
+            <div class="chatlog__message " data-message-id="833726358617849886" id="message-833726358617849886">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">This channel is about modding portable executables though, but it&#39;s fine eitherway.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/d4918cddd2475822478a0aa290a5b44c-742B3.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="bokeeXD#9210" data-user-id="804697194825121842" style="color: rgb(46,204,113)">BokeeXD</span>
+
+
+        <span class="chatlog__timestamp">19-Apr-21 10:34 AM</span>
+
+            <div class="chatlog__message " data-message-id="833727301408522311" id="message-833727301408522311">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">ok</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="833727330886746112" id="message-833727330886746112">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">i wanna modify this one</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="833727415142055976" id="message-833727415142055976">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">tho i know to mod a pe as much as psvewri know about linux</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/cbad1418a0cd40ea749636cb35b86295-20CB0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Audi81#5335" data-user-id="410109122839838721" style="color: rgb(149,165,166)">Audi666 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">19-Apr-21 10:35 AM</span>
+
+            <div class="chatlog__message " data-message-id="833727507131793439" id="message-833727507131793439">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Portable executable (PE) and Preinstallation Environment (PE) are different things though</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/d4918cddd2475822478a0aa290a5b44c-742B3.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="bokeeXD#9210" data-user-id="804697194825121842" style="color: rgb(46,204,113)">BokeeXD</span>
+
+
+        <span class="chatlog__timestamp">19-Apr-21 10:35 AM</span>
+
+            <div class="chatlog__message " data-message-id="833727544125161492" id="message-833727544125161492">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">oh</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="833727647132418109" id="message-833727647132418109">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">well they are based on pe tho</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="833727667978108949" id="message-833727667978108949">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">is that right?</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/cbad1418a0cd40ea749636cb35b86295-20CB0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Audi81#5335" data-user-id="410109122839838721" style="color: rgb(149,165,166)">Audi666 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">19-Apr-21 10:36 AM</span>
+
+            <div class="chatlog__message " data-message-id="833727761419468830" id="message-833727761419468830">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Uh..cant tell</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="833727804058894336" id="message-833727804058894336">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">They are completely different things</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="833727867690156072" id="message-833727867690156072">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Most windows components are PE (portable executables), yes</span>
+
+                                <span class="chatlog__edited-timestamp" title="19-Apr-21 10:37 AM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/2615e7bba5bafc8a266dd8422fc8db9b-E597E.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win32#7457" data-user-id="767234278630228019" style="color: rgb(26,188,156)">win32</span>
+
+
+        <span class="chatlog__timestamp">19-Apr-21 08:16 PM</span>
+
+            <div class="chatlog__message " data-message-id="833873814152675379" id="message-833873814152675379">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Preinstallation Environments wouldn&#39;t exist if not for Portable Executables!</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20general-pe-modding-stuff%20%5B820594456897126412%5D.html_Files/d4918cddd2475822478a0aa290a5b44c-742B3.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="bokeeXD#9210" data-user-id="804697194825121842" style="color: rgb(46,204,113)">BokeeXD</span>
+
+
+        <span class="chatlog__timestamp">20-Apr-21 03:28 AM</span>
+
+            <div class="chatlog__message " data-message-id="833982426605813811" id="message-833982426605813811">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">^</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+</div>
+
+<div class="postamble">
+    <div class="postamble__entry">Exported 66 message(s)</div>
+</div>
+
+</body>
+
+</html>

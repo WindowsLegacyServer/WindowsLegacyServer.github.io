@@ -1,0 +1,2450 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Windows 7 and Legacy Software - older-steam-versions</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <style>
+        /* General */
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-300.woff);
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-400.woff);
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-500.woff);
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-600.woff);
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-700.woff);
+    font-weight: 700;
+}
+
+body {
+    font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 17px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    object-fit: contain;
+}
+
+.markdown {
+    max-width: 100%;
+    line-height: 1.3;
+    overflow-wrap: break-word;
+}
+
+.preserve-whitespace {
+    white-space: pre-wrap;
+}
+
+.spoiler {
+    /* width: fit-content; */
+    display: inline-block;
+    /* This is more consistent across browsers, the old attribute worked well under Chrome but not FireFox. */
+}
+
+.spoiler--hidden {
+    cursor: pointer;
+}
+
+.spoiler-text {
+    border-radius: 3px;
+}
+
+.spoiler--hidden .spoiler-text {
+    color: rgba(0, 0, 0, 0);
+}
+
+.spoiler--hidden .spoiler-text::selection {
+    color: rgba(0, 0, 0, 0);
+}
+
+.spoiler-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px;
+}
+
+.spoiler--hidden .spoiler-image {
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.spoiler--hidden .spoiler-image * {
+    filter: blur(44px);
+}
+
+.spoiler--hidden .spoiler-image:after {
+    content: "SPOILER";
+    color: #dcddde;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 600;
+    padding: 100%;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+    font-size: 0.9em;
+}
+
+.spoiler--hidden:hover .spoiler-image:after {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.quote {
+    margin: 0.1em 0;
+    padding-left: 0.6em;
+    border-left: 4px solid;
+    border-radius: 3px;
+}
+
+.pre {
+    font-family: "Consolas", "Courier New", Courier, monospace;
+}
+
+.pre--multiline {
+    margin-top: 0.25em;
+    padding: 0.5em;
+    border: 2px solid;
+    border-radius: 5px;
+}
+
+.pre--inline {
+    padding: 2px;
+    border-radius: 3px;
+    font-size: 0.85em;
+}
+
+.mention {
+    border-radius: 3px;
+    padding: 0 2px;
+    color: #7289da;
+    background: rgba(114, 137, 218, .1);
+    font-weight: 500;
+}
+
+.emoji {
+    width: 1.25em;
+    height: 1.25em;
+    margin: 0 0.06em;
+    vertical-align: -0.4em;
+}
+
+.emoji--small {
+    width: 1em;
+    height: 1em;
+}
+
+.emoji--large {
+    width: 2.8em;
+    height: 2.8em;
+}
+
+/* Preamble */
+
+.preamble {
+    display: grid;
+    margin: 0 0.3em 0.6em 0.3em;
+    max-width: 100%;
+    grid-template-columns: auto 1fr;
+}
+
+.preamble__guild-icon-container {
+    grid-column: 1;
+}
+
+.preamble__guild-icon {
+    max-width: 88px;
+    max-height: 88px;
+}
+
+.preamble__entries-container {
+    grid-column: 2;
+    margin-left: 0.6em;
+}
+
+.preamble__entry {
+    font-size: 1.4em;
+}
+
+.preamble__entry--small {
+    font-size: 1em;
+}
+
+/* Chatlog */
+
+.chatlog {
+    max-width: 100%;
+}
+
+.chatlog__message-group {
+    display: grid;
+    margin: 0 0.6em;
+    padding: 0.9em 0;
+    border-top: 1px solid;
+    grid-template-columns: auto 1fr;
+}
+
+.chatlog__reference-symbol {
+    grid-column: 1;
+    border-style: solid;
+    border-width: 2px 0 0 2px;
+    border-radius: 8px 0 0 0;
+    margin-left: 16px;
+    margin-top: 8px;
+}
+
+.chatlog__reference {
+    display: flex;
+    grid-column: 2;
+    margin-left: 1.2em;
+    margin-bottom: 0.25em;
+    font-size: 0.875em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    align-items: center;
+}
+
+.chatlog__reference-avatar {
+    border-radius: 50%;
+    height: 16px;
+    width: 16px;
+    margin-right: 0.25em;
+}
+
+.chatlog__reference-name {
+    margin-right: 0.25em;
+    font-weight: 600;
+}
+
+.chatlog__reference-link {
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.chatlog__reference-link:hover {
+    text-decoration: none;
+}
+
+.chatlog__reference-content > * {
+    display: inline;
+}
+
+.chatlog__reference-edited-timestamp {
+    margin-left: 0.25em;
+    font-size: 0.8em;
+}
+
+.chatlog__author-avatar-container {
+    grid-column: 1;
+    width: 40px;
+    height: 40px;
+}
+
+.chatlog__author-avatar {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+}
+
+.chatlog__messages {
+    grid-column: 2;
+    margin-left: 1.2em;
+    min-width: 50%;
+}
+
+.chatlog__author-name {
+    font-weight: 500;
+}
+
+.chatlog__timestamp {
+    margin-left: 0.3em;
+    font-size: 0.75em;
+}
+
+.chatlog__message {
+    padding: 0.1em 0.3em;
+    margin: 0 -0.3em;
+    background-color: transparent;
+    transition: background-color 1s ease;
+}
+
+.chatlog__content {
+    font-size: 0.95em;
+    word-wrap: break-word;
+}
+
+.chatlog__edited-timestamp {
+    margin-left: 0.15em;
+    font-size: 0.8em;
+}
+
+.chatlog__attachment {
+    margin-top: 0.3em;
+}
+
+.chatlog__attachment-thumbnail {
+    vertical-align: top;
+    max-width: 45vw;
+    max-height: 500px;
+    border-radius: 3px;
+}
+
+.chatlog__attachment-container {
+    height: 40px;
+    width: 100%;
+    max-width: 520px;
+    padding: 10px;
+    border: 1px solid;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.chatlog__attachment-icon {
+    float: left;
+    height: 100%;
+    margin-right: 10px;
+}
+
+.chatlog__attachment-icon > .a {
+    fill: #f4f5fb;
+    d: path("M50,935a25,25,0,0,1-25-25V50A25,25,0,0,1,50,25H519.6L695,201.32V910a25,25,0,0,1-25,25Z");
+}
+
+.chatlog__attachment-icon > .b {
+    fill: #7789c4;
+    d: path("M509.21,50,670,211.63V910H50V50H509.21M530,0H50A50,50,0,0,0,0,50V910a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50h0V191Z");
+}
+
+.chatlog__attachment-icon > .c {
+    fill: #f4f5fb;
+    d: path("M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z");
+}
+
+.chatlog__attachment-icon > .d {
+    fill: #7789c4;
+    d: path("M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z");
+}
+
+.chatlog__attachment-filesize {
+    color: #72767d;
+    font-size: 12px;
+}
+
+.chatlog__attachment-filename {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.chatlog__embed {
+    display: flex;
+    margin-top: 0.3em;
+    max-width: 520px;
+}
+
+.chatlog__embed-color-pill {
+    flex-shrink: 0;
+    width: 0.25em;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.chatlog__embed-content-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em 0.6em;
+    border: 1px solid;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.chatlog__embed-content {
+    display: flex;
+    width: 100%;
+}
+
+.chatlog__embed-text {
+    flex: 1;
+}
+
+.chatlog__embed-author {
+    display: flex;
+    margin-bottom: 0.3em;
+    align-items: center;
+}
+
+.chatlog__embed-author-icon {
+    margin-right: 0.5em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.chatlog__embed-author-name {
+    font-size: 0.875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-title {
+    margin-bottom: 0.2em;
+    font-size: 0.875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-description {
+    font-weight: 500;
+    font-size: 0.85em;
+}
+
+.chatlog__embed-fields {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.chatlog__embed-field {
+    flex: 0;
+    min-width: 100%;
+    max-width: 506px;
+    padding-top: 0.6em;
+    font-size: 0.875em;
+}
+
+.chatlog__embed-field--inline {
+    flex: 1;
+    flex-basis: auto;
+    min-width: 150px;
+}
+
+.chatlog__embed-field-name {
+    margin-bottom: 0.2em;
+    font-weight: 600;
+}
+
+.chatlog__embed-field-value {
+    font-weight: 500;
+}
+
+.chatlog__embed-thumbnail {
+    flex: 0;
+    margin-left: 1.2em;
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-image-container {
+    margin-top: 0.6em;
+}
+
+.chatlog__embed-image {
+    max-width: 500px;
+    max-height: 400px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-footer {
+    margin-top: 0.6em;
+}
+
+.chatlog__embed-footer-icon {
+    margin-right: 0.2em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.chatlog__embed-footer-text {
+    font-size: 0.75em;
+    font-weight: 500;
+}
+
+.chatlog__reactions {
+    display: flex;
+}
+
+.chatlog__reaction {
+    display: flex;
+    align-items: center;
+    margin: 0.35em 0.1em 0.1em 0.1em;
+    padding: 0.2em 0.35em;
+    border-radius: 3px;
+}
+
+.chatlog__reaction-count {
+    min-width: 9px;
+    margin-left: 0.35em;
+    font-size: 0.875em;
+}
+
+.chatlog__bot-tag {
+    position: relative;
+    top: -.2em;
+    margin-left: 0.3em;
+    padding: 0.05em 0.3em;
+    border-radius: 3px;
+    vertical-align: middle;
+    line-height: 1.3;
+    background: #7289da;
+    color: #ffffff;
+    font-size: 0.625em;
+    font-weight: 500;
+}
+
+/* Postamble */
+
+.postamble {
+    margin: 1.4em 0.3em 0.6em 0.3em;
+    padding: 1em;
+    border-top: 1px solid;
+}
+    </style>
+    <style>
+        /* General */
+
+body {
+    background-color: #36393e;
+    color: #dcddde;
+}
+
+a {
+    color: #0096cf;
+}
+
+.spoiler-text {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.spoiler--hidden .spoiler-text {
+    background-color: #202225;
+}
+
+.spoiler--hidden:hover .spoiler-text {
+    background-color: rgba(32, 34, 37, 0.8);
+}
+
+.quote {
+    border-color: #4f545c;
+}
+
+.pre {
+    background-color: #2f3136 !important;
+}
+
+.pre--multiline {
+    border-color: #282b30 !important;
+    color: #b9bbbe !important;
+}
+
+/* === Preamble === */
+
+.preamble__entry {
+    color: #ffffff;
+}
+
+/* Chatlog */
+
+.chatlog__message-group {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.chatlog__reference-symbol {
+    border-color: #4f545c;
+}
+
+.chatlog__reference {
+    color: #b5b6b8;
+}
+
+.chatlog__reference-link {
+    color: #b5b6b8;
+}
+
+.chatlog__reference-link:hover {
+    color: #ffffff;
+}
+
+.chatlog__reference-edited-timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__author-name {
+    color: #ffffff;
+}
+
+.chatlog__timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__message--highlighted {
+    background-color: rgba(114, 137, 218, 0.2) !important;
+}
+
+.chatlog__message--pinned {
+    background-color: rgba(249, 168, 37, 0.05);
+}
+
+.chatlog__attachment-container {
+    background-color: #2f3136;
+    border-color: #292b2f;
+}
+
+.chatlog__edited-timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__embed-color-pill--default {
+    background-color: rgba(79, 84, 92, 1);
+}
+
+.chatlog__embed-content-container {
+    background-color: rgba(46, 48, 54, 0.3);
+    border-color: rgba(46, 48, 54, 0.6);
+}
+
+.chatlog__embed-author-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-author-name-link {
+    color: #ffffff;
+}
+
+.chatlog__embed-title {
+    color: #ffffff;
+}
+
+.chatlog__embed-description {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-field-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-field-value {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-footer {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__reaction {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.chatlog__reaction-count {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* Postamble */
+
+.postamble {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.postamble__entry {
+    color: #ffffff;
+}
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.pre--multiline').forEach(block => hljs.highlightBlock(block));
+        });
+    </script>
+
+    <script>
+        function scrollToMessage(event, id) {
+            var element = document.getElementById('message-' + id);
+
+            if (element) {
+                event.preventDefault();
+
+                element.classList.add('chatlog__message--highlighted');
+
+                window.scrollTo({
+                    top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
+                    behavior: 'smooth'
+                });
+
+                window.setTimeout(function() {
+                    element.classList.remove('chatlog__message--highlighted');
+                }, 2000);
+            }
+        }
+
+        function showSpoiler(event, element) {
+            if (element && element.classList.contains('spoiler--hidden')) {
+                event.preventDefault();
+                element.classList.remove('spoiler--hidden');
+            }
+        }
+    </script>
+</head>
+<body>
+
+<div class="preamble">
+    <div class="preamble__guild-icon-container">
+        <img class="preamble__guild-icon" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/dc536ce53c6925864bef1064f357e510-C5C2D.png" alt="Guild icon">
+    </div>
+    <div class="preamble__entries-container">
+        <div class="preamble__entry">Windows 7 and Legacy Software</div>
+        <div class="preamble__entry">Software / older-steam-versions</div>
+
+
+    </div>
+</div>
+
+<div class="chatlog">
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/c428bb71e26ad27f6888e8c95c84110a-B5280.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="ImSwordKing#8312" data-user-id="262543082271145984" style="color: rgb(32,102,148)">ImSwordKing</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 05:52 AM</span>
+
+            <div class="chatlog__message " data-message-id="820610250742300692" id="message-820610250742300692">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">better than new versions</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 07:40 AM</span>
+
+            <div class="chatlog__message " data-message-id="820637496835964958" id="message-820637496835964958">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Will be left here for further references to the properties menu design:</span>
+
+                        </div>
+                    </div>
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <div class="chatlog__attachment-container">
+                                        <svg class="chatlog__attachment-icon" viewBox="0 0 720 960">
+                                            <path class="a"/>
+                                            <path class="b"/>
+                                            <path class="c"/>
+                                            <path class="d"/>
+                                        </svg>
+                                        <div class="chatlog__attachment-filename">
+                                            <a href="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/Steam_Game_Util_Archive-D0153.rar">
+                                                Steam_Game_Util_Archive.rar
+                                            </a>
+                                        </div>
+                                        <div class="chatlog__attachment-filesize">
+                                            81.76 KB
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">15-Mar-21 07:33 AM</span>
+
+            <div class="chatlog__message " data-message-id="820998198210068580" id="message-820998198210068580">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Steam versions ranging from 2019-1 to 2020-8 (and one Feb-2014 build) provided by R3n: <a href="https://mega.nz/folder/jM1DxCYA#Un9Y1d3mpLVvvrqYcsVMsg">https://mega.nz/folder/jM1DxCYA#Un9Y1d3mpLVvvrqYcsVMsg</a> <s>Here&#39;s this.</s></span>
+
+                                <span class="chatlog__edited-timestamp" title="15-Mar-21 12:18 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+
+                                        <div class="chatlog__embed-title">
+                                                <a class="chatlog__embed-title-link" href="https://mega.nz/folder/jM1DxCYA">
+                                                    <div class="markdown preserve-whitespace">10.93 GB folder on MEGA</div>
+                                                </a>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown preserve-whitespace">28 files and 5 subfolders</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/rich-folder-BBD0C.png">
+                                            <img class="chatlog__embed-thumbnail" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/rich-folder-BBD0C.png" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/406a288bb0c301920f1a6857b6b6dda2-B82A0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="tyl#5381" data-user-id="711271606835740791" style="color: rgb(149,165,166)">tyl</span>
+
+
+        <span class="chatlog__timestamp">15-Mar-21 07:37 AM</span>
+
+            <div class="chatlog__message " data-message-id="820999023867199529" id="message-820999023867199529">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">10GB?</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">15-Mar-21 07:37 AM</span>
+
+            <div class="chatlog__message " data-message-id="820999157308850256" id="message-820999157308850256">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Yes, it&#39;s all the steam versions up until last august*.</span>
+
+                                <span class="chatlog__edited-timestamp" title="15-Mar-21 07:38 AM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/1b6ef1383b39509ea359d7623914567f-BCA1C.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="R3n#5950" data-user-id="159828005781241868" style="color: rgb(155,89,182)">R3n&#39;s ghost (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">15-Mar-21 12:15 PM</span>
+
+            <div class="chatlog__message " data-message-id="821069071046541312" id="message-821069071046541312">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I need to update that and gather newer versions</span>
+
+                                <span class="chatlog__edited-timestamp" title="15-Mar-21 12:15 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">15-Mar-21 12:16 PM</span>
+
+            <div class="chatlog__message " data-message-id="821069329713070190" id="message-821069329713070190">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Oh so you own it, my bad let me just.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/08e42ec0792c20fa1b3cbd8681294732-1E905.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="lodocus#9919" data-user-id="396731429200986113" style="color: rgb(149,165,166)">lodocus</span>
+
+
+        <span class="chatlog__timestamp">15-Mar-21 12:43 PM</span>
+
+            <div class="chatlog__message " data-message-id="821076144929243158" id="message-821076144929243158">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">does the 2014 build work?</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="821076222489526282" id="message-821076222489526282">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">maybe we can run it on 2k?</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">15-Mar-21 12:44 PM</span>
+
+            <div class="chatlog__message " data-message-id="821076288667385864" id="message-821076288667385864">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I think not, someone tried it, the login screen is just not functional.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/406a288bb0c301920f1a6857b6b6dda2-B82A0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="tyl#5381" data-user-id="711271606835740791" style="color: rgb(149,165,166)">tyl</span>
+
+
+        <span class="chatlog__timestamp">07-Apr-21 07:24 PM</span>
+
+            <div class="chatlog__message " data-message-id="829511950132183040" id="message-829511950132183040">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">is the old library still working</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">07-Apr-21 11:32 PM</span>
+
+            <div class="chatlog__message " data-message-id="829574416093413397" id="message-829574416093413397">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I don&#39;t think that will work easily out of the box, but someone did make an old version of steam alive.</span>
+
+                                <span class="chatlog__edited-timestamp" title="08-Apr-21 04:55 AM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/5c704ee0474da04776a841a71fb7dd20-0CB43.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Shroomer98#4146" data-user-id="347134668417531914" style="color: rgb(149,165,166)">Shroomer98 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">08-Apr-21 04:58 PM</span>
+
+            <div class="chatlog__message " data-message-id="829837602727002153" id="message-829837602727002153">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Ooo, my steam post would be better here.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/5c704ee0474da04776a841a71fb7dd20-0CB43.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Shroomer98#4146" data-user-id="347134668417531914" style="color: rgb(149,165,166)">Shroomer98 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">08-Apr-21 05:11 PM</span>
+
+            <div class="chatlog__message " data-message-id="829841016818892840" id="message-829841016818892840">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Would you like the steam version I have? that works on xp? I think it&#39;s the Nov 2019 build I got from the archive</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/406a288bb0c301920f1a6857b6b6dda2-B82A0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="tyl#5381" data-user-id="711271606835740791" style="color: rgb(149,165,166)">tyl</span>
+
+
+        <span class="chatlog__timestamp">08-Apr-21 05:50 PM</span>
+
+            <div class="chatlog__message " data-message-id="829850600346746880" id="message-829850600346746880">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Sure</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/0a779cd0127cd5909eec30e2525012b8-BD6E3.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="CRMX#0666" data-user-id="647890761848848433" style="color: rgb(149,165,166)">CRMX</span>
+
+
+        <span class="chatlog__timestamp">08-Apr-21 05:51 PM</span>
+
+            <div class="chatlog__message " data-message-id="829850861517799424" id="message-829850861517799424">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Yeah, I’d appreciate it too</span>
+
+                                <span class="chatlog__edited-timestamp" title="08-Apr-21 05:51 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/5c704ee0474da04776a841a71fb7dd20-0CB43.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Shroomer98#4146" data-user-id="347134668417531914" style="color: rgb(149,165,166)">Shroomer98 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">09-Apr-21 08:58 PM</span>
+
+            <div class="chatlog__message " data-message-id="830260540277522462" id="message-830260540277522462">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://archive.org/details/steam_201901">https://archive.org/details/steam_201901</a></span>
+
+                        </div>
+                    </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+
+                                        <div class="chatlog__embed-title">
+                                                <a class="chatlog__embed-title-link" href="https://archive.org/details/steam_201901">
+                                                    <div class="markdown preserve-whitespace">Steam build Nov 26 2018, archived for XP/Vista compatibility : spaz...</div>
+                                                </a>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown preserve-whitespace">Well, kinda good news. By getting a packageinfo.vdf from a new Steam version, converting it to the old format with PackageInfoConverter...</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/steam_201901-846F9">
+                                            <img class="chatlog__embed-thumbnail" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/steam_201901-846F9" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+            </div>
+            <div class="chatlog__message " data-message-id="830260598083289119" id="message-830260598083289119">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I think this is the steam version I used</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">09-Apr-21 08:59 PM</span>
+
+            <div class="chatlog__message " data-message-id="830260671987580948" id="message-830260671987580948">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Oh nice; didn&#39;t know it was on archive.org, no pop up in the search results.</span>
+
+                                <span class="chatlog__edited-timestamp" title="09-Apr-21 09:00 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/5c704ee0474da04776a841a71fb7dd20-0CB43.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Shroomer98#4146" data-user-id="347134668417531914" style="color: rgb(149,165,166)">Shroomer98 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">09-Apr-21 09:00 PM</span>
+
+            <div class="chatlog__message " data-message-id="830260900018913341" id="message-830260900018913341">
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/unknown-76891.png">
+                                        <img class="chatlog__attachment-thumbnail" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/unknown-76891.png" alt="Image attachment" title="Image: unknown.png (195.99 KB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="830260955971715092" id="message-830260955971715092">
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/unknown-3BE48.png">
+                                        <img class="chatlog__attachment-thumbnail" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/unknown-3BE48.png" alt="Image attachment" title="Image: unknown.png (94.55 KB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">09-Apr-21 09:00 PM</span>
+
+            <div class="chatlog__message " data-message-id="830260966792101908" id="message-830260966792101908">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Oh that&#39;s the resource you used?</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/5c704ee0474da04776a841a71fb7dd20-0CB43.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Shroomer98#4146" data-user-id="347134668417531914" style="color: rgb(149,165,166)">Shroomer98 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">09-Apr-21 09:00 PM</span>
+
+            <div class="chatlog__message " data-message-id="830260978419499028" id="message-830260978419499028">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I never saw the videos</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="830261028583112704" id="message-830261028583112704">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">but I must have read one of those forums</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">09-Apr-21 09:00 PM</span>
+
+            <div class="chatlog__message " data-message-id="830261044763951104" id="message-830261044763951104">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Ah, just the MSFN guide.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/5c704ee0474da04776a841a71fb7dd20-0CB43.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Shroomer98#4146" data-user-id="347134668417531914" style="color: rgb(149,165,166)">Shroomer98 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">09-Apr-21 09:01 PM</span>
+
+            <div class="chatlog__message " data-message-id="830261159004340225" id="message-830261159004340225">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">It&#39;s been two years, I forgot, but I don&#39;t recall i430vx&#39;s version (msfn)</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="830261214164025355" id="message-830261214164025355">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I think I used reddit, i&#39;m pretty sure</span>
+
+                                <span class="chatlog__edited-timestamp" title="09-Apr-21 09:01 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">09-Apr-21 09:01 PM</span>
+
+            <div class="chatlog__message " data-message-id="830261259655315518" id="message-830261259655315518">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Oh, ok.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/5c704ee0474da04776a841a71fb7dd20-0CB43.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Shroomer98#4146" data-user-id="347134668417531914" style="color: rgb(149,165,166)">Shroomer98 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">09-Apr-21 09:02 PM</span>
+
+            <div class="chatlog__message " data-message-id="830261434201014282" id="message-830261434201014282">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">anyways there you go guys, let me know if it still works when you get to try it</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">09-Apr-21 09:03 PM</span>
+
+            <div class="chatlog__message " data-message-id="830261665354350602" id="message-830261665354350602">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Sure enough, though afraid to experiement on the main account and the test one i just made was golf&#39;d out for no reason.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/5c704ee0474da04776a841a71fb7dd20-0CB43.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Shroomer98#4146" data-user-id="347134668417531914" style="color: rgb(149,165,166)">Shroomer98 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">09-Apr-21 09:05 PM</span>
+
+            <div class="chatlog__message " data-message-id="830262260152795187" id="message-830262260152795187">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">ooo</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="830262307984113725" id="message-830262307984113725">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">nah it&#39;s fine on my main account</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="830262340468867082" id="message-830262340468867082">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">but yeah it&#39;s good to be safe</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="830262463731466301" id="message-830262463731466301">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">what are you concerned about specifically, security or account corruption?</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">09-Apr-21 09:07 PM</span>
+
+            <div class="chatlog__message " data-message-id="830262564709335070" id="message-830262564709335070">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Not security, but rather it was rash desicion before reading the ToS.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/5c704ee0474da04776a841a71fb7dd20-0CB43.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Shroomer98#4146" data-user-id="347134668417531914" style="color: rgb(149,165,166)">Shroomer98 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">09-Apr-21 09:07 PM</span>
+
+            <div class="chatlog__message " data-message-id="830262720090865704" id="message-830262720090865704">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">it&#39;s... illegal to run a modified steam?</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">09-Apr-21 09:07 PM</span>
+
+            <div class="chatlog__message " data-message-id="830262763128619008" id="message-830262763128619008">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I&#39;m not sure, haven&#39;t read that.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/5c704ee0474da04776a841a71fb7dd20-0CB43.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Shroomer98#4146" data-user-id="347134668417531914" style="color: rgb(149,165,166)">Shroomer98 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">09-Apr-21 09:07 PM</span>
+
+            <div class="chatlog__message " data-message-id="830262806108438538" id="message-830262806108438538">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">oh, then what about the TOS</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">09-Apr-21 09:08 PM</span>
+
+            <div class="chatlog__message " data-message-id="830262854828556288" id="message-830262854828556288">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I am about to read it now.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/5c704ee0474da04776a841a71fb7dd20-0CB43.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Shroomer98#4146" data-user-id="347134668417531914" style="color: rgb(149,165,166)">Shroomer98 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">09-Apr-21 09:08 PM</span>
+
+            <div class="chatlog__message " data-message-id="830262881895186462" id="message-830262881895186462">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">oohhhhhhh</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="830263098791166003" id="message-830263098791166003">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">well I just wanna let you know that Steam Guard with the mobile app still works, as shown in my screenshots, I think that might say something about the security</span>
+
+                                <span class="chatlog__edited-timestamp" title="09-Apr-21 09:09 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">09-Apr-21 09:09 PM</span>
+
+            <div class="chatlog__message " data-message-id="830263148745326624" id="message-830263148745326624">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Oh very nice. Though still don&#39;t know why that other account suddenly went poof, was rather unusual; it wasn&#39;t some half-assed email service too, was a legit provider.</span>
+
+                                <span class="chatlog__edited-timestamp" title="09-Apr-21 09:14 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+        <div class="chatlog__reference-symbol">
+        </div>
+        <div class="chatlog__reference">
+                <img class="chatlog__reference-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+                <span class="chatlog__reference-name" title="MassClaw#9517" style="color: rgb(153,45,34)">MassClaw</span>
+                <a class="chatlog__reference-link" href="#" onclick="scrollToMessage(event, &#39;830263148745326624&#39;)">
+                    <span class="chatlog__reference-content">
+Oh very nice. Though still don&#39;t know why that other account suddenly went poof, was rather unusual; it wasn&#39;t some half-assed email service too, was a legit provider.                    </span>
+
+                        <span class="chatlog__reference-edited-timestamp" title="09-Apr-21 09:14 PM">(edited)</span>
+                </a>
+        </div>
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/5c704ee0474da04776a841a71fb7dd20-0CB43.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Shroomer98#4146" data-user-id="347134668417531914" style="color: rgb(149,165,166)">Shroomer98 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">09-Apr-21 09:15 PM</span>
+
+            <div class="chatlog__message " data-message-id="830264730131759114" id="message-830264730131759114">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I&#39;ve made a second account but I haven&#39;t used mine in years. I wonder if it&#39;s still up. I think that maybe you just didn&#39;t install games or set up steam guard, so steam assumed it was a bot spam account or something</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">09-Apr-21 09:16 PM</span>
+
+            <div class="chatlog__message " data-message-id="830264907978637312" id="message-830264907978637312">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">But i made the thing on their site, used it for the client to test the waters in a vm- wait... Is the VM an issue to the ToS? but... that doesn&#39;t make any sense. And then i tried to log onto it in the site, couldn&#39;t do that at all.</span>
+
+                                <span class="chatlog__edited-timestamp" title="09-Apr-21 09:18 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/5c704ee0474da04776a841a71fb7dd20-0CB43.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Shroomer98#4146" data-user-id="347134668417531914" style="color: rgb(149,165,166)">Shroomer98 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">09-Apr-21 09:17 PM</span>
+
+            <div class="chatlog__message " data-message-id="830265303866146828" id="message-830265303866146828">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">did you put any games in your library though</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">09-Apr-21 09:17 PM</span>
+
+            <div class="chatlog__message " data-message-id="830265318634422293" id="message-830265318634422293">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Nope. (My bad the reply message below refers to the one above it.)</span>
+
+                                <span class="chatlog__edited-timestamp" title="09-Apr-21 09:47 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/5c704ee0474da04776a841a71fb7dd20-0CB43.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Shroomer98#4146" data-user-id="347134668417531914" style="color: rgb(149,165,166)">Shroomer98 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">09-Apr-21 09:18 PM</span>
+
+            <div class="chatlog__message " data-message-id="830265343308988426" id="message-830265343308988426">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">that must be why</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+        <div class="chatlog__reference-symbol">
+        </div>
+        <div class="chatlog__reference">
+                <span class="chatlog__reference-unknown">
+                    Original message was deleted.
+                </span>
+        </div>
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/5c704ee0474da04776a841a71fb7dd20-0CB43.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Shroomer98#4146" data-user-id="347134668417531914" style="color: rgb(149,165,166)">Shroomer98 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">09-Apr-21 09:18 PM</span>
+
+            <div class="chatlog__message " data-message-id="830265385587965992" id="message-830265385587965992">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">did it give an error</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">09-Apr-21 09:18 PM</span>
+
+            <div class="chatlog__message " data-message-id="830265427006849034" id="message-830265427006849034">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Wait, so i have to buy a game on the site? but why? Also no.</span>
+
+                                <span class="chatlog__edited-timestamp" title="09-Apr-21 09:18 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+        <div class="chatlog__reference-symbol">
+        </div>
+        <div class="chatlog__reference">
+                <img class="chatlog__reference-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+                <span class="chatlog__reference-name" title="MassClaw#9517" style="color: rgb(153,45,34)">MassClaw</span>
+                <a class="chatlog__reference-link" href="#" onclick="scrollToMessage(event, &#39;830265427006849034&#39;)">
+                    <span class="chatlog__reference-content">
+Wait, so i have to buy a game on the site? but why? Also no.                    </span>
+
+                        <span class="chatlog__reference-edited-timestamp" title="09-Apr-21 09:18 PM">(edited)</span>
+                </a>
+        </div>
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/5c704ee0474da04776a841a71fb7dd20-0CB43.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Shroomer98#4146" data-user-id="347134668417531914" style="color: rgb(149,165,166)">Shroomer98 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">09-Apr-21 09:18 PM</span>
+
+            <div class="chatlog__message " data-message-id="830265522625052744" id="message-830265522625052744">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">i mean not buy, but like, at least put some free games in the library</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="830265616824008714" id="message-830265616824008714">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">so that it would make steam believe you&#39;re a real person, i guess</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">09-Apr-21 09:19 PM</span>
+
+            <div class="chatlog__message " data-message-id="830265707899912232" id="message-830265707899912232">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Huh... was about to do that on the client though.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/5c704ee0474da04776a841a71fb7dd20-0CB43.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Shroomer98#4146" data-user-id="347134668417531914" style="color: rgb(149,165,166)">Shroomer98 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">09-Apr-21 09:19 PM</span>
+
+            <div class="chatlog__message " data-message-id="830265737821683723" id="message-830265737821683723">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I think this since Steam seems like it&#39;s pretty strict on security</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="830265788375760917" id="message-830265788375760917">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">wait, when did you make your test account?</span>
+
+                                <span class="chatlog__edited-timestamp" title="09-Apr-21 09:20 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">09-Apr-21 09:20 PM</span>
+
+            <div class="chatlog__message " data-message-id="830265886656561193" id="message-830265886656561193">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">On jan this year.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/5c704ee0474da04776a841a71fb7dd20-0CB43.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Shroomer98#4146" data-user-id="347134668417531914" style="color: rgb(149,165,166)">Shroomer98 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">09-Apr-21 09:21 PM</span>
+
+            <div class="chatlog__message " data-message-id="830266296973262888" id="message-830266296973262888">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">hmm, did you try making another account using the same email?</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">09-Apr-21 09:22 PM</span>
+
+            <div class="chatlog__message " data-message-id="830266353227268117" id="message-830266353227268117">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Nope. It really doesn&#39;t align well man; there must be either VM protection or you just can&#39;t login with an old version anymore but.. i can&#39;t see this posisbly being the case when someone else here did successfully make it work.</span>
+
+                                <span class="chatlog__edited-timestamp" title="09-Apr-21 09:23 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/5c704ee0474da04776a841a71fb7dd20-0CB43.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Shroomer98#4146" data-user-id="347134668417531914" style="color: rgb(149,165,166)">Shroomer98 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">09-Apr-21 09:24 PM</span>
+
+            <div class="chatlog__message " data-message-id="830267032233574400" id="message-830267032233574400">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">hard to figure out</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+        <div class="chatlog__reference-symbol">
+        </div>
+        <div class="chatlog__reference">
+                <img class="chatlog__reference-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/5c704ee0474da04776a841a71fb7dd20-0CB43.png" alt="Avatar">
+                <span class="chatlog__reference-name" title="Shroomer98#4146" style="color: rgb(149,165,166)">Shroomer98 (Simons GT Mix)</span>
+                <a class="chatlog__reference-link" href="#" onclick="scrollToMessage(event, &#39;830265385587965992&#39;)">
+                    <span class="chatlog__reference-content">
+did it give an error                    </span>
+
+                </a>
+        </div>
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/5c704ee0474da04776a841a71fb7dd20-0CB43.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Shroomer98#4146" data-user-id="347134668417531914" style="color: rgb(149,165,166)">Shroomer98 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">09-Apr-21 09:25 PM</span>
+
+            <div class="chatlog__message " data-message-id="830267098650902569" id="message-830267098650902569">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">?</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">09-Apr-21 09:25 PM</span>
+
+            <div class="chatlog__message " data-message-id="830267172436967454" id="message-830267172436967454">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Nope it didn&#39;t, i just couldn&#39;t log in and the page i made the account in disappeared. Wish i know if it had somewhat of a warning sent to that email but nope, nothing in the inbox; not even the spam category.</span>
+
+                                <span class="chatlog__edited-timestamp" title="09-Apr-21 09:46 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+        <div class="chatlog__reference-symbol">
+        </div>
+        <div class="chatlog__reference">
+                <img class="chatlog__reference-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+                <span class="chatlog__reference-name" title="MassClaw#9517" style="color: rgb(153,45,34)">MassClaw</span>
+                <a class="chatlog__reference-link" href="#" onclick="scrollToMessage(event, &#39;830267172436967454&#39;)">
+                    <span class="chatlog__reference-content">
+Nope it didn&#39;t, i just couldn&#39;t log in and the page i made the account in disappeared. Wish i know if it had somewhat of a warning sent to that email but nope, nothing in the inbox; not even the spam category.                    </span>
+
+                        <span class="chatlog__reference-edited-timestamp" title="09-Apr-21 09:46 PM">(edited)</span>
+                </a>
+        </div>
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/5c704ee0474da04776a841a71fb7dd20-0CB43.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Shroomer98#4146" data-user-id="347134668417531914" style="color: rgb(149,165,166)">Shroomer98 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">09-Apr-21 09:37 PM</span>
+
+            <div class="chatlog__message " data-message-id="830270330244825108" id="message-830270330244825108">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">disappeared?</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">09-Apr-21 09:38 PM</span>
+
+            <div class="chatlog__message " data-message-id="830270403308945456" id="message-830270403308945456">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Yep, like i said before. Couldn&#39;t log in.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/5c704ee0474da04776a841a71fb7dd20-0CB43.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Shroomer98#4146" data-user-id="347134668417531914" style="color: rgb(149,165,166)">Shroomer98 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">09-Apr-21 09:38 PM</span>
+
+            <div class="chatlog__message " data-message-id="830270592758448128" id="message-830270592758448128">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">well yes but the page.... disppeared?</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">09-Apr-21 09:39 PM</span>
+
+            <div class="chatlog__message " data-message-id="830270717932470292" id="message-830270717932470292">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">By disappeared, i meant logged me out after a refresh. Yeah after reading the ToS it only got blurrier. There are literally no other accounts that had this problem. All of those who speak the same tone are years old problems and have suspicious motives.</span>
+
+                                <span class="chatlog__edited-timestamp" title="10-Apr-21 08:02 AM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/5c704ee0474da04776a841a71fb7dd20-0CB43.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Shroomer98#4146" data-user-id="347134668417531914" style="color: rgb(149,165,166)">Shroomer98 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">10-Apr-21 11:07 AM</span>
+
+            <div class="chatlog__message " data-message-id="830473987377201223" id="message-830473987377201223">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">so there are other accounts with no games in their library that have been up for years?</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">10-Apr-21 11:10 AM</span>
+
+            <div class="chatlog__message " data-message-id="830474795195695134" id="message-830474795195695134">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Yep, seen some.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/5c704ee0474da04776a841a71fb7dd20-0CB43.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Shroomer98#4146" data-user-id="347134668417531914" style="color: rgb(149,165,166)">Shroomer98 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">10-Apr-21 11:12 AM</span>
+
+            <div class="chatlog__message " data-message-id="830475394037317642" id="message-830475394037317642">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">weird</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20Software%20-%20older-steam-versions%20%5B820592851364479008%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">11-Apr-21 12:04 AM</span>
+
+            <div class="chatlog__message " data-message-id="830669695773311037" id="message-830669695773311037">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Too weird.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+</div>
+
+<div class="postamble">
+    <div class="postamble__entry">Exported 68 message(s)</div>
+</div>
+
+</body>
+
+</html>

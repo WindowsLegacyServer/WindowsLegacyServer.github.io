@@ -1,0 +1,4130 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Windows 7 and Legacy Software - help</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <style>
+        /* General */
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-300.woff);
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-400.woff);
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-500.woff);
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-600.woff);
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-700.woff);
+    font-weight: 700;
+}
+
+body {
+    font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 17px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    object-fit: contain;
+}
+
+.markdown {
+    max-width: 100%;
+    line-height: 1.3;
+    overflow-wrap: break-word;
+}
+
+.preserve-whitespace {
+    white-space: pre-wrap;
+}
+
+.spoiler {
+    /* width: fit-content; */
+    display: inline-block;
+    /* This is more consistent across browsers, the old attribute worked well under Chrome but not FireFox. */
+}
+
+.spoiler--hidden {
+    cursor: pointer;
+}
+
+.spoiler-text {
+    border-radius: 3px;
+}
+
+.spoiler--hidden .spoiler-text {
+    color: rgba(0, 0, 0, 0);
+}
+
+.spoiler--hidden .spoiler-text::selection {
+    color: rgba(0, 0, 0, 0);
+}
+
+.spoiler-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px;
+}
+
+.spoiler--hidden .spoiler-image {
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.spoiler--hidden .spoiler-image * {
+    filter: blur(44px);
+}
+
+.spoiler--hidden .spoiler-image:after {
+    content: "SPOILER";
+    color: #dcddde;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 600;
+    padding: 100%;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+    font-size: 0.9em;
+}
+
+.spoiler--hidden:hover .spoiler-image:after {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.quote {
+    margin: 0.1em 0;
+    padding-left: 0.6em;
+    border-left: 4px solid;
+    border-radius: 3px;
+}
+
+.pre {
+    font-family: "Consolas", "Courier New", Courier, monospace;
+}
+
+.pre--multiline {
+    margin-top: 0.25em;
+    padding: 0.5em;
+    border: 2px solid;
+    border-radius: 5px;
+}
+
+.pre--inline {
+    padding: 2px;
+    border-radius: 3px;
+    font-size: 0.85em;
+}
+
+.mention {
+    border-radius: 3px;
+    padding: 0 2px;
+    color: #7289da;
+    background: rgba(114, 137, 218, .1);
+    font-weight: 500;
+}
+
+.emoji {
+    width: 1.25em;
+    height: 1.25em;
+    margin: 0 0.06em;
+    vertical-align: -0.4em;
+}
+
+.emoji--small {
+    width: 1em;
+    height: 1em;
+}
+
+.emoji--large {
+    width: 2.8em;
+    height: 2.8em;
+}
+
+/* Preamble */
+
+.preamble {
+    display: grid;
+    margin: 0 0.3em 0.6em 0.3em;
+    max-width: 100%;
+    grid-template-columns: auto 1fr;
+}
+
+.preamble__guild-icon-container {
+    grid-column: 1;
+}
+
+.preamble__guild-icon {
+    max-width: 88px;
+    max-height: 88px;
+}
+
+.preamble__entries-container {
+    grid-column: 2;
+    margin-left: 0.6em;
+}
+
+.preamble__entry {
+    font-size: 1.4em;
+}
+
+.preamble__entry--small {
+    font-size: 1em;
+}
+
+/* Chatlog */
+
+.chatlog {
+    max-width: 100%;
+}
+
+.chatlog__message-group {
+    display: grid;
+    margin: 0 0.6em;
+    padding: 0.9em 0;
+    border-top: 1px solid;
+    grid-template-columns: auto 1fr;
+}
+
+.chatlog__reference-symbol {
+    grid-column: 1;
+    border-style: solid;
+    border-width: 2px 0 0 2px;
+    border-radius: 8px 0 0 0;
+    margin-left: 16px;
+    margin-top: 8px;
+}
+
+.chatlog__reference {
+    display: flex;
+    grid-column: 2;
+    margin-left: 1.2em;
+    margin-bottom: 0.25em;
+    font-size: 0.875em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    align-items: center;
+}
+
+.chatlog__reference-avatar {
+    border-radius: 50%;
+    height: 16px;
+    width: 16px;
+    margin-right: 0.25em;
+}
+
+.chatlog__reference-name {
+    margin-right: 0.25em;
+    font-weight: 600;
+}
+
+.chatlog__reference-link {
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.chatlog__reference-link:hover {
+    text-decoration: none;
+}
+
+.chatlog__reference-content > * {
+    display: inline;
+}
+
+.chatlog__reference-edited-timestamp {
+    margin-left: 0.25em;
+    font-size: 0.8em;
+}
+
+.chatlog__author-avatar-container {
+    grid-column: 1;
+    width: 40px;
+    height: 40px;
+}
+
+.chatlog__author-avatar {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+}
+
+.chatlog__messages {
+    grid-column: 2;
+    margin-left: 1.2em;
+    min-width: 50%;
+}
+
+.chatlog__author-name {
+    font-weight: 500;
+}
+
+.chatlog__timestamp {
+    margin-left: 0.3em;
+    font-size: 0.75em;
+}
+
+.chatlog__message {
+    padding: 0.1em 0.3em;
+    margin: 0 -0.3em;
+    background-color: transparent;
+    transition: background-color 1s ease;
+}
+
+.chatlog__content {
+    font-size: 0.95em;
+    word-wrap: break-word;
+}
+
+.chatlog__edited-timestamp {
+    margin-left: 0.15em;
+    font-size: 0.8em;
+}
+
+.chatlog__attachment {
+    margin-top: 0.3em;
+}
+
+.chatlog__attachment-thumbnail {
+    vertical-align: top;
+    max-width: 45vw;
+    max-height: 500px;
+    border-radius: 3px;
+}
+
+.chatlog__attachment-container {
+    height: 40px;
+    width: 100%;
+    max-width: 520px;
+    padding: 10px;
+    border: 1px solid;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.chatlog__attachment-icon {
+    float: left;
+    height: 100%;
+    margin-right: 10px;
+}
+
+.chatlog__attachment-icon > .a {
+    fill: #f4f5fb;
+    d: path("M50,935a25,25,0,0,1-25-25V50A25,25,0,0,1,50,25H519.6L695,201.32V910a25,25,0,0,1-25,25Z");
+}
+
+.chatlog__attachment-icon > .b {
+    fill: #7789c4;
+    d: path("M509.21,50,670,211.63V910H50V50H509.21M530,0H50A50,50,0,0,0,0,50V910a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50h0V191Z");
+}
+
+.chatlog__attachment-icon > .c {
+    fill: #f4f5fb;
+    d: path("M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z");
+}
+
+.chatlog__attachment-icon > .d {
+    fill: #7789c4;
+    d: path("M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z");
+}
+
+.chatlog__attachment-filesize {
+    color: #72767d;
+    font-size: 12px;
+}
+
+.chatlog__attachment-filename {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.chatlog__embed {
+    display: flex;
+    margin-top: 0.3em;
+    max-width: 520px;
+}
+
+.chatlog__embed-color-pill {
+    flex-shrink: 0;
+    width: 0.25em;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.chatlog__embed-content-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em 0.6em;
+    border: 1px solid;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.chatlog__embed-content {
+    display: flex;
+    width: 100%;
+}
+
+.chatlog__embed-text {
+    flex: 1;
+}
+
+.chatlog__embed-author {
+    display: flex;
+    margin-bottom: 0.3em;
+    align-items: center;
+}
+
+.chatlog__embed-author-icon {
+    margin-right: 0.5em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.chatlog__embed-author-name {
+    font-size: 0.875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-title {
+    margin-bottom: 0.2em;
+    font-size: 0.875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-description {
+    font-weight: 500;
+    font-size: 0.85em;
+}
+
+.chatlog__embed-fields {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.chatlog__embed-field {
+    flex: 0;
+    min-width: 100%;
+    max-width: 506px;
+    padding-top: 0.6em;
+    font-size: 0.875em;
+}
+
+.chatlog__embed-field--inline {
+    flex: 1;
+    flex-basis: auto;
+    min-width: 150px;
+}
+
+.chatlog__embed-field-name {
+    margin-bottom: 0.2em;
+    font-weight: 600;
+}
+
+.chatlog__embed-field-value {
+    font-weight: 500;
+}
+
+.chatlog__embed-thumbnail {
+    flex: 0;
+    margin-left: 1.2em;
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-image-container {
+    margin-top: 0.6em;
+}
+
+.chatlog__embed-image {
+    max-width: 500px;
+    max-height: 400px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-footer {
+    margin-top: 0.6em;
+}
+
+.chatlog__embed-footer-icon {
+    margin-right: 0.2em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.chatlog__embed-footer-text {
+    font-size: 0.75em;
+    font-weight: 500;
+}
+
+.chatlog__reactions {
+    display: flex;
+}
+
+.chatlog__reaction {
+    display: flex;
+    align-items: center;
+    margin: 0.35em 0.1em 0.1em 0.1em;
+    padding: 0.2em 0.35em;
+    border-radius: 3px;
+}
+
+.chatlog__reaction-count {
+    min-width: 9px;
+    margin-left: 0.35em;
+    font-size: 0.875em;
+}
+
+.chatlog__bot-tag {
+    position: relative;
+    top: -.2em;
+    margin-left: 0.3em;
+    padding: 0.05em 0.3em;
+    border-radius: 3px;
+    vertical-align: middle;
+    line-height: 1.3;
+    background: #7289da;
+    color: #ffffff;
+    font-size: 0.625em;
+    font-weight: 500;
+}
+
+/* Postamble */
+
+.postamble {
+    margin: 1.4em 0.3em 0.6em 0.3em;
+    padding: 1em;
+    border-top: 1px solid;
+}
+    </style>
+    <style>
+        /* General */
+
+body {
+    background-color: #36393e;
+    color: #dcddde;
+}
+
+a {
+    color: #0096cf;
+}
+
+.spoiler-text {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.spoiler--hidden .spoiler-text {
+    background-color: #202225;
+}
+
+.spoiler--hidden:hover .spoiler-text {
+    background-color: rgba(32, 34, 37, 0.8);
+}
+
+.quote {
+    border-color: #4f545c;
+}
+
+.pre {
+    background-color: #2f3136 !important;
+}
+
+.pre--multiline {
+    border-color: #282b30 !important;
+    color: #b9bbbe !important;
+}
+
+/* === Preamble === */
+
+.preamble__entry {
+    color: #ffffff;
+}
+
+/* Chatlog */
+
+.chatlog__message-group {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.chatlog__reference-symbol {
+    border-color: #4f545c;
+}
+
+.chatlog__reference {
+    color: #b5b6b8;
+}
+
+.chatlog__reference-link {
+    color: #b5b6b8;
+}
+
+.chatlog__reference-link:hover {
+    color: #ffffff;
+}
+
+.chatlog__reference-edited-timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__author-name {
+    color: #ffffff;
+}
+
+.chatlog__timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__message--highlighted {
+    background-color: rgba(114, 137, 218, 0.2) !important;
+}
+
+.chatlog__message--pinned {
+    background-color: rgba(249, 168, 37, 0.05);
+}
+
+.chatlog__attachment-container {
+    background-color: #2f3136;
+    border-color: #292b2f;
+}
+
+.chatlog__edited-timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__embed-color-pill--default {
+    background-color: rgba(79, 84, 92, 1);
+}
+
+.chatlog__embed-content-container {
+    background-color: rgba(46, 48, 54, 0.3);
+    border-color: rgba(46, 48, 54, 0.6);
+}
+
+.chatlog__embed-author-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-author-name-link {
+    color: #ffffff;
+}
+
+.chatlog__embed-title {
+    color: #ffffff;
+}
+
+.chatlog__embed-description {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-field-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-field-value {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-footer {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__reaction {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.chatlog__reaction-count {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* Postamble */
+
+.postamble {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.postamble__entry {
+    color: #ffffff;
+}
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.pre--multiline').forEach(block => hljs.highlightBlock(block));
+        });
+    </script>
+
+    <script>
+        function scrollToMessage(event, id) {
+            var element = document.getElementById('message-' + id);
+
+            if (element) {
+                event.preventDefault();
+
+                element.classList.add('chatlog__message--highlighted');
+
+                window.scrollTo({
+                    top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
+                    behavior: 'smooth'
+                });
+
+                window.setTimeout(function() {
+                    element.classList.remove('chatlog__message--highlighted');
+                }, 2000);
+            }
+        }
+
+        function showSpoiler(event, element) {
+            if (element && element.classList.contains('spoiler--hidden')) {
+                event.preventDefault();
+                element.classList.remove('spoiler--hidden');
+            }
+        }
+    </script>
+</head>
+<body>
+
+<div class="preamble">
+    <div class="preamble__guild-icon-container">
+        <img class="preamble__guild-icon" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/dc536ce53c6925864bef1064f357e510-C5C2D.png" alt="Guild icon">
+    </div>
+    <div class="preamble__entries-container">
+        <div class="preamble__entry">Windows 7 and Legacy Software</div>
+        <div class="preamble__entry">410 gone / help</div>
+
+
+    </div>
+</div>
+
+<div class="chatlog">
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/c428bb71e26ad27f6888e8c95c84110a-B5280.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="ImSwordKing#8312" data-user-id="262543082271145984" style="color: rgb(32,102,148)">ImSwordKing</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 05:50 AM</span>
+
+            <div class="chatlog__message " data-message-id="820609730728296468" id="message-820609730728296468">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">i need help</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/5c704ee0474da04776a841a71fb7dd20-0CB43.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Shroomer98#4146" data-user-id="347134668417531914" style="color: rgb(149,165,166)">Shroomer98 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 11:25 AM</span>
+
+            <div class="chatlog__message " data-message-id="820694058682941523" id="message-820694058682941523">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">i need help too</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/2615e7bba5bafc8a266dd8422fc8db9b-E597E.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win32#7457" data-user-id="767234278630228019" style="color: rgb(26,188,156)">win32</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 11:25 AM</span>
+
+            <div class="chatlog__message " data-message-id="820694161346002974" id="message-820694161346002974">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">&quot;help yourself&quot; - theodor, maker of mypal and centuary</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/423c7536719cbb7b1904c25c07fe7c5a-F2E4F.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="blueviper10#3793" data-user-id="792629882907394063" style="color: rgb(149,165,166)">blueviper10</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 11:30 AM</span>
+
+            <div class="chatlog__message " data-message-id="820695465158639708" id="message-820695465158639708">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">i need mental help</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/21180337ff74db5f57aeed1a7ac9ca5f-FF199.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="freedom#7341" data-user-id="190196212165509121" style="">freedom</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 12:42 PM</span>
+
+            <div class="chatlog__message " data-message-id="820713633288814644" id="message-820713633288814644">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">mental help yourself</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/c918c5278b0fe853d1a5834370f0fd68-47E07.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="SerjG2005#7765" data-user-id="414344074628169730" style="color: rgb(149,165,166)">SerjG2005 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 02:35 PM</span>
+
+            <div class="chatlog__message " data-message-id="820741997211418694" id="message-820741997211418694">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">halp</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 02:36 PM</span>
+
+            <div class="chatlog__message " data-message-id="820742180029202494" id="message-820742180029202494">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">?</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+        <div class="chatlog__reference-symbol">
+        </div>
+        <div class="chatlog__reference">
+                <img class="chatlog__reference-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/423c7536719cbb7b1904c25c07fe7c5a-F2E4F.png" alt="Avatar">
+                <span class="chatlog__reference-name" title="blueviper10#3793" style="color: rgb(149,165,166)">blueviper10</span>
+                <a class="chatlog__reference-link" href="#" onclick="scrollToMessage(event, &#39;820695465158639708&#39;)">
+                    <span class="chatlog__reference-content">
+i need mental help                    </span>
+
+                </a>
+        </div>
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/5c704ee0474da04776a841a71fb7dd20-0CB43.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Shroomer98#4146" data-user-id="347134668417531914" style="color: rgb(149,165,166)">Shroomer98 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">15-Mar-21 12:37 AM</span>
+
+            <div class="chatlog__message " data-message-id="820893538408857611" id="message-820893538408857611">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Sorry, our hotline is busy, we&#39;d appreciate it if you called back in 12 hours, thank you.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/423c7536719cbb7b1904c25c07fe7c5a-F2E4F.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="blueviper10#3793" data-user-id="792629882907394063" style="color: rgb(149,165,166)">blueviper10</span>
+
+
+        <span class="chatlog__timestamp">15-Mar-21 12:39 AM</span>
+
+            <div class="chatlog__message " data-message-id="820893858891825172" id="message-820893858891825172">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">damn</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+        <div class="chatlog__reference-symbol">
+        </div>
+        <div class="chatlog__reference">
+                <img class="chatlog__reference-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/423c7536719cbb7b1904c25c07fe7c5a-F2E4F.png" alt="Avatar">
+                <span class="chatlog__reference-name" title="blueviper10#3793" style="color: rgb(149,165,166)">blueviper10</span>
+                <a class="chatlog__reference-link" href="#" onclick="scrollToMessage(event, &#39;820695465158639708&#39;)">
+                    <span class="chatlog__reference-content">
+i need mental help                    </span>
+
+                </a>
+        </div>
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">15-Mar-21 01:19 AM</span>
+
+            <div class="chatlog__message " data-message-id="820904043278762024" id="message-820904043278762024">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention" title="freedom#7341">@freedom</span> approves of your name</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/423c7536719cbb7b1904c25c07fe7c5a-F2E4F.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="blueviper10#3793" data-user-id="792629882907394063" style="color: rgb(149,165,166)">blueviper10</span>
+
+
+        <span class="chatlog__timestamp">15-Mar-21 01:19 AM</span>
+
+            <div class="chatlog__message " data-message-id="820904078758117397" id="message-820904078758117397">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">?</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">15-Mar-21 01:19 AM</span>
+
+            <div class="chatlog__message " data-message-id="820904137511403540" id="message-820904137511403540">
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/luc_016b-C9B86.png">
+                                        <img class="chatlog__attachment-thumbnail" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/luc_016b-C9B86.png" alt="Image attachment" title="Image: luc_016b.png (618.04 KB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="820904142506688533" id="message-820904142506688533">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention" title="blueviper10#3793">@blueviper10</span></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/423c7536719cbb7b1904c25c07fe7c5a-F2E4F.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="blueviper10#3793" data-user-id="792629882907394063" style="color: rgb(149,165,166)">blueviper10</span>
+
+
+        <span class="chatlog__timestamp">15-Mar-21 01:20 AM</span>
+
+            <div class="chatlog__message " data-message-id="820904158902353960" id="message-820904158902353960">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Knew it</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="820904189122969612" id="message-820904189122969612">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Problem is this is my second account</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="820904205497008129" id="message-820904205497008129">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">my first account is blueviper10</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="820904243829407745" id="message-820904243829407745">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">which is the blue version of that exact model lmao</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">15-Mar-21 01:20 AM</span>
+
+            <div class="chatlog__message " data-message-id="820904254960435201" id="message-820904254960435201">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">XD</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/423c7536719cbb7b1904c25c07fe7c5a-F2E4F.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="blueviper10#3793" data-user-id="792629882907394063" style="color: rgb(149,165,166)">blueviper10</span>
+
+
+        <span class="chatlog__timestamp">15-Mar-21 01:20 AM</span>
+
+            <div class="chatlog__message " data-message-id="820904304969777182" id="message-820904304969777182">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">wait</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="820904309382184977" id="message-820904309382184977">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">actually</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="820904321453522944" id="message-820904321453522944">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">mine is a convertible</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/0-EB806.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">15-Mar-21 01:20 AM</span>
+
+            <div class="chatlog__message " data-message-id="820904343707713536" id="message-820904343707713536">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">ah</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/992ec89c718d9ef0109aac2827321fea-2DC2C.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="openrain502r#4577" data-user-id="419240629412036618" style="color: rgb(153,45,34)">openrain502r</span>
+
+
+        <span class="chatlog__timestamp">20-Mar-21 11:10 PM</span>
+
+            <div class="chatlog__message " data-message-id="823045934535409735" id="message-823045934535409735">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">anyone know what this is</span>
+
+                        </div>
+                    </div>
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/unknown-6D3E8.png">
+                                        <img class="chatlog__attachment-thumbnail" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/unknown-6D3E8.png" alt="Image attachment" title="Image: unknown.png (46.27 KB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/1b6ef1383b39509ea359d7623914567f-BCA1C.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="R3n#5950" data-user-id="159828005781241868" style="color: rgb(155,89,182)">R3n&#39;s ghost (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">21-Mar-21 12:33 AM</span>
+
+            <div class="chatlog__message " data-message-id="823066706523717633" id="message-823066706523717633">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Idfk TBH</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="823066891722424341" id="message-823066891722424341">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">My best guess is that those programs contain the program you scan, and probably are just adware or whatever wrappers</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/992ec89c718d9ef0109aac2827321fea-2DC2C.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="openrain502r#4577" data-user-id="419240629412036618" style="color: rgb(153,45,34)">openrain502r</span>
+
+
+        <span class="chatlog__timestamp">21-Mar-21 12:40 AM</span>
+
+            <div class="chatlog__message " data-message-id="823068502763765790" id="message-823068502763765790">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">execution parents are similar</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/841fa7b99e48b5ab587ca0ce3dcd6c9d-CF1BF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win#0235" data-user-id="149047896468226048" style="color: rgb(149,165,166)">win</span>
+
+
+        <span class="chatlog__timestamp">22-Mar-21 02:20 AM</span>
+
+            <div class="chatlog__message " data-message-id="823456141018398760" id="message-823456141018398760">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://youtu.be/DgH1Kutdvf0">https://youtu.be/DgH1Kutdvf0</a></span>
+
+                        </div>
+                    </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(255,0,0,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://www.youtube.com/channel/UCkAYSHusIHZbnaS9zj4Zgmw">a toaster</a>
+                                                </span>
+                                        </div>
+
+                                        <div class="chatlog__embed-title">
+                                                <a class="chatlog__embed-title-link" href="https://www.youtube.com/watch?v=DgH1Kutdvf0">
+                                                    <div class="markdown preserve-whitespace">wtf</div>
+                                                </a>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown preserve-whitespace">idk</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/maxresdefault-5AFF3.jpg">
+                                            <img class="chatlog__embed-thumbnail" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/maxresdefault-5AFF3.jpg" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+            </div>
+            <div class="chatlog__message " data-message-id="823456176666443836" id="message-823456176666443836">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">what the hell is this i&#39;ve never seen this happen before</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/08e42ec0792c20fa1b3cbd8681294732-1E905.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="lodocus#9919" data-user-id="396731429200986113" style="color: rgb(149,165,166)">lodocus</span>
+
+
+        <span class="chatlog__timestamp">22-Mar-21 02:24 AM</span>
+
+            <div class="chatlog__message " data-message-id="823457106971459605" id="message-823457106971459605">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">does it load</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="823457162041884693" id="message-823457162041884693">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">if not motherboard is most likely dead</span>
+
+                                <span class="chatlog__edited-timestamp" title="22-Mar-21 02:25 AM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">22-Mar-21 02:25 AM</span>
+
+            <div class="chatlog__message " data-message-id="823457358507540480" id="message-823457358507540480">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">As you can see it does, this is just some ageing the model have gone through.</span>
+
+                                <span class="chatlog__edited-timestamp" title="22-Mar-21 02:25 AM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/08e42ec0792c20fa1b3cbd8681294732-1E905.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="lodocus#9919" data-user-id="396731429200986113" style="color: rgb(149,165,166)">lodocus</span>
+
+
+        <span class="chatlog__timestamp">22-Mar-21 02:31 AM</span>
+
+            <div class="chatlog__message " data-message-id="823458792397733889" id="message-823458792397733889">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">i mean does it go past the splash screen</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">22-Mar-21 02:38 AM</span>
+
+            <div class="chatlog__message " data-message-id="823460541610721281" id="message-823460541610721281">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I think if you get dell&#39;s bios booting up, it works.</span>
+
+                                <span class="chatlog__edited-timestamp" title="22-Mar-21 02:38 AM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/841fa7b99e48b5ab587ca0ce3dcd6c9d-CF1BF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win#0235" data-user-id="149047896468226048" style="color: rgb(149,165,166)">win</span>
+
+
+        <span class="chatlog__timestamp">22-Mar-21 02:39 AM</span>
+
+            <div class="chatlog__message " data-message-id="823460909514358805" id="message-823460909514358805">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">figured it out</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="823460976833331231" id="message-823460976833331231">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">it was a sata cable that worked itself loose</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="823461060496982016" id="message-823461060496982016">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">i noticed one of the hdds didnt sound like it completely spun up</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">22-Mar-21 02:40 AM</span>
+
+            <div class="chatlog__message " data-message-id="823461201035264050" id="message-823461201035264050">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">What a weird sound for it.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/841fa7b99e48b5ab587ca0ce3dcd6c9d-CF1BF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win#0235" data-user-id="149047896468226048" style="color: rgb(149,165,166)">win</span>
+
+
+        <span class="chatlog__timestamp">22-Mar-21 02:41 AM</span>
+
+            <div class="chatlog__message " data-message-id="823461264671899678" id="message-823461264671899678">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">well idc it works now</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="823461309651484672" id="message-823461309651484672">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">as long as it stays working</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/cbad1418a0cd40ea749636cb35b86295-20CB0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Audi81#5335" data-user-id="410109122839838721" style="color: rgb(149,165,166)">Audi666 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">22-Mar-21 02:47 AM</span>
+
+            <div class="chatlog__message " data-message-id="823462769218945024" id="message-823462769218945024">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Where is that picture from?</span>
+
+                        </div>
+                    </div>
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/22-03-2021_104448-B6EF0.png">
+                                        <img class="chatlog__attachment-thumbnail" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/22-03-2021_104448-B6EF0.png" alt="Image attachment" title="Image: 22-03-2021_104448.png (900.2 KB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">22-Mar-21 03:16 AM</span>
+
+            <div class="chatlog__message " data-message-id="823470170726203412" id="message-823470170726203412">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">The colors are weak so it might be an impossible task, do you have more frames?</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/1b6ef1383b39509ea359d7623914567f-BCA1C.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="R3n#5950" data-user-id="159828005781241868" style="color: rgb(155,89,182)">R3n&#39;s ghost (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">22-Mar-21 04:03 AM</span>
+
+            <div class="chatlog__message " data-message-id="823482123833835540" id="message-823482123833835540">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Cyberpunk 2077
+<a href="https://www.youtube.com/watch?v=8prHp8vnwYs">https://www.youtube.com/watch?v=8prHp8vnwYs</a>
+Around 1:18 in the video</span>
+
+                        </div>
+                    </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(255,0,0,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+                                        <div class="chatlog__embed-author">
+
+                                                <span class="chatlog__embed-author-name">
+                                                        <a class="chatlog__embed-author-name-link" href="https://www.youtube.com/channel/UCjkGJp2slfpXs3g05JhsnEA">Ruba</a>
+                                                </span>
+                                        </div>
+
+                                        <div class="chatlog__embed-title">
+                                                <a class="chatlog__embed-title-link" href="https://www.youtube.com/watch?v=8prHp8vnwYs">
+                                                    <div class="markdown preserve-whitespace">Cyberpunk 2077 - Opening Sequence</div>
+                                                </a>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown preserve-whitespace"><em>Game description</em>  
+
+Cyberpunk 2077 is an open-world, action-adventure story set in Night City, a megalopolis obsessed with power, glamour and body modification. You play as V, a mercenary outlaw going after a one-of-a-kind implant that is the key to immortality.
+
+Buy the game,
+PC ,
+<a href="https://store.steampowered.com/app/1091500/Cyberpunk_2077/">https://store.steampowered.com/app/1091500/Cyberpunk_2077/</a>
+PSN...</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/maxresdefault-E1878.jpg">
+                                            <img class="chatlog__embed-thumbnail" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/maxresdefault-E1878.jpg" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+        <div class="chatlog__reference-symbol">
+        </div>
+        <div class="chatlog__reference">
+                <img class="chatlog__reference-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+                <span class="chatlog__reference-name" title="MassClaw#9517" style="color: rgb(153,45,34)">MassClaw</span>
+                <a class="chatlog__reference-link" href="#" onclick="scrollToMessage(event, &#39;823470170726203412&#39;)">
+                    <span class="chatlog__reference-content">
+The colors are weak so it might be an impossible task, do you have more frames?                    </span>
+
+                </a>
+        </div>
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/cbad1418a0cd40ea749636cb35b86295-20CB0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Audi81#5335" data-user-id="410109122839838721" style="color: rgb(149,165,166)">Audi666 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">22-Mar-21 04:07 AM</span>
+
+            <div class="chatlog__message " data-message-id="823483011512795156" id="message-823483011512795156">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">This was the only screenshot :D</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+        <div class="chatlog__reference-symbol">
+        </div>
+        <div class="chatlog__reference">
+                <img class="chatlog__reference-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/1b6ef1383b39509ea359d7623914567f-BCA1C.png" alt="Avatar">
+                <span class="chatlog__reference-name" title="R3n#5950" style="color: rgb(155,89,182)">R3n&#39;s ghost (Simons GT Mix)</span>
+                <a class="chatlog__reference-link" href="#" onclick="scrollToMessage(event, &#39;823482123833835540&#39;)">
+                    <span class="chatlog__reference-content">
+Cyberpunk 2077
+<a href="https://www.youtube.com/watch?v=8prHp8vnwYs">https://www.youtube.com/watch?v=8prHp8vnwYs</a>
+Around 1:18 in the video                    </span>
+
+                </a>
+        </div>
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/cbad1418a0cd40ea749636cb35b86295-20CB0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Audi81#5335" data-user-id="410109122839838721" style="color: rgb(149,165,166)">Audi666 (Simons GT Mix)</span>
+
+
+        <span class="chatlog__timestamp">22-Mar-21 04:07 AM</span>
+
+            <div class="chatlog__message " data-message-id="823483060426506250" id="message-823483060426506250">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Oh dam, knew it was cyberpunk</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="823483065971638272" id="message-823483065971638272">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Thanks</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/841fa7b99e48b5ab587ca0ce3dcd6c9d-CF1BF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win#0235" data-user-id="149047896468226048" style="color: rgb(149,165,166)">win</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 01:24 PM</span>
+
+            <div class="chatlog__message " data-message-id="825072726238298133" id="message-825072726238298133">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">anyone have experience with samba?</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 01:25 PM</span>
+
+            <div class="chatlog__message " data-message-id="825073062599852033" id="message-825073062599852033">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Yes, moderately low but still an experience regardless. State your issue.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+        <div class="chatlog__reference-symbol">
+        </div>
+        <div class="chatlog__reference">
+                <img class="chatlog__reference-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+                <span class="chatlog__reference-name" title="MassClaw#9517" style="color: rgb(153,45,34)">MassClaw</span>
+                <a class="chatlog__reference-link" href="#" onclick="scrollToMessage(event, &#39;825073062599852033&#39;)">
+                    <span class="chatlog__reference-content">
+Yes, moderately low but still an experience regardless. State your issue.                    </span>
+
+                </a>
+        </div>
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/841fa7b99e48b5ab587ca0ce3dcd6c9d-CF1BF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win#0235" data-user-id="149047896468226048" style="color: rgb(149,165,166)">win</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 01:34 PM</span>
+
+            <div class="chatlog__message " data-message-id="825075291537408030" id="message-825075291537408030">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">trying to share a hard drive yes</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825075352363335740" id="message-825075352363335740">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">each time i try to access it in windows it says network path not found</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825075435325882418" id="message-825075435325882418">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">but the share name is visible</span>
+
+                                <span class="chatlog__edited-timestamp" title="26-Mar-21 01:35 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825075555518382130" id="message-825075555518382130">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">i&#39;ll put the conf file in here</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 01:36 PM</span>
+
+            <div class="chatlog__message " data-message-id="825075750465044480" id="message-825075750465044480">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Ok then. What error code you got on your windows machine?</span>
+
+                                <span class="chatlog__edited-timestamp" title="26-Mar-21 02:07 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/841fa7b99e48b5ab587ca0ce3dcd6c9d-CF1BF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win#0235" data-user-id="149047896468226048" style="color: rgb(149,165,166)">win</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 01:39 PM</span>
+
+            <div class="chatlog__message " data-message-id="825076522666688532" id="message-825076522666688532">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><div class="pre pre--multiline nohighlight">[global]
+        workgroup = WORKGROUP
+        security = user
+
+        passdb backend = tdbsam
+        
+        printing = cups
+        printcap name = cups
+        load printers = yes
+        cups options = raw
+        min protocol = NT1
+        lanman auth = yes
+        ntlm auth = yes
+
+[NetworkBackup]
+        comment = Backup Drive Share
+        path = /run/media/basementfiles/smbdisk
+        browseable = yes
+        writeable = yes
+        valid users = winsupermario</div></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825076557542326302" id="message-825076557542326302">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">that&#39;s the stuff in my config that i changed</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825076682951229491" id="message-825076682951229491">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">there&#39;s more but i didn&#39;t touch any of that stuff like for printers and home directories and i had to write that word for word</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825076694657400852" id="message-825076694657400852">
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/unknown-AE81E.png">
+                                        <img class="chatlog__attachment-thumbnail" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/unknown-AE81E.png" alt="Image attachment" title="Image: unknown.png (28.1 KB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825076782112833646" id="message-825076782112833646">
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/unknown-68A34.png">
+                                        <img class="chatlog__attachment-thumbnail" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/unknown-68A34.png" alt="Image attachment" title="Image: unknown.png (1.74 KB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825076825432653876" id="message-825076825432653876">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">and thats the error code in windows</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+        <div class="chatlog__reference-symbol">
+        </div>
+        <div class="chatlog__reference">
+                <span class="chatlog__reference-unknown">
+                    Original message was deleted.
+                </span>
+        </div>
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/841fa7b99e48b5ab587ca0ce3dcd6c9d-CF1BF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win#0235" data-user-id="149047896468226048" style="color: rgb(149,165,166)">win</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 01:41 PM</span>
+
+            <div class="chatlog__message " data-message-id="825077116873474089" id="message-825077116873474089">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">you seen this before?</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825077318968016926" id="message-825077318968016926">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">my samba box is also running cent OS 8</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825077580885000233" id="message-825077580885000233">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">all the stuff i put in global is because i&#39;m trying to make an XP box able to access the share</span>
+
+                                <span class="chatlog__edited-timestamp" title="26-Mar-21 01:44 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 01:45 PM</span>
+
+            <div class="chatlog__message " data-message-id="825078031931801661" id="message-825078031931801661">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><div class="quote"> you seen this before?
+</div>Yeah, 10 just bested this &#39;gift&#39; upon me as well and wrecked my shit when i samba&#39;d my way out from arch.</span>
+
+                                <span class="chatlog__edited-timestamp" title="26-Mar-21 01:46 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/841fa7b99e48b5ab587ca0ce3dcd6c9d-CF1BF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win#0235" data-user-id="149047896468226048" style="color: rgb(149,165,166)">win</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 01:46 PM</span>
+
+            <div class="chatlog__message " data-message-id="825078359276781579" id="message-825078359276781579">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">OOF</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825078403459842129" id="message-825078403459842129">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">also can&#39;t access it on my XP box either
+network path not found</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825078429488775189" id="message-825078429488775189">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">but i&#39;m able to see the shares</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825078624402145331" id="message-825078624402145331">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">if that happened with you have you been able to fix it?</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 01:48 PM</span>
+
+            <div class="chatlog__message " data-message-id="825078890706894878" id="message-825078890706894878">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I haven&#39;t seen the shares at all so that&#39;s already a good sign, it&#39;s probably some permission stuff missing. Yeah you didn&#39;t allow any user to access it.</span>
+
+                                <span class="chatlog__edited-timestamp" title="26-Mar-21 02:07 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/841fa7b99e48b5ab587ca0ce3dcd6c9d-CF1BF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win#0235" data-user-id="149047896468226048" style="color: rgb(149,165,166)">win</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 01:49 PM</span>
+
+            <div class="chatlog__message " data-message-id="825079061617442827" id="message-825079061617442827">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">oh?</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 01:49 PM</span>
+
+            <div class="chatlog__message " data-message-id="825079082776526878" id="message-825079082776526878">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><s>One moment.</s> I could&#39;ve sworn i&#39;ve had my arch config somewhere here before- ah there it is. 
+guest ok = yes
+try adding this.</span>
+
+                                <span class="chatlog__edited-timestamp" title="26-Mar-21 02:07 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/841fa7b99e48b5ab587ca0ce3dcd6c9d-CF1BF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win#0235" data-user-id="149047896468226048" style="color: rgb(149,165,166)">win</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 01:56 PM</span>
+
+            <div class="chatlog__message " data-message-id="825080900253122591" id="message-825080900253122591">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">in the global settings?</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 01:57 PM</span>
+
+            <div class="chatlog__message " data-message-id="825080933644238918" id="message-825080933644238918">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">The file specific ones.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/841fa7b99e48b5ab587ca0ce3dcd6c9d-CF1BF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win#0235" data-user-id="149047896468226048" style="color: rgb(149,165,166)">win</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 01:59 PM</span>
+
+            <div class="chatlog__message " data-message-id="825081495722393661" id="message-825081495722393661">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">i added that in vim to the entry for the hard drive</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825081519273803796" id="message-825081519273803796">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">samba is now rebooting</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 01:59 PM</span>
+
+            <div class="chatlog__message " data-message-id="825081621622685696" id="message-825081621622685696">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Ok nice.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/841fa7b99e48b5ab587ca0ce3dcd6c9d-CF1BF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win#0235" data-user-id="149047896468226048" style="color: rgb(149,165,166)">win</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 02:00 PM</span>
+
+            <div class="chatlog__message " data-message-id="825081717915779094" id="message-825081717915779094">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">ehhhhh nope
+it&#39;s still not going into the network folder for the hard disk</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825081801667641375" id="message-825081801667641375">
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/unknown-03516.png">
+                                        <img class="chatlog__attachment-thumbnail" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/unknown-03516.png" alt="Image attachment" title="Image: unknown.png (31.16 KB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 02:00 PM</span>
+
+            <div class="chatlog__message " data-message-id="825081884555083857" id="message-825081884555083857">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Then i didn&#39;t explain it well enough, let me just post you the video i&#39;ve used before.</span>
+
+                                <span class="chatlog__edited-timestamp" title="26-Mar-21 02:01 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/841fa7b99e48b5ab587ca0ce3dcd6c9d-CF1BF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win#0235" data-user-id="149047896468226048" style="color: rgb(149,165,166)">win</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 02:01 PM</span>
+
+            <div class="chatlog__message " data-message-id="825081931308990504" id="message-825081931308990504">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">sure</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825082015313035286" id="message-825082015313035286">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">also did you share a hard disk or a directory?</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 02:01 PM</span>
+
+            <div class="chatlog__message " data-message-id="825082079187435601" id="message-825082079187435601">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Oh? right i shared a directory. Not a disk but it should be the same as far as i believe.</span>
+
+                                <span class="chatlog__edited-timestamp" title="26-Mar-21 02:01 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/841fa7b99e48b5ab587ca0ce3dcd6c9d-CF1BF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win#0235" data-user-id="149047896468226048" style="color: rgb(149,165,166)">win</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 02:02 PM</span>
+
+            <div class="chatlog__message " data-message-id="825082369114374225" id="message-825082369114374225">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">i used the mount path for the disk</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825082401730461706" id="message-825082401730461706">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">and it doesn&#39;t work</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825082450438258749" id="message-825082450438258749">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">anyway what video did u use</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 02:04 PM</span>
+
+            <div class="chatlog__message " data-message-id="825082851032432681" id="message-825082851032432681">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I am having a hard time finding it for some reason.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/841fa7b99e48b5ab587ca0ce3dcd6c9d-CF1BF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win#0235" data-user-id="149047896468226048" style="color: rgb(149,165,166)">win</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 02:05 PM</span>
+
+            <div class="chatlog__message " data-message-id="825083025539989504" id="message-825083025539989504">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">rip</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 02:05 PM</span>
+
+            <div class="chatlog__message " data-message-id="825083091953123329" id="message-825083091953123329">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Not given up on it though. Oh nevermind there&#39;s this one:  <a href="https://www.youtube.com/watch?v=oRHSrnQueak">https://www.youtube.com/watch?v=oRHSrnQueak</a></span>
+
+                                <span class="chatlog__edited-timestamp" title="26-Mar-21 02:07 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/841fa7b99e48b5ab587ca0ce3dcd6c9d-CF1BF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win#0235" data-user-id="149047896468226048" style="color: rgb(149,165,166)">win</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 02:07 PM</span>
+
+            <div class="chatlog__message " data-message-id="825083618664906782" id="message-825083618664906782">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">will give it a watch</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/0cfec781df368dbce990d440d075a2d7-B24BC.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="AmariBot#5150" data-user-id="339254240012664832" style="color: rgb(233,30,99)">AmariBot</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">26-Mar-21 02:07 PM</span>
+
+            <div class="chatlog__message " data-message-id="825083619470344192" id="message-825083619470344192">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention" title="win#0235">@win</span></span>
+
+                        </div>
+                    </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(0,174,134,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+
+                                        <div class="chatlog__embed-title">
+                                                <div class="markdown preserve-whitespace">win</div>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown preserve-whitespace"><strong>CONGRATS</strong>
+You are now level <strong>1</strong>!!!</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/841fa7b99e48b5ab587ca0ce3dcd6c9d-9B055.png">
+                                            <img class="chatlog__embed-thumbnail" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/841fa7b99e48b5ab587ca0ce3dcd6c9d-9B055.png" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                                <div class="chatlog__embed-footer">
+
+                                    <span class="chatlog__embed-footer-text">
+Windows 7 and Legacy Software
+
+                                    </span>
+                                </div>
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 02:07 PM</span>
+
+            <div class="chatlog__message " data-message-id="825083679524388934" id="message-825083679524388934">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><s>Sure enough.</s> Any news?</span>
+
+                                <span class="chatlog__edited-timestamp" title="26-Mar-21 02:32 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/841fa7b99e48b5ab587ca0ce3dcd6c9d-CF1BF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win#0235" data-user-id="149047896468226048" style="color: rgb(149,165,166)">win</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 02:32 PM</span>
+
+            <div class="chatlog__message " data-message-id="825089928383168532" id="message-825089928383168532">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">there is new error</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825089935643508756" id="message-825089935643508756">
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/unknown-1C544.png">
+                                        <img class="chatlog__attachment-thumbnail" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/unknown-1C544.png" alt="Image attachment" title="Image: unknown.png (31.22 KB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825089951048663050" id="message-825089951048663050">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention" title="MassClaw#9517">@MassClaw</span></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 02:32 PM</span>
+
+            <div class="chatlog__message " data-message-id="825089972322566214" id="message-825089972322566214">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Hm.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/841fa7b99e48b5ab587ca0ce3dcd6c9d-CF1BF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win#0235" data-user-id="149047896468226048" style="color: rgb(149,165,166)">win</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 02:34 PM</span>
+
+            <div class="chatlog__message " data-message-id="825090284932169789" id="message-825090284932169789">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">i&#39;ll try using the /dev path</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 02:34 PM</span>
+
+            <div class="chatlog__message " data-message-id="825090346999742535" id="message-825090346999742535">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Sure enough.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/841fa7b99e48b5ab587ca0ce3dcd6c9d-CF1BF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win#0235" data-user-id="149047896468226048" style="color: rgb(149,165,166)">win</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 02:35 PM</span>
+
+            <div class="chatlog__message " data-message-id="825090581158953031" id="message-825090581158953031">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">still the same thing</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 02:35 PM</span>
+
+            <div class="chatlog__message " data-message-id="825090643646218240" id="message-825090643646218240">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Have you tried assinging a name onto the drive(in you windows machine)?</span>
+
+                                <span class="chatlog__edited-timestamp" title="26-Mar-21 02:35 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/841fa7b99e48b5ab587ca0ce3dcd6c9d-CF1BF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win#0235" data-user-id="149047896468226048" style="color: rgb(149,165,166)">win</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 02:37 PM</span>
+
+            <div class="chatlog__message " data-message-id="825090988208160788" id="message-825090988208160788">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">the drive is in my linux box</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 02:37 PM</span>
+
+            <div class="chatlog__message " data-message-id="825091081322233926" id="message-825091081322233926">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Ah yeah that&#39;s right. My bad. Let me just review your config real quick. Try to enable &#39;Always wait for the network at computer startup and logon&#39; in the gpe.</span>
+
+                                <span class="chatlog__edited-timestamp" title="26-Mar-21 02:47 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/841fa7b99e48b5ab587ca0ce3dcd6c9d-CF1BF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win#0235" data-user-id="149047896468226048" style="color: rgb(149,165,166)">win</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 02:51 PM</span>
+
+            <div class="chatlog__message " data-message-id="825094652385689610" id="message-825094652385689610">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">where would i find that?</span>
+
+                        </div>
+                    </div>
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/unknown-AFE00.png">
+                                        <img class="chatlog__attachment-thumbnail" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/unknown-AFE00.png" alt="Image attachment" title="Image: unknown.png (82.01 KB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 02:51 PM</span>
+
+            <div class="chatlog__message " data-message-id="825094691665608775" id="message-825094691665608775">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">One moment. Computer Configuration&gt; Adminstrative templates &gt; System &gt; logon</span>
+
+                                <span class="chatlog__edited-timestamp" title="02-Apr-21 03:53 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/841fa7b99e48b5ab587ca0ce3dcd6c9d-CF1BF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win#0235" data-user-id="149047896468226048" style="color: rgb(149,165,166)">win</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 02:53 PM</span>
+
+            <div class="chatlog__message " data-message-id="825095250494095440" id="message-825095250494095440">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">nope</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 02:54 PM</span>
+
+            <div class="chatlog__message " data-message-id="825095265706704987" id="message-825095265706704987">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Nothing?</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/841fa7b99e48b5ab587ca0ce3dcd6c9d-CF1BF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win#0235" data-user-id="149047896468226048" style="color: rgb(149,165,166)">win</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 02:54 PM</span>
+
+            <div class="chatlog__message " data-message-id="825095284501643315" id="message-825095284501643315">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">mhm</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 02:54 PM</span>
+
+            <div class="chatlog__message " data-message-id="825095384577081354" id="message-825095384577081354">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Shit, it&#39;s probably 10&#39;s self-harm policies again.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/841fa7b99e48b5ab587ca0ce3dcd6c9d-CF1BF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win#0235" data-user-id="149047896468226048" style="color: rgb(149,165,166)">win</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 02:54 PM</span>
+
+            <div class="chatlog__message " data-message-id="825095412070875137" id="message-825095412070875137">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">i&#39;m on 7</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 02:54 PM</span>
+
+            <div class="chatlog__message " data-message-id="825095431305297920" id="message-825095431305297920">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Yeah i know.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/841fa7b99e48b5ab587ca0ce3dcd6c9d-CF1BF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win#0235" data-user-id="149047896468226048" style="color: rgb(149,165,166)">win</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 02:55 PM</span>
+
+            <div class="chatlog__message " data-message-id="825095542882172938" id="message-825095542882172938">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">i also tried using the /mnt/ path as the hard drive path in smb.conf</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825095552483459144" id="message-825095552483459144">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">still nothing</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 02:56 PM</span>
+
+            <div class="chatlog__message " data-message-id="825095799863640144" id="message-825095799863640144">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I feel some itch that it&#39;s probably something related to workgroups but i&#39;m not sure. What changes you have made on the config so far?</span>
+
+                                <span class="chatlog__edited-timestamp" title="26-Mar-21 02:56 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/841fa7b99e48b5ab587ca0ce3dcd6c9d-CF1BF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win#0235" data-user-id="149047896468226048" style="color: rgb(149,165,166)">win</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 02:56 PM</span>
+
+            <div class="chatlog__message " data-message-id="825095898341310514" id="message-825095898341310514">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">i set the workgroup to WORKGROUP</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825095913575546891" id="message-825095913575546891">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">same as on my windows box</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 02:57 PM</span>
+
+            <div class="chatlog__message " data-message-id="825096136763113502" id="message-825096136763113502">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Yeah but i reckon there&#39;s some line to make your machine join together in a group, but the shared files are already there so that knocks off the theory from the get go.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/841fa7b99e48b5ab587ca0ce3dcd6c9d-CF1BF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win#0235" data-user-id="149047896468226048" style="color: rgb(149,165,166)">win</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 02:59 PM</span>
+
+            <div class="chatlog__message " data-message-id="825096539943993376" id="message-825096539943993376">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><div class="pre pre--multiline nohighlight">[global]
+        workgroup = WORKGROUP
+        security = user
+        passdb backend = tdbsam
+        hosts allow = 172.16.100.0/16
+        hosts deny = 0.0.0.0/0
+        min protocol = NT1
+        lanman auth = yes
+        ntlm auth = yes
+
+[NetworkBackup]
+        comment = Backup Drive Share
+        path = /mnt/numbersandshitidontfeellikewritingdown
+        browseable = yes
+        read only = no
+        writeable = yes
+        create mask = 0755
+        directory mask = 0755
+        valid users = winsupermario</div></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825096589567328276" id="message-825096589567328276">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">thats my smb.conf too</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 02:59 PM</span>
+
+            <div class="chatlog__message " data-message-id="825096675759751220" id="message-825096675759751220">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">So it&#39;s still largely the same.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825096871008796743" id="message-825096871008796743">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I swear windows access to samba shared files is only getting worse everyday. But hopefully this will end soon.</span>
+
+                                <span class="chatlog__edited-timestamp" title="26-Mar-21 03:00 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825097075842744430" id="message-825097075842744430">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">And i&#39;m not really finding anything that seems wrong in the conf file too.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825097286518308984" id="message-825097286518308984">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Tried removing the last line? though i bet this one from linux&#39;s side and has nothing to do with windows.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/841fa7b99e48b5ab587ca0ce3dcd6c9d-CF1BF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win#0235" data-user-id="149047896468226048" style="color: rgb(149,165,166)">win</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 03:03 PM</span>
+
+            <div class="chatlog__message " data-message-id="825097725234249778" id="message-825097725234249778">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">nothing still</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825097754014777364" id="message-825097754014777364">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">network name cannot be foundf</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825097824018366474" id="message-825097824018366474">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">i&#39;ve been going at this for 3 hours now why can&#39;t i just get it to work</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/406a288bb0c301920f1a6857b6b6dda2-B82A0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="tyl#5381" data-user-id="711271606835740791" style="color: rgb(149,165,166)">tyl</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 03:08 PM</span>
+
+            <div class="chatlog__message " data-message-id="825098880324075560" id="message-825098880324075560">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">you trying to set up a network share on linux?</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/841fa7b99e48b5ab587ca0ce3dcd6c9d-CF1BF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win#0235" data-user-id="149047896468226048" style="color: rgb(149,165,166)">win</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 03:08 PM</span>
+
+            <div class="chatlog__message " data-message-id="825098948749557780" id="message-825098948749557780">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">yes</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825098958081622027" id="message-825098958081622027">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">with a hard drive</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825098994103222293" id="message-825098994103222293">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">but i can&#39;t access it from my windows box</span>
+
+                                <span class="chatlog__edited-timestamp" title="26-Mar-21 03:08 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/406a288bb0c301920f1a6857b6b6dda2-B82A0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="tyl#5381" data-user-id="711271606835740791" style="color: rgb(149,165,166)">tyl</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 03:09 PM</span>
+
+            <div class="chatlog__message " data-message-id="825099070724112395" id="message-825099070724112395">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">i tried exact same thing and just gave up</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825099105994276895" id="message-825099105994276895">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">its the drive NTFS</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/841fa7b99e48b5ab587ca0ce3dcd6c9d-CF1BF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win#0235" data-user-id="149047896468226048" style="color: rgb(149,165,166)">win</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 03:09 PM</span>
+
+            <div class="chatlog__message " data-message-id="825099124788953129" id="message-825099124788953129">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">ext4</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825099239214022677" id="message-825099239214022677">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">i thought that wouldn&#39;t be a problem because it&#39;s samba that interfaces with the filesystem and not windowsx</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 03:11 PM</span>
+
+            <div class="chatlog__message " data-message-id="825099636972716103" id="message-825099636972716103">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I&#39;m not even sure about either.
+<div class="quote"> i&#39;ve been going at this for 3 hours now why can&#39;t i just get it to work
+</div>It&#39;s typical windows behaviour, i couldn&#39;t get mine work either.</span>
+
+                                <span class="chatlog__edited-timestamp" title="26-Mar-21 03:11 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/841fa7b99e48b5ab587ca0ce3dcd6c9d-CF1BF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win#0235" data-user-id="149047896468226048" style="color: rgb(149,165,166)">win</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 03:12 PM</span>
+
+            <div class="chatlog__message " data-message-id="825100025570000907" id="message-825100025570000907">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">i&#39;ll just install windows server</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825100038258032660" id="message-825100038258032660">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">or some shit</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825100102737068073" id="message-825100102737068073">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">fuck trying to make this work
+3 hours is long enough</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/0cfec781df368dbce990d440d075a2d7-B24BC.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="AmariBot#5150" data-user-id="339254240012664832" style="color: rgb(233,30,99)">AmariBot</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">26-Mar-21 03:13 PM</span>
+
+            <div class="chatlog__message " data-message-id="825100103748419595" id="message-825100103748419595">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention" title="win#0235">@win</span></span>
+
+                        </div>
+                    </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(0,174,134,255)"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+
+                                        <div class="chatlog__embed-title">
+                                                <div class="markdown preserve-whitespace">win</div>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown preserve-whitespace"><strong>CONGRATS</strong>
+You are now level <strong>2</strong>!!!</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/841fa7b99e48b5ab587ca0ce3dcd6c9d-9B055.png">
+                                            <img class="chatlog__embed-thumbnail" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/841fa7b99e48b5ab587ca0ce3dcd6c9d-9B055.png" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                                <div class="chatlog__embed-footer">
+
+                                    <span class="chatlog__embed-footer-text">
+Windows 7 and Legacy Software
+
+                                    </span>
+                                </div>
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 03:13 PM</span>
+
+            <div class="chatlog__message " data-message-id="825100166746210366" id="message-825100166746210366">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Yeah try that, it tends to be easier and have these annoying policies disabled by default.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/406a288bb0c301920f1a6857b6b6dda2-B82A0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="tyl#5381" data-user-id="711271606835740791" style="color: rgb(149,165,166)">tyl</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 03:13 PM</span>
+
+            <div class="chatlog__message " data-message-id="825100244144226416" id="message-825100244144226416">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">windows wont read an ext4 drive</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/841fa7b99e48b5ab587ca0ce3dcd6c9d-CF1BF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win#0235" data-user-id="149047896468226048" style="color: rgb(149,165,166)">win</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 03:15 PM</span>
+
+            <div class="chatlog__message " data-message-id="825100702896095292" id="message-825100702896095292">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">so i&#39;ll reformat it as ntfs</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825100765764648960" id="message-825100765764648960">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">it&#39;s a brand new drive that has nothing on it anyway</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825100807677673523" id="message-825100807677673523">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">and i bought it specifically for using in a file server</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/406a288bb0c301920f1a6857b6b6dda2-B82A0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="tyl#5381" data-user-id="711271606835740791" style="color: rgb(149,165,166)">tyl</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 03:17 PM</span>
+
+            <div class="chatlog__message " data-message-id="825101152181682227" id="message-825101152181682227">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">good for you, i still dont know how im gonna switch to linux with ~10TB of NTFS drives with barely any space left free</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/841fa7b99e48b5ab587ca0ce3dcd6c9d-CF1BF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win#0235" data-user-id="149047896468226048" style="color: rgb(149,165,166)">win</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 03:17 PM</span>
+
+            <div class="chatlog__message " data-message-id="825101281441742898" id="message-825101281441742898">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">the switch seems quite far off for me rn especially with the failure to set up samba</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825101347384197120" id="message-825101347384197120">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">guess all my boxes will continue to be windows boxes</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825101416514322462" id="message-825101416514322462">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">downloading an iso of windows server 2008 r2 atm</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825101493933178880" id="message-825101493933178880">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">then i&#39;ll burn it and pop it in the server</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 03:19 PM</span>
+
+            <div class="chatlog__message " data-message-id="825101767896858636" id="message-825101767896858636">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Sure enough.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/841fa7b99e48b5ab587ca0ce3dcd6c9d-CF1BF.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="win#0235" data-user-id="149047896468226048" style="color: rgb(149,165,166)">win</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 06:25 PM</span>
+
+            <div class="chatlog__message " data-message-id="825148573472784425" id="message-825148573472784425">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">just finished setting up server 2008 R2</span>
+
+                        </div>
+                    </div>
+
+                    <div class="chatlog__attachment">
+                        <div class="" onclick="">
+                            <div class="">
+                                    <a href="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/unknown-55DA9.png">
+                                        <img class="chatlog__attachment-thumbnail" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/unknown-55DA9.png" alt="Image attachment" title="Image: unknown.png (219.3 KB)">
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825148608931430441" id="message-825148608931430441">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">network transfers work perfectly</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825148665953517580" id="message-825148665953517580">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">i can access the hard drive and i&#39;m in the process of writing data to it</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825148740008017940" id="message-825148740008017940">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">also as an added bonus i can use remote desktop connection to access the server</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825148798833000498" id="message-825148798833000498">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">security wise i&#39;m not worried because i don&#39;t have the server connected to the internet</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825148824448008222" id="message-825148824448008222">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">it&#39;s on an isolated wired ethernet network</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825148892051931196" id="message-825148892051931196">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">accessible only by my PCs that are connected to it</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="825149983468683286" id="message-825149983468683286">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">you&#39;d have to connect directly to the switch and have my username and password to access it</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Windows%207%20and%20Legacy%20Software%20-%20410%20gone%20-%20help%20%5B820601791468404756%5D.html_Files/412edfc2d961fc13a6f4401b3cdd3a0d-9E0B6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="MassClaw#9517" data-user-id="268586675188269059" style="color: rgb(153,45,34)">MassClaw</span>
+
+
+        <span class="chatlog__timestamp">26-Mar-21 06:34 PM</span>
+
+            <div class="chatlog__message " data-message-id="825150683488845864" id="message-825150683488845864">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><div class="quote"> network transfers work perfectly
+</div>Yeah definitely intentional then.</span>
+
+                                <span class="chatlog__edited-timestamp" title="26-Mar-21 06:34 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+</div>
+
+<div class="postamble">
+    <div class="postamble__entry">Exported 155 message(s)</div>
+</div>
+
+</body>
+
+</html>
